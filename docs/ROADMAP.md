@@ -58,11 +58,10 @@ Como foi feito:
 ## Fase 3: Melhorias visuais
 
 - Resolução interna 4x ou mais, PGXP (sem tremedeira, texturas com perspectiva correta).
-- [x] Widescreen 16:9 / Adaptativo (mod `tobal2.enhancement.widescreen`,
-      desligado por padrão). `auto_screen_x` alarga 7 funções de corte de
-      tela achadas pelo `psxrecomp-analyze --scan-widescreen`; HUD corrigido
-      por `auto_ui_squash`. Testado: título e lutas (12/11/2026).
-- [ ] Widescreen: testar Quest, seleção de personagem, 21:9 e pop-in nas bordas.
+- Widescreen: **descartado por enquanto** (12/11/2026). A versão por mod
+  (squash do GTE + `auto_screen_x`) funcionou no título e nas lutas, mas vários
+  objetos ficaram com bugs, e o dono decidiu remover. O que foi feito está no commit
+  4fe6589 (revertido), caso um dia valha tentar de novo.
 - Launcher com box art e mapeamento de controle.
 
 ## Fase 4: Mods
