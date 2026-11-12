@@ -1,0 +1,69 @@
+# ---------------------------------------------------------------
+# Tobal2Recomp — arquivos que NUNCA devem ir para o Git/GitHub
+# Baseado em psxrecomp/docs/ci/templates/game.gitignore
+# ---------------------------------------------------------------
+
+# Imagem do disco, BIOS e saves (dados da Sony/Square — proibido publicar)
+/iso/
+/disc/
+/bios/
+/saves/
+/prepared_disc/
+*.bin
+*.cue
+*.iso
+*.img
+*.sub
+*.ccd
+*.mcd
+*.mcr
+*.chd
+*.car
+SCPH*.BIN
+SLPM_*.*
+bios.cfg
+disc.cfg
+rom.cfg
+settings.toml
+
+# Código C gerado a partir do executável do jogo.
+# É uma tradução direta do código original da Square, por isso fica fora do
+# repositório público: cada pessoa gera o seu a partir do próprio disco
+# (mesma escolha do BattleArenaToshindenRecomp). Ver docs/ROADMAP.md.
+/generated/
+
+# Saídas de build
+/build/
+/build-*/
+/out/
+/.cache/
+/.happypath/
+/release-stage/
+/dist/
+*.zip
+
+# Análise local (extrações do disco, capturas da GPU, projetos Ghidra)
+/analysis/
+/ghidra/projects/
+*.gpr
+*.rep/
+*.lock
+*.lock~
+
+# Artefatos de execução do runtime
+psx_crash.txt
+psx_last_run_report.json
+psx_screenshot.bmp
+psx_freeze_heartbeat.json
+.psxrecomp_last_generate
+.psxrecomp_write_probe
+starvation_dump.jsonl
+
+# Editor / sistema
+.vs/
+.vscode/
+*.user
+*.log
+.DS_Store
+Thumbs.db
+__pycache__/
