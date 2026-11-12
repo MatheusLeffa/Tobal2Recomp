@@ -3,12 +3,14 @@
 Cada fase só termina quando o resultado é **visível**: o jogo na tela, não
 "deve funcionar".
 
-## Fase 0: Preparação ✅ (em andamento)
+## Fase 0: Preparação (quase pronta)
 
 - [x] Pesquisa de ferramentas (ver `PESQUISA.md`)
 - [x] Repositório Git com PSXRecomp e recomp-ui como submódulos
 - [x] Toolchain (CMake, Ninja, Clang) instalado e testado
-- [ ] Recompilador do PSXRecomp compilado nesta máquina
+- [x] Recompilador do PSXRecomp compilado nesta máquina (`build-recompiler/`)
+- [x] Runtime de teste rodando: o OpenBIOS recompilado mostra o cubo
+      girando, em OpenGL e resolução 4x (12/11/2026)
 - [ ] **Dump do disco original** (ver `DUMP_DO_DISCO.md`) ← bloqueio atual
 
 ## Fase 1: Primeiro boot
