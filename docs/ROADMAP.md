@@ -11,9 +11,16 @@ Cada fase só termina quando o resultado é **visível**: o jogo na tela, não
 - [x] Recompilador do PSXRecomp compilado nesta máquina (`build-recompiler/`)
 - [x] Runtime de teste rodando: o OpenBIOS recompilado mostra o cubo
       girando, em OpenGL e resolução 4x (12/11/2026)
-- [ ] **Dump do disco original** (ver `DUMP_DO_DISCO.md`) ← bloqueio atual
+- [x] Dump do disco original: SLPM-86033 v1.1, SHA-1 `50edccaa…` confere
+      com o Redump (disco 10087)
 
-## Fase 1: Primeiro boot
+## Fase 1: Primeiro boot ✅ (12/11/2026)
+
+Resultado: logo da DreamFactory → vídeo de abertura (MDEC) → tela de título
+→ seleção de personagem → luta do Torneio (Chuji vs Epon, Stage 1) rodando
+nativamente, com OpenGL e resolução 4x. Foram geradas cerca de 3.750 funções e 12 milhões de linhas de C.
+
+Como foi feito:
 
 1. Colocar o dump em `iso/` (`.cue` + `.bin`).
 2. Rodar o scaffold do PSXRecomp numa pasta temporária. Ele recusa pastas que
@@ -34,11 +41,14 @@ Cada fase só termina quando o resultado é **visível**: o jogo na tela, não
    python psxrecomp/psxrecomp_cli.py generate --config game.toml --project-root . --disc "iso/Tobal 2 (Japan).cue"
    python psxrecomp/psxrecomp_cli.py rebuild --config game.toml --project-root . --build-dir build-release --no-pgo
    ```
-4. **Meta:** logos da Square/DreamFactory → tela de título.
+4. Rodar sem o launcher:
+   `build-release/Tobal_2_Recompiled.exe --game game.toml --disc "iso/Tobal 2 (Japan) (v1.1).cue" --no-launcher`
 
-## Fase 2: Jogável
+## Fase 2: Jogável ← fase atual
 
-- Menu → seleção de personagem → luta completa (1P vs CPU, depois 1P vs 2P).
+- [x] Menu → seleção de personagem → luta começa (1P vs CPU)
+- [ ] Jogar uma luta inteira com controle/teclado; depois 1P vs 2P.
+- [ ] Conferir o som (músicas e efeitos).
 - Modo Quest: entrar no primeiro andar da dungeon.
 - Ir adicionando seeds e overlays conforme o jogo avança, até a cobertura nativa ficar perto de 100%.
 - Sons, músicas (CD-DA/XA) e vídeos funcionando.
