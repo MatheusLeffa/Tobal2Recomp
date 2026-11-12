@@ -1,0 +1,45 @@
+format_version = 5
+id = "tobal2.enhancement.widescreen"
+version = "1.0.0"
+name = "Tobal 2 Widescreen"
+author = "Tobal2Recomp"
+description = "Renders Tobal 2 with a wider 3D field of view. Choose fixed 16:9 or Adaptive, which follows the window from 4:3 up to 32:9."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLPM-86033"
+
+[[feature]]
+id = "widescreen"
+name = "Widescreen"
+description = "Wider field of view in 3D scenes. FMVs and 2D screens stay 4:3."
+group = "Display"
+default_enabled = false
+
+[[option]]
+feature = "widescreen"
+id = "aspect"
+label = "Aspect ratio"
+description = "Adaptive follows the live window size from 4:3 through 32:9."
+group = "Display"
+type = "choice"
+default = "16:9"
+
+[[option.choice]]
+value = "16:9"
+label = "16:9"
+
+[[option.choice]]
+value = "adaptive"
+label = "Adaptive"
+
+[[plugin]]
+feature = "widescreen"
+id = "tobal2.widescreen.16-9"
+when = { aspect = "16:9" }
+
+[[plugin]]
+feature = "widescreen"
+id = "tobal2.widescreen.adaptive"
+when = { aspect = "adaptive" }

@@ -58,8 +58,11 @@ Como foi feito:
 ## Fase 3: Melhorias visuais
 
 - Resolução interna 4x ou mais, PGXP (sem tremedeira, texturas com perspectiva correta).
-- Widescreen: achar no código do Tobal 2 os pontos de projeção e de culling
-  (`psxrecomp/docs/WIDESCREEN.md`).
+- [x] Widescreen 16:9 / Adaptativo (mod `tobal2.enhancement.widescreen`,
+      desligado por padrão). `auto_screen_x` alarga 7 funções de corte de
+      tela achadas pelo `psxrecomp-analyze --scan-widescreen`; HUD corrigido
+      por `auto_ui_squash`. Testado: título e lutas (12/11/2026).
+- [ ] Widescreen: testar Quest, seleção de personagem, 21:9 e pop-in nas bordas.
 - Launcher com box art e mapeamento de controle.
 
 ## Fase 4: Mods

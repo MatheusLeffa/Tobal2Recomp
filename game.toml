@@ -49,6 +49,28 @@ aspect_ratio = "4:3"
 # full 320 px width, so no trailing blanking is needed.
 depth24_trailing_margin = 0
 
+[widescreen]
+# Ativação pertence ao mod tobal2.enhancement.widescreen (desligado por
+# padrão). Sem o mod, tudo abaixo é identidade (margem 0).
+offer = false
+offer_ultrawide = true
+adaptive_view = true
+gte_game_mode = true
+native_wide = false
+precise_nclip = true
+# HUD: corrige proporção de barras/textos de forma genérica e prende cada
+# grupo à borda/centro mais próxima.
+auto_ui_squash = true
+auto_ui_anchor = "edges"
+
+[widescreen.cull]
+# psxrecomp-analyze --scan-widescreen: 7 funções GTE com a assinatura de
+# corte de tela. As lutas usam 512x480 entrelaçado (0x200 / 0x201); a 7ª
+# função usa 0x120/0x103/0xCD (outra tela, talvez o Quest).
+auto_screen_x = true
+screen_w_imms = ["0x103", "0x120", "0x121", "0x200", "0x201"]
+screen_h_imms = ["0xCD", "0x100", "0x101", "0x199", "0x19A"]
+
 [controller]
 default_mode = "digital"
 
