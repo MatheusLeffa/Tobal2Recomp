@@ -1,0 +1,54 @@
+# Autofilled by tools/new_project_layout/probe_disc.py from your legal dump.
+# Review before shipping. Runtime quirks / overlay seeds still need hand work.
+
+[game]
+name = "Tobal 2"
+id = "SLPM-86033"
+players = 2
+exe = "disc/SLPM_860.33"
+disc = "iso/Tobal 2 (Japan) (v1.1).cue"
+load_address = "0x80010000"
+entry_pc = "0x800B8910"
+text_size = "0x000EC000"
+stack_base = "0x801FFFF0"
+
+# Digests are for data Track 01 (first BINARY FILE / TRACK 01).
+[prepare_disc]
+out_dir = "disc"
+bin_name = "Tobal 2 (Japan) (v1.1).bin"
+cue_name = "Tobal 2 (Japan) (v1.1).cue"
+boot_exe = "SLPM_860.33"
+known_sizes = [669555600]
+known_md5 = [
+  "9d583bcc0ee949f42e07fa8613939d8d",
+]
+known_sha1 = [
+  "50edccaaccf002673a817047905372603e63e208",
+]
+known_crc32 = [
+  "479f1388",
+]
+
+[recompiler]
+seeds = "seeds/ghidra_funcs.txt"
+out_dir = "generated"
+strict = true
+
+[runtime]
+window_title = "Tobal 2 Recompiled"
+memcard_dir = "saves"
+overlay_cache = true
+
+[video]
+renderer = "opengl"
+aspect_ratio = "4:3"
+
+[controller]
+default_mode = "digital"
+
+# Online mount gate: digests + track count + optional TOC fingerprint
+# (see docs/NETPLAY.md).
+[netplay]
+require_cue = true
+required_tracks = 1
+required_disc_fp = "6aa977c4b850e107deacce25d0f7d9d908feec9bfc9e533b955b4b70615f6c57"

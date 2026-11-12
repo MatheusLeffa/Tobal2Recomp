@@ -1,0 +1,48 @@
+{
+  "format_version": 1,
+  "game": {
+    "name": "Tobal2",
+    "id": "SLPM-86033",
+    "boot_exe": "SLPM_860.33"
+  },
+  "marketing": {
+    "description": "Tobal 2 static recompilation",
+    "publisher": "Square",
+    "year": "1997",
+    "region": "Japan",
+    "players": 2
+  },
+  "rom_identity": {
+    "cue_name": "Tobal 2 (Japan) (v1.1).cue",
+    "bin_name": "Tobal 2 (Japan) (v1.1).bin",
+    "track_counts": [
+      1
+    ],
+    "require_cue": true,
+    "data_track": {
+      "size": 669555600,
+      "md5": "9d583bcc0ee949f42e07fa8613939d8d",
+      "sha1": "50edccaaccf002673a817047905372603e63e208",
+      "crc32": "479f1388"
+    },
+    "disc_fp": "6aa977c4b850e107deacce25d0f7d9d908feec9bfc9e533b955b4b70615f6c57"
+  },
+  "exe": {
+    "load_address": "0x80010000",
+    "entry_pc": "0x800B8910",
+    "text_size": "0x000EC000",
+    "stack_base": "0x801FFFF0"
+  },
+  "seeds": {
+    "count": 1886,
+    "source": "boot_exe_jal"
+  },
+  "warnings": [
+    "cue has only 1 TRACK \u2014 Track-01-only dumps fail multi-track netplay/catalog gates; prefer a full Redump cue."
+  ],
+  "notes": [
+    "entry_pc/load_address/text_size/stack_base taken from PS-X EXE header.",
+    "seeds are first-pass boot-EXE JAL targets (+ entry); expect to grow as overlays / runtime paths are discovered.",
+    "required_disc_fp is psxrecomp-toc-v1 (matches runtime DiscIdentity)."
+  ]
+}

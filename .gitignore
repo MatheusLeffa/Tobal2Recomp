@@ -59,7 +59,19 @@ psx_freeze_heartbeat.json
 .psxrecomp_write_probe
 starvation_dump.jsonl
 
+# Dumps de diagnóstico na raiz (capturas, relatórios); manter os de identidade
+/*.bmp
+/*.png
+/*.json
+!/.recomp.json
+!/catalog_identity.json
+!/disc_set.json
+CMakeCache.txt
+CMakeFiles/
+compile_commands.json
+
 # Editor / sistema
+.settings/
 .vs/
 .vscode/
 *.user
