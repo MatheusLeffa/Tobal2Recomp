@@ -42,6 +42,12 @@ overlay_cache = true
 [video]
 renderer = "opengl"
 aspect_ratio = "4:3"
+# Tobal 2 sends each FMV frame to VRAM in pieces narrower than 256 words
+# (e.g. 256 + 224). The framework's upload tracker only counts pieces >= 256
+# wide, so with the default margin (8) it blanked everything past column 170
+# and the intro video showed only its left half. The MDEC uploads cover the
+# full 320 px width, so no trailing blanking is needed.
+depth24_trailing_margin = 0
 
 [controller]
 default_mode = "digital"
