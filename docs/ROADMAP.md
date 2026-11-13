@@ -82,7 +82,10 @@ Como foi feito:
       LANGUAGE): English (padrão) ou Japanese (original), sem gerar código de
       novo (`docs/IDIOMAS.md`, patch no recomp-ui)
 - [ ] Português (texto + letras com acento na fonte)
-- [ ] Releases automáticos Windows / Linux / Mac no GitHub
+- [x] Releases automáticos Windows / Linux / Mac no GitHub (workflow "Release
+      kits", testado nos 4 sistemas; `docs/KIT.md`)
+- [ ] Publicar a release v0.1.0 e enviar ao catálogo do Retro Launcher
+      (`docs/retro-catalog/`)
 
 ## Fase 5: Publicação
 
