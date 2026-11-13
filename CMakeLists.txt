@@ -17,10 +17,10 @@ project(Tobal2Recomp LANGUAGES C CXX)
 # picker; releases are compiled from the committed generated/ C, so it never
 # needs to generate or rebuild anything on a player's machine.
 # recomp-ui submodule present (PSX_RECOMP_UI defaults ON).
-# Full netplay UI -- enable after adding recomp-ui + testing:
-# if(EXISTS "${PSXRECOMP_ROOT}/lib/recomp-net/CMakeLists.txt")
-#     set(PSX_NETPLAY ON CACHE BOOL "..." FORCE)
-# endif()
+# Online play is not supported yet. Explicit OFF (the framework default) also
+# tells the Retro Catalog submission autofill not to list the title as netplay:
+# the [netplay] section in game.toml is only the disc-identity gate.
+set(PSX_NETPLAY OFF CACHE BOOL "Tobal 2: no online play yet" FORCE)
 set(PSX_SETUP_WIZARD ON CACHE BOOL
     "Advertise first-run setup wizard + Generate & rebuild in recomp-ui" FORCE)
 include("${PSXRECOMP_ROOT}/runtime/runtime.cmake")
@@ -39,8 +39,6 @@ endif()
 
 psxrecomp_add_game_runtime(psx-runtime
     PRELOADED_MODS_DIR "${PSX_PRELOADED_MODS}"
-    # ENABLE_NETPLAY_IF_PRESENT
-    # NETPLAY_LOBBY_URL ws://netplay.retcomm.net:8765
     ENABLE_SETUP_WIZARD
     WINDOW_TITLE "Tobal 2 Recompiled"
     DEFAULT_GAME_CONFIG_PATH "game.toml"
