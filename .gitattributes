@@ -1,2 +1,4 @@
 # Patches precisam dos bytes exatos (git am / git apply).
 *.patch -text
+# Payloads de mods: bytes exatos, conferidos por SHA-256.
+*.dat binary
