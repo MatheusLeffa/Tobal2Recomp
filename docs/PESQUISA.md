@@ -63,15 +63,8 @@ quisermos modificar a fundo podem ser decompiladas à mão depois, por cima.
 - Conhecido por rodar a 60 fps em alta resolução no PS1. Tem um modo Quest
   (dungeon crawler) e um elenco enorme de personagens desbloqueáveis.
 - **Não existe** recomp nem decompilação pública do Tobal 2 (verificado em nov/2026).
-- Trabalhos de tradução que já fizeram engenharia reversa do executável:
-  - Infinite Lupine Translations: patch de tradução em inglês v1.00b.
-  - r4dius: v1.01b (2020), com engenharia reversa do executável e menus alargados.
-    <https://www.romhacking.net/translations/5662/>
-  - VincentNL: correção de texto com novo código em assembly (out/2025), alvo
-    "Tobal 2 (Japan) (v1.1).bin".
-    <https://github.com/VincentNLOBJ/Tobal-2---Text-Hack>
-  - Isso indica que existe pelo menos uma revisão **v1.1** do disco original.
-    Precisamos confirmar qual revisão temos quando o dump existir.
+- O disco original existe em pelo menos uma revisão **v1.1**; é a que o
+  projeto suporta (SLPM-86033 v1.1, confere com o Redump).
 
 ## Riscos conhecidos
 

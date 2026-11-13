@@ -36,7 +36,8 @@ antes de ser aplicado; com outro disco, o mod se recusa a ligar.
 
 ## Inglês
 
-Gerado a partir da tradução de fã v1.00b. Ela muda só dados (32 setores):
+Gerado a partir de um disco em inglês de referência. Ele difere do original só
+em dados (32 setores):
 7,5 KB de texto no executável, sem tocar em código, e ~25 KB em `ALLBIN.BIN`
 (texto + letras latinas desenhadas na fonte). O mod guarda apenas os
 **35 KB de bytes alterados** (395 trechos), nada do conteúdo original.
@@ -62,7 +63,7 @@ cada uma conferida antes):
 Só essa função passa a rodar no interpretador do framework (ela mudou na
 RAM); o resto do jogo continua nativo. Em japonês nada é trocado.
 
-Observação: o "E" da fonte da tradução é serifado e, pequeno, lembra um "B"
+Observação: o "E" da fonte latina é serifado e, pequeno, lembra um "B"
 (TOURNAMENT, QUEST). É o desenho da fonte, não um erro de texto; pode ser
 redesenhado junto com as letras acentuadas do português.
 
@@ -77,10 +78,8 @@ python tools/make_lang_mod.py "iso/Tobal 2 (Japan) (v1.1).bin" mods/preloaded/pa
 
 Cada `--variant` vira uma escolha da opção *Language / Idioma*. `--default`
 liga o mod naquele idioma numa instalação nova (sem ele, o padrão é japonês).
-O gerador só aceita discos do mesmo tamanho do original (trocas no lugar).
-
-(A versão do VincentNL, com letras de meia largura, muda **código**; não serve
-para este gerador.)
+O gerador só aceita discos do mesmo tamanho do original (trocas no lugar) e
+que mudem apenas dados, não código.
 
 ## Próximo: português
 
