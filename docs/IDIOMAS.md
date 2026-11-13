@@ -37,11 +37,33 @@ Verificado (12/11/2026): disco original + mod = disco em inglês, byte a byte;
 título (TOURNAMENT / VS / QUEST / TRAINING / OPTIONS), Quest (NEW GAME,
 Pick Fighter, história do imperador Udan) em inglês; mod desligado = japonês.
 
+### Ajustes de layout (`mods/lang_extra/en.toml`)
+
+As letras latinas são desenhadas com a largura dos caracteres japoneses, então
+textos longos podem passar dos quadros. O menu de título (`func_80053298`) tem
+as posições no código; em inglês o mod troca 7 imediatos (instruções `ori`,
+cada uma conferida antes):
+
+| Item | Original | Inglês |
+| --- | --- | --- |
+| Quadro escuro (esq./dir.) | 152 / 360 | 136 / 376 |
+| Barra de seleção (esq./dir.) | 166 / 346 | 150 / 362 |
+| Texto / sombra (x) | 200 / 202 | 184 / 186 |
+| Seta ▶ (x) | 168 | 152 |
+
+Só essa função passa a rodar no interpretador do framework (ela mudou na
+RAM); o resto do jogo continua nativo. Em japonês nada é trocado.
+
+Observação: o "E" da fonte da tradução é serifado e, pequeno, lembra um "B"
+(TOURNAMENT, QUEST). É o desenho da fonte, não um erro de texto; pode ser
+redesenhado junto com as letras acentuadas do português.
+
 ## Gerar ou adicionar um idioma
 
 ```bash
 python tools/make_lang_mod.py "iso/Tobal 2 (Japan) (v1.1).bin" mods/preloaded/packages \
   --variant en English "iso/referencia-en/<disco em inglês>.bin" \
+  --extra en mods/lang_extra/en.toml \
   [--variant pt "Português" "iso/<disco em português>.bin"]
 ```
 

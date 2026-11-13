@@ -103,9 +103,17 @@ def main():
     ap.add_argument("out")
     ap.add_argument("--variant", nargs=3, action="append", required=True,
                     metavar=("CODIGO", "NOME", "DISCO"))
+    ap.add_argument("--extra", nargs=2, action="append", default=[],
+                    metavar=("CODIGO", "TOML"),
+                    help="anexa [[patch]]/[[overlay]] extras de um idioma "
+                         "(ex.: mods/lang_extra/en.toml)")
     ap.add_argument("--version", default="0.1.0")
     ap.add_argument("--game-id", default="SLPM-86033")
     a = ap.parse_args()
+    codes = {v[0] for v in a.variant}
+    for code, _ in a.extra:
+        if code not in codes:
+            raise SystemExit(f"--extra {code}: idioma não está entre os --variant")
 
     pkg = "tobal2.language"
     root = os.path.join(a.out, pkg, a.version)
@@ -170,6 +178,10 @@ def main():
             ]
         total += len(runs)
         print(f"{code} ({label}): {len(runs)} trechos, {nbytes} bytes")
+    for code, path in a.extra:
+        with open(path, encoding="utf-8") as f:
+            lines += ["", f"# --- extras de '{code}' ({os.path.basename(path)}) ---", f.read().rstrip()]
+        print(f"{code}: extras anexados de {path}")
     with open(os.path.join(root, "manifest.toml"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
     print(f"{pkg} {a.version}: {total} overlays -> {root}")

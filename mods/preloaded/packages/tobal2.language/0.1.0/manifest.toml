@@ -3585,3 +3585,70 @@ file = "en/462518190.dat"
 sha256 = "7fda27cb9e40892aa4656043f9b6e25b42fa21e199b5219f1a21e3f7ae30f841"
 expected_sha256 = "4fb4120e7effd4b699c4f518b0247261b9b37751248ffd4efc75e61b5f46da57"
 when = { lang = "en" }
+
+# --- extras de 'en' (en.toml) ---
+# Ajustes extras do idioma inglês (anexados ao manifest por tools/make_lang_mod.py).
+#
+# Menu de título (func_80053298): as letras latinas são desenhadas com a mesma
+# largura dos caracteres japoneses, e "TOURNAMENT" (10 letras) passava do
+# quadro feito para "トーナメント" (6). O quadro escuro cresce 16 px de cada
+# lado (152..360 -> 136..376, continua centrado em 256) e o texto, a sombra, a
+# seta e a barra de seleção andam 16 px para a esquerda, mantendo os mesmos
+# espaçamentos do original. Cada troca confere a instrução original
+# (ori reg, $zero, imediato) antes de aplicar.
+
+[[patch]]
+feature = "language"
+target = "main_exe"
+address = 0x800532A8
+expected = "c8 00 13 34"   # ori $s3, $zero, 200  (x do texto, 1ª passada)
+replace  = "b8 00 13 34"   # 184
+when = { lang = "en" }
+
+[[patch]]
+feature = "language"
+target = "main_exe"
+address = 0x80053348
+expected = "ca 00 13 34"   # ori $s3, $zero, 202  (x do texto, 2ª passada)
+replace  = "ba 00 13 34"   # 186
+when = { lang = "en" }
+
+[[patch]]
+feature = "language"
+target = "main_exe"
+address = 0x80053478
+expected = "a8 00 02 34"   # ori $v0, $zero, 168  (x da seta)
+replace  = "98 00 02 34"   # 152
+when = { lang = "en" }
+
+[[patch]]
+feature = "language"
+target = "main_exe"
+address = 0x800533A4
+expected = "a6 00 05 34"   # ori $a1, $zero, 166  (barra: esquerda)
+replace  = "96 00 05 34"   # 150
+when = { lang = "en" }
+
+[[patch]]
+feature = "language"
+target = "main_exe"
+address = 0x800533B8
+expected = "5a 01 06 34"   # ori $a2, $zero, 346  (barra: direita)
+replace  = "6a 01 06 34"   # 362
+when = { lang = "en" }
+
+[[patch]]
+feature = "language"
+target = "main_exe"
+address = 0x800534D8
+expected = "98 00 04 34"   # ori $a0, $zero, 152  (quadro: esquerda)
+replace  = "88 00 04 34"   # 136
+when = { lang = "en" }
+
+[[patch]]
+feature = "language"
+target = "main_exe"
+address = 0x80053500
+expected = "68 01 05 34"   # ori $a1, $zero, 360  (quadro: direita)
+replace  = "78 01 05 34"   # 376
+when = { lang = "en" }
