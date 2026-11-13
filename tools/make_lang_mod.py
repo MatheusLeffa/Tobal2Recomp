@@ -1,22 +1,38 @@
-"""Gera um pacote de mod de idioma a partir de duas imagens do Tobal 2.
+"""Gera o mod de idioma do Tobal 2 (tobal2.language) a partir de discos traduzidos.
 
 Uso:
-    python tools/make_lang_mod.py ORIGINAL.bin TRADUZIDO.bin SAIDA_DIR \
-        --lang en --label English [--version 0.1.0]
+    python tools/make_lang_mod.py ORIGINAL.bin SAIDA_DIR \
+        --variant en English "caminho/disco_em_ingles.bin" \
+        [--variant pt Português "caminho/disco_em_portugues.bin"] \
+        [--version 0.1.0]
 
-Compara as duas imagens setor a setor (MODE2/2352) e escreve
-SAIDA_DIR/<id>/<versão>/manifest.toml com um [[overlay]] disc_raw por setor
-alterado (o setor traduzido inteiro, com EDC/ECC), guardado pelo SHA-256 do
-setor original e pelo SHA-256 do disco original.
+Compara cada disco traduzido com o original (MODE2/2352, uma trilha) e grava
+SAIDA_DIR/tobal2.language/<versão>/:
+    manifest.toml   um [[overlay]] disc_user por trecho alterado, ativo só
+                    quando a opção "lang" do mod é aquela variante
+    <lang>/*.dat    SOMENTE os bytes que a tradução mudou (texto e letras da
+                    fonte); nada do conteúdo original do jogo vai junto. Cada
+                    trecho é guardado pelo SHA-256 do trecho original.
 
-O pacote gerado contém dados do disco traduzido (trabalho dos tradutores):
-NÃO coloque a saída no Git. Use uma pasta ignorada, como analysis/.
+Mod desligado = jogo em japonês, idêntico ao disco original.
+Para publicar, use SAIDA_DIR = mods/preloaded/packages.
 """
 import argparse
 import hashlib
 import os
+import shutil
 
 SECTOR = 2352
+USER = 2048
+MAX_GAP = 4  # bytes iguais tolerados dentro de um trecho alterado
+
+
+def user_data(raw):
+    if raw[15] == 2:  # MODE2
+        if raw[18] & 0x20:  # Form 2 (XA): não suportado por disc_user
+            return None
+        return raw[24:24 + USER]
+    return raw[16:16 + USER]
 
 
 def sha256_file(path):
@@ -27,49 +43,84 @@ def sha256_file(path):
     return h.hexdigest()
 
 
+def changed_runs(orig_path, mod_path):
+    """Lista de (offset_disc_user, bytes_originais, bytes_novos)."""
+    if os.path.getsize(orig_path) != os.path.getsize(mod_path):
+        raise SystemExit(f"{mod_path}: tamanho diferente do original; o gerador "
+                         "só faz trocas do mesmo tamanho")
+    runs = []
+    with open(orig_path, "rb") as fo, open(mod_path, "rb") as fm:
+        lba = 0
+        while True:
+            so, sm = fo.read(SECTOR), fm.read(SECTOR)
+            if not so:
+                break
+            if so != sm:
+                uo, um = user_data(so), user_data(sm)
+                if uo is None or um is None:
+                    raise SystemExit(f"setor {lba} alterado é XA (Form 2); não suportado")
+                base = lba * USER
+                i = 0
+                while i < USER:
+                    if uo[i] == um[i]:
+                        i += 1
+                        continue
+                    j = i
+                    last = i
+                    while j < USER and j - last <= MAX_GAP:
+                        if uo[j] != um[j]:
+                            last = j
+                        j += 1
+                    end = last + 1
+                    runs.append([base + i, bytes(uo[i:end]), bytes(um[i:end])])
+                    i = end
+            lba += 1
+    # junta trechos vizinhos (inclusive atravessando a fronteira de setor)
+    merged = []
+    for off, o, m in runs:
+        if merged:
+            p = merged[-1]
+            gap = off - (p[0] + len(p[1]))
+            if 0 <= gap <= MAX_GAP:
+                # bytes do vão são iguais nos dois discos; recupera do original
+                filler = b""
+                if gap:
+                    with open(orig_path, "rb") as fo:
+                        for k in range(gap):
+                            pos = p[0] + len(p[1]) + k
+                            fo.seek((pos // USER) * SECTOR)
+                            filler += bytes([user_data(fo.read(SECTOR))[pos % USER]])
+                p[1] += filler + o
+                p[2] += filler + m
+                continue
+        merged.append([off, bytearray(o), bytearray(m)])
+    return merged
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("original")
-    ap.add_argument("translated")
     ap.add_argument("out")
-    ap.add_argument("--lang", required=True)
-    ap.add_argument("--label", required=True)
+    ap.add_argument("--variant", nargs=3, action="append", required=True,
+                    metavar=("CODIGO", "NOME", "DISCO"))
     ap.add_argument("--version", default="0.1.0")
     ap.add_argument("--game-id", default="SLPM-86033")
     a = ap.parse_args()
 
-    if os.path.getsize(a.original) != os.path.getsize(a.translated):
-        raise SystemExit("as imagens têm tamanhos diferentes; este gerador só "
-                         "faz trocas de setor do mesmo tamanho")
-    pkg_id = f"tobal2.language.{a.lang}"
-    root = os.path.join(a.out, pkg_id, a.version)
-    sec_dir = os.path.join(root, "sectors")
-    os.makedirs(sec_dir, exist_ok=True)
-
-    changed = []
-    with open(a.original, "rb") as fo, open(a.translated, "rb") as ft:
-        lba = 0
-        while True:
-            so, st = fo.read(SECTOR), ft.read(SECTOR)
-            if not so:
-                break
-            if so != st:
-                name = f"sectors/{lba:06d}.bin"
-                with open(os.path.join(root, name), "wb") as f:
-                    f.write(st)
-                changed.append((lba, name, hashlib.sha256(st).hexdigest(),
-                                hashlib.sha256(so).hexdigest()))
-            lba += 1
-
+    pkg = "tobal2.language"
+    root = os.path.join(a.out, pkg, a.version)
+    if os.path.isdir(root):
+        shutil.rmtree(root)
+    os.makedirs(root)
     disc_sha = sha256_file(a.original)
+
     lines = [
         "format_version = 5",
-        f'id = "{pkg_id}"',
+        f'id = "{pkg}"',
         f'version = "{a.version}"',
-        f'name = "Tobal 2 - {a.label}"',
-        'author = "Tobal2Recomp (gerado por tools/make_lang_mod.py)"',
-        f'description = "Troca os textos e a fonte do jogo para {a.label}. '
-        f'{len(changed)} setores do disco original, sem mexer no código."',
+        'name = "Tobal 2 - Language / Idioma"',
+        'author = "Tobal2Recomp"',
+        'description = "Changes the game text and font. Off = original Japanese."',
         'resolver = "declarative"',
         'save_compatibility = "shared"',
         "",
@@ -79,25 +130,49 @@ def main():
         "",
         "[[feature]]",
         'id = "language"',
-        f'name = "Idioma: {a.label}"',
-        f'description = "Jogo em {a.label}. Desligado = japonês original."',
+        'name = "Language / Idioma"',
+        'description = "Game language. Disabled = original Japanese."',
         'group = "Localization"',
         "default_enabled = false",
+        "",
+        "[[option]]",
+        'feature = "language"',
+        'id = "lang"',
+        'label = "Language / Idioma"',
+        'description = "Text language used in menus, Quest mode and dialogue."',
+        'group = "Localization"',
+        'type = "choice"',
+        f'default = "{a.variant[0][0]}"',
     ]
-    for lba, name, sha, sha_stock in changed:
-        lines += [
-            "",
-            "[[overlay]]",
-            'feature = "language"',
-            'target = "disc_raw"',
-            f"offset = {lba * SECTOR}",
-            f'file = "{name}"',
-            f'sha256 = "{sha}"',
-            f'expected_sha256 = "{sha_stock}"',
-        ]
+    for code, label, _ in a.variant:
+        lines += ["", "[[option.choice]]", f'value = "{code}"', f'label = "{label}"']
+
+    total = 0
+    for code, label, path in a.variant:
+        runs = changed_runs(a.original, path)
+        os.makedirs(os.path.join(root, code))
+        nbytes = 0
+        for off, orig, new in runs:
+            name = f"{code}/{off:09d}.dat"
+            with open(os.path.join(root, name), "wb") as f:
+                f.write(new)
+            nbytes += len(new)
+            lines += [
+                "",
+                "[[overlay]]",
+                'feature = "language"',
+                'target = "disc_user"',
+                f"offset = {off}",
+                f'file = "{name}"',
+                f'sha256 = "{hashlib.sha256(new).hexdigest()}"',
+                f'expected_sha256 = "{hashlib.sha256(orig).hexdigest()}"',
+                f'when = {{ lang = "{code}" }}',
+            ]
+        total += len(runs)
+        print(f"{code} ({label}): {len(runs)} trechos, {nbytes} bytes")
     with open(os.path.join(root, "manifest.toml"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
-    print(f"{pkg_id} {a.version}: {len(changed)} setores -> {root}")
+    print(f"{pkg} {a.version}: {total} overlays -> {root}")
 
 
 if __name__ == "__main__":

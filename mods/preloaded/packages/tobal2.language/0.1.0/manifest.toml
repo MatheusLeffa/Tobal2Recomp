@@ -1,0 +1,3587 @@
+format_version = 5
+id = "tobal2.language"
+version = "0.1.0"
+name = "Tobal 2 - Language / Idioma"
+author = "Tobal2Recomp"
+description = "Changes the game text and font. Off = original Japanese."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLPM-86033"
+disc_sha256 = "04e79535b4616963e045957b4f9b87126753e94b01d35d32c60214df04bf5a5a"
+
+[[feature]]
+id = "language"
+name = "Language / Idioma"
+description = "Game language. Disabled = original Japanese."
+group = "Localization"
+default_enabled = false
+
+[[option]]
+feature = "language"
+id = "lang"
+label = "Language / Idioma"
+description = "Text language used in menus, Quest mode and dialogue."
+group = "Localization"
+type = "choice"
+default = "en"
+
+[[option.choice]]
+value = "en"
+label = "English"
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68327308
+file = "en/068327308.dat"
+sha256 = "e34491ed478faf0d92cd06590958d2e3f8d68fd40b888dcb0ecc5019e6fe0d6f"
+expected_sha256 = "1866340a07366fa41094257024cc268d5f7d2859bd406463529b144925395510"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68328475
+file = "en/068328475.dat"
+sha256 = "ca7f6201d78fb8a729668090c30182ea2719d41917218cf965502d9f81c74f39"
+expected_sha256 = "45fa55ef9ef6db83f6a83dfd4c4e9e5d40af36646926c631c74a58ae11b20a0a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68328721
+file = "en/068328721.dat"
+sha256 = "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e"
+expected_sha256 = "ca5ac45eac44d9b693311b01698b275203aa40da5ac254187a43a0e6691c0ac7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68328734
+file = "en/068328734.dat"
+sha256 = "ad95131bc0b799c0b1af477fb14fcf26a6a9f76079e48bf090acb7e8367bfd0e"
+expected_sha256 = "4a924e4179f452304de4deaba534255e7c81ae77ac04ffb528e2e80e68c9d0c0"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68328743
+file = "en/068328743.dat"
+sha256 = "132369a3b7f24fa619785c4e2eee68855f5d46cbe0aaa19eadd0dbc2dd592c39"
+expected_sha256 = "c0218b6074a7f38cf201d9b5fce480235b15a2ab8c1a36fee450b158902b6d76"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68328756
+file = "en/068328756.dat"
+sha256 = "76ece85f9f0698ec7800de2504879d8563872bb6c37767e2b1fd942ce12b8a1f"
+expected_sha256 = "5879c905e2e37a8dcfe5c4aafbf224e3f65c6a120fc18b9df95806e7eaf2e595"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68328976
+file = "en/068328976.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "63b1f9d536b772d68483707f4ef983a04f23138ec684f92a045252eb5fc6c82e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68328983
+file = "en/068328983.dat"
+sha256 = "132369a3b7f24fa619785c4e2eee68855f5d46cbe0aaa19eadd0dbc2dd592c39"
+expected_sha256 = "048acfae9ca9aeeef342d977eca9bc6bec7595d41078fab2a0d577de43a892f6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68328998
+file = "en/068328998.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "63b1f9d536b772d68483707f4ef983a04f23138ec684f92a045252eb5fc6c82e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329019
+file = "en/068329019.dat"
+sha256 = "f72abfd200b7f6471e81520ecda24bd4c8832871cb84b68533d642ef3456e948"
+expected_sha256 = "0a7c06c196e2c340eb9ca4d218b194ba989781f8c968375e0a90d7b98afa3ab6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329294
+file = "en/068329294.dat"
+sha256 = "12a3ae445661ce5dee78d0650d33362dec29c4f82af05e7e57fb595bbbacf0ca"
+expected_sha256 = "89f9e9df3cb73d95ba743538d5f8311f6b677a2e2b13c9ef3a7db775e53ed9ce"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329321
+file = "en/068329321.dat"
+sha256 = "a278ffd21cf5142ed86f7f4ff5dd051bb754cba9e038463138c3071269a557dc"
+expected_sha256 = "dcc1f1eb89dbfa283606f2b432c4c15810c73fbbfb6106639f8e1d4204b9c3f6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329349
+file = "en/068329349.dat"
+sha256 = "e9988f62b3ca196c637aa165e18671c5ade492ba59327fe76b20fc8c474ce3f2"
+expected_sha256 = "767bb469b699ebfa574c22c8c2f9481762d72948411eb629d49440c9fb12a84a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329461
+file = "en/068329461.dat"
+sha256 = "1399631c5a851f29d4abc8e50b5e62bb7de02b5e5d34d7f0371cbc4d888219ec"
+expected_sha256 = "f481bd9b338d51be8fd39959ba5f96fc75234403d4407457d6eb5f4a8ac0de74"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329523
+file = "en/068329523.dat"
+sha256 = "6f27b6332778d931d28dc39884b690ac490e6302a52f1e6ccda601320f997381"
+expected_sha256 = "072b33f7df42189a2fd944f4031747f6f79ff737343519201347819e8d016bda"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329544
+file = "en/068329544.dat"
+sha256 = "4fbe3527cbd853da0472e8ab33a8d8961c5cda9e22c1c7c1fd19d891965ad027"
+expected_sha256 = "582a89dfd9dd98459170424119467ab2eaba55baee5f3216b1bd960ff35362e0"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329571
+file = "en/068329571.dat"
+sha256 = "8c1c138b9eb993af6a25729ba60bf45c1a1534aaef8c4f3b43432e9f54927d52"
+expected_sha256 = "ed1eb16dada8bce237d30b582467c8f22f99fa7aca9b3a9cf3c8983236369bf8"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329613
+file = "en/068329613.dat"
+sha256 = "be32a73016f6f55b580adcc7041010de62e3826440e837554869647d66ad1727"
+expected_sha256 = "c6880e7399f3fac2548b9f75e16231d05b73397d081a40de426a78f7d6d58d44"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329641
+file = "en/068329641.dat"
+sha256 = "adaac4b55ddb3a6ab09d09b3b1e43850b9e5ae838a9460152bf064e3ee61ae6a"
+expected_sha256 = "a13ed9913daf81e598acbc4da11e654fa997c72c781302011a1b02439d332a58"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329653
+file = "en/068329653.dat"
+sha256 = "5ae7e6a42304dc6e4176210b83c43024f99a0bce9a870c3b6d2c95fc8ebfb74c"
+expected_sha256 = "f4152f96c5e772d1ce3634707016f2c53c9b2683de4b6ac32d26399ccc7f43fc"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 68329669
+file = "en/068329669.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "97f7bf9f314f6d1bc31689c1dc6e5659eb1587af8ea665838ee35dc960087a08"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77323959
+file = "en/077323959.dat"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "4a64a107f0cb32536e5bce6c98c393db21cca7f4ea187ba8c4dca8b51d4ea80a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77323967
+file = "en/077323967.dat"
+sha256 = "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d"
+expected_sha256 = "4a64a107f0cb32536e5bce6c98c393db21cca7f4ea187ba8c4dca8b51d4ea80a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77323973
+file = "en/077323973.dat"
+sha256 = "71dfac4836b7894bd1ae356d10c7bfba99ce522d58b3942c6ff24f1b2b6ea4da"
+expected_sha256 = "b156f7e1192cb2a6a2fc014f3d6a18d8af9b40f6c49b4310ed11656213442be6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77328731
+file = "en/077328731.dat"
+sha256 = "723ee393b3e519bf5ed58ec0b9f01a872b49aaa11da318fac528917acb4f0c9c"
+expected_sha256 = "9fde74c4b0dee549124deeb23b0278cad42a6270c2df5e536c98a39a0f348acb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77328756
+file = "en/077328756.dat"
+sha256 = "4d475263709e39682970a5028ff25f9e83a9ae71ce988f73fb17e0fb431258fc"
+expected_sha256 = "61b7f7b241d028c212a18e71ee74d0ef7bdbd1252f9d3416c75c8a79720f4fac"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77328764
+file = "en/077328764.dat"
+sha256 = "50f0ba85cb12f738d585249265a2a54942bf3eeab140ced1820197d72049dfce"
+expected_sha256 = "6598fd76e2b9358e81bfa419a8c88af4c7926506a203f5d2fc55976fbd05fb13"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77328805
+file = "en/077328805.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "1758f0a79ae2792796a08d414603b41707211d8459283991370c015246cdc1ce"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77328813
+file = "en/077328813.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "1758f0a79ae2792796a08d414603b41707211d8459283991370c015246cdc1ce"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77328871
+file = "en/077328871.dat"
+sha256 = "68fbeebdcb7cdbe8789f109d4cd93c72e543306f9ad0dd474dd9ac6bdb72eed9"
+expected_sha256 = "d4e24909a9d96d899a1edf3da7a44cf9d289dda378ac3d9606ce82443b5c231f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77328896
+file = "en/077328896.dat"
+sha256 = "de8767f9170fd177dd69c5247266cb9b24928a721120a1854039f975b7010d31"
+expected_sha256 = "3d561318c14416e55a4746313531d65cad8576ea3eff1c3ab3acc689d23acb74"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77328904
+file = "en/077328904.dat"
+sha256 = "98d1f892f98af0bc49df6b1b3e12f8270cf584bdbae8062d5badc9d1d9e7d67a"
+expected_sha256 = "2447488da1be4937664faeed8a067295c0fe44185fa2bf1f8da7cd9b96ef03b0"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77328945
+file = "en/077328945.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "cae1efc6256f7e371297970428768c6ef84dae99b697d295afae12bfdbe1ce2a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77328953
+file = "en/077328953.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "cae1efc6256f7e371297970428768c6ef84dae99b697d295afae12bfdbe1ce2a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77329145
+file = "en/077329145.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "1758f0a79ae2792796a08d414603b41707211d8459283991370c015246cdc1ce"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77329153
+file = "en/077329153.dat"
+sha256 = "5142c8f57073dbb452c9b72d07dc801cae23099b0923ca038f15780c2712e058"
+expected_sha256 = "224b8fe6e9a6e733e5db2bc88f746a9fc1fe2b79a3156ee2c7f3115b73fdf0af"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77329225
+file = "en/077329225.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "1758f0a79ae2792796a08d414603b41707211d8459283991370c015246cdc1ce"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77329233
+file = "en/077329233.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "1758f0a79ae2792796a08d414603b41707211d8459283991370c015246cdc1ce"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77329285
+file = "en/077329285.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "cae1efc6256f7e371297970428768c6ef84dae99b697d295afae12bfdbe1ce2a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77329293
+file = "en/077329293.dat"
+sha256 = "90a92c1252a8740886f2d9e12911b7d66b32ced435086e50fcd933622510c1fe"
+expected_sha256 = "e86e04f66ec9ee7241f0202d66df1e13504b4ac70fe0cab2bb69cb7f0a3e72dd"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77329365
+file = "en/077329365.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "cae1efc6256f7e371297970428768c6ef84dae99b697d295afae12bfdbe1ce2a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77329373
+file = "en/077329373.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "cae1efc6256f7e371297970428768c6ef84dae99b697d295afae12bfdbe1ce2a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77332815
+file = "en/077332815.dat"
+sha256 = "5ae7e6a42304dc6e4176210b83c43024f99a0bce9a870c3b6d2c95fc8ebfb74c"
+expected_sha256 = "c4fb7517e6b1b42869600c9e6f26874ba6d4ac9c256176b33ea9d8ebbe6a7b0e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77332836
+file = "en/077332836.dat"
+sha256 = "dbdf855a3966649c9ce22bbcc56d5979467bb2443d310a43e9070ae76e4d5178"
+expected_sha256 = "0a2bca355021d51ad761d01efdb1e05b15bf349a5fda50c0eda1e361a6d4a33b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77332853
+file = "en/077332853.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "6955e033387d66926f9db5df30168daf59bccac3688078c2c46f4ee4240e6645"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77332860
+file = "en/077332860.dat"
+sha256 = "dbdf855a3966649c9ce22bbcc56d5979467bb2443d310a43e9070ae76e4d5178"
+expected_sha256 = "fc8b5d4b7dfd005c34d63488033ba4ae6a2361946feb2f7208525987d5bf3db5"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77332871
+file = "en/077332871.dat"
+sha256 = "895a9541999b53b65b00e78c127d2277b0dd09556ad18160944b1577ee50499e"
+expected_sha256 = "55edf3abaf429b4ce217f4f7a525b9f0d0d9edb7f78807450192cbcc074ce146"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333166
+file = "en/077333166.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "390400374360c53cad1385d026af51c012f7a8aa7cabdaa2cc6e47ea22b5cb0f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333173
+file = "en/077333173.dat"
+sha256 = "5ae7e6a42304dc6e4176210b83c43024f99a0bce9a870c3b6d2c95fc8ebfb74c"
+expected_sha256 = "0e02e07639d0bc01165c41d1e0d24cc231879f8b18e7b50feb78b37b9e7856ef"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333197
+file = "en/077333197.dat"
+sha256 = "d16f708d42c5d263528298327753d6d9d6536a207a261839584c9036085235c0"
+expected_sha256 = "b42650b0044b133489f8f0fa0057625788bc9abe7ad4c6913d8388edcb1f51aa"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333217
+file = "en/077333217.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "d7fcf32ee8e1cd3eef022fead751340276a82cd865ccaabc42af0a680ab8387d"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333228
+file = "en/077333228.dat"
+sha256 = "103566e6010efbaef2901d06fd6be9b0918cc539fefec733bb28f7b60d3c3795"
+expected_sha256 = "c33f2b2d1a465eacc36b5f3b9a8cc9adfa0b992ceee7a21b7b86d1c152cbc29a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333249
+file = "en/077333249.dat"
+sha256 = "5ae7e6a42304dc6e4176210b83c43024f99a0bce9a870c3b6d2c95fc8ebfb74c"
+expected_sha256 = "f4b5368f1f954d6d34d4d5e52b55fe8f32d63f1191ccedc55b3826107d3badbf"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333260
+file = "en/077333260.dat"
+sha256 = "103566e6010efbaef2901d06fd6be9b0918cc539fefec733bb28f7b60d3c3795"
+expected_sha256 = "199b78c168bf62e93cd01fb2745bdd4a73f3cc9b464a71fee19c6b0955c92bdf"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333278
+file = "en/077333278.dat"
+sha256 = "ce8bee525d6736e9825261b19a9b51719f9dc4bb728e95cf7067a2142b03b362"
+expected_sha256 = "7e1b26cdef6b45ff327911afe4e793af7044d40ba2fd8ebfd08a3fb0451cf1ed"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333292
+file = "en/077333292.dat"
+sha256 = "103566e6010efbaef2901d06fd6be9b0918cc539fefec733bb28f7b60d3c3795"
+expected_sha256 = "3f05f42073c47b753ff0791f6b6f24776a1a45f8b8c13372cac7d01407e912a6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333309
+file = "en/077333309.dat"
+sha256 = "adaac4b55ddb3a6ab09d09b3b1e43850b9e5ae838a9460152bf064e3ee61ae6a"
+expected_sha256 = "e28751ecab7e761e8433b7f2e12e89a359747c52c114862d8a1444ab782e142e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333323
+file = "en/077333323.dat"
+sha256 = "058c75cb03f7cf6f91c3d4003a4f82067264b8746ed286a3870c3ce997f747f7"
+expected_sha256 = "d398086c56b498604a88d42e792f04807b74273a06d2efabedd36c9825a40716"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333629
+file = "en/077333629.dat"
+sha256 = "331ee8ec4a030419fed48a71f32f9ac1c47c2198ff1dc6e26352b7b2c3a94000"
+expected_sha256 = "44f354629459533fbd1f298418e4d3a8a4566ca53fdef1de50e526db331c226b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333661
+file = "en/077333661.dat"
+sha256 = "69f11787d68a785b4edabc11ccb6da7a1f21534edff7db3c0d1c2b7121920e25"
+expected_sha256 = "a59c8ec1b3d38a19cc55715351dfb603a72f622502e092df4145f0a99e86fc55"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333694
+file = "en/077333694.dat"
+sha256 = "4b732368933c81ab1981c03c091d0ca72e278befbb3ef07667c53c073bb2f0fe"
+expected_sha256 = "b7d1b3a1104cc86b1cea310793cf777002db0517281d135a02de079b0ea87c23"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333728
+file = "en/077333728.dat"
+sha256 = "c12cdbdd30150a0ba52f678155dc067be64109b4b84d0f95bc033003e282d364"
+expected_sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333737
+file = "en/077333737.dat"
+sha256 = "c12cdbdd30150a0ba52f678155dc067be64109b4b84d0f95bc033003e282d364"
+expected_sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333744
+file = "en/077333744.dat"
+sha256 = "c12cdbdd30150a0ba52f678155dc067be64109b4b84d0f95bc033003e282d364"
+expected_sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333764
+file = "en/077333764.dat"
+sha256 = "a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89"
+expected_sha256 = "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333770
+file = "en/077333770.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "bcf403bde5b90e018ff03bc7aebf30b9659594394f8e1388f91c7a90b5eb0c22"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333780
+file = "en/077333780.dat"
+sha256 = "731c3eceeb6309cab3853342f4b27390750bd9e434dc52490e2031a287549765"
+expected_sha256 = "74b3edaadf6a11548c3fa17d4d0fa80f6fdcc5583edf331ea0220c9837417044"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333789
+file = "en/077333789.dat"
+sha256 = "45a9ad7ed395f6efc88008ed473160f04101cf5ec291e96ba40ea87d219cc69f"
+expected_sha256 = "0da72ce25a377c3f911d439cb4db47a2a66cf7bd26e1b19083f221d5815fce00"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333812
+file = "en/077333812.dat"
+sha256 = "3ca1cd3246b94888a50aeadf92d5605bd242d2060e8e86dccbdcdfc0f886fb1e"
+expected_sha256 = "9bcb20e5c50eb0ed5d2eaa80a9fe695e62cdadbcd680a883a438dd936976b32c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333832
+file = "en/077333832.dat"
+sha256 = "34cdff5426edac597e623ecaf03dccbebab7d82961b91757c230904280b5356a"
+expected_sha256 = "53c017e97aee06aec5b9304b8a066ccd1983a8b9beccade30d806faf25fc672b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333884
+file = "en/077333884.dat"
+sha256 = "06e6314318f0d140595a16745ee5ffe10c52e757dae4e1079efdc7a32e1d9024"
+expected_sha256 = "111334bc208dc17005fc45f3aff32fa026e371f1c9284145c6464147417e2512"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77333945
+file = "en/077333945.dat"
+sha256 = "42ad8b21a63772a286049baa7fb82079103d96e8e253121047ed764c77467696"
+expected_sha256 = "5a5a015ceeb661d58b39e49e204491de2d753f5709a49c42bf2a4d99eff5188d"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77334517
+file = "en/077334517.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "858d9b9b968f4cf4089c17caeea2e72be54ea62970da6ce1a37e4f78e70e74d9"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77334524
+file = "en/077334524.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "140ad0841b7999e39160d942527b215b312137061143e29095a2f7638bb8711a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77334531
+file = "en/077334531.dat"
+sha256 = "05c57943f342ec42fa9804b9847cb4421e34e7a7194c3ebf4a65a78a059dcc2e"
+expected_sha256 = "952fbac0d67e0d3d2e783f778d87f40421bb7c3b66bf7b40592ed6f42a0bef22"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77334599
+file = "en/077334599.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "8359046a334e54cbe43866ffcfaa38bacb9c0cfbe98ee903026d4bededfcbf4d"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77334619
+file = "en/077334619.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "bcf403bde5b90e018ff03bc7aebf30b9659594394f8e1388f91c7a90b5eb0c22"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77334631
+file = "en/077334631.dat"
+sha256 = "bc633b3d23c69ae98e331bb62faaebf353a41b0f34c76c4df3e515d8411c5065"
+expected_sha256 = "686f309af281524e4529472c6e71234f3180078671817d8b2d55fa4a2314ea7a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77334662
+file = "en/077334662.dat"
+sha256 = "731c3eceeb6309cab3853342f4b27390750bd9e434dc52490e2031a287549765"
+expected_sha256 = "0fc047f59968cd36e60aa6377683b4bd047231b100617b2408678df0ef2df1bc"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77334675
+file = "en/077334675.dat"
+sha256 = "bc633b3d23c69ae98e331bb62faaebf353a41b0f34c76c4df3e515d8411c5065"
+expected_sha256 = "13bbd69d02abc9778dc66e4081041f59eb51aa20ae8f093a37a60d9b4cde57af"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77334706
+file = "en/077334706.dat"
+sha256 = "731c3eceeb6309cab3853342f4b27390750bd9e434dc52490e2031a287549765"
+expected_sha256 = "e9ff17ea75907ef6aff5954b98693d47b2458ead6e7901d011d35df307d4eca2"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77334718
+file = "en/077334718.dat"
+sha256 = "4f1539edec05003c390f6d0040b5d46c9b03040bf113c4cf3c9cfa376b0d5ea4"
+expected_sha256 = "638ba72fa29cbe1d39e48b437542fec56d25c647279465fbe8d4baf71b8112c6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77335244
+file = "en/077335244.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "46e04d129d7b45d054469ce34e24069a1426b3e34f1b68a3d1bff1e070aee192"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77335253
+file = "en/077335253.dat"
+sha256 = "8688d249e9d047b4fc2fb89ce05afe9ec89252ffccdd969de6eef260dd7ffb21"
+expected_sha256 = "9b7ca7de8ba5edfba1b28f79aa02843392a4b4819abd8e416c44a62e50346d18"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77335290
+file = "en/077335290.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77335302
+file = "en/077335302.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "0775dc2c55f6afbf4975006e2245f220467a25f2b7d15092bc59449c4d6e0546"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77335309
+file = "en/077335309.dat"
+sha256 = "4d73597f2bd771e513478eacc7d5ea65cfb0257e79584bbed05dab60363f258a"
+expected_sha256 = "6a11afa6de9d84b2bb1fb415efe9d121fab71bdba00a8f5163e6e3dd6724c49f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77335781
+file = "en/077335781.dat"
+sha256 = "ca2fd00fa001190744c15c317643ab092e7048ce086a243e2be9437c898de1bb"
+expected_sha256 = "bcf403bde5b90e018ff03bc7aebf30b9659594394f8e1388f91c7a90b5eb0c22"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77335800
+file = "en/077335800.dat"
+sha256 = "44a5f7891570e5631e8c91c85186e6633f4ab5364f644040b2a00126a07985b6"
+expected_sha256 = "2fd387742c50bbbeaa11210290dc6935ff62f66348c8e1078b5fe1c851a0ccba"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77335830
+file = "en/077335830.dat"
+sha256 = "44a5f7891570e5631e8c91c85186e6633f4ab5364f644040b2a00126a07985b6"
+expected_sha256 = "54414f14bff4879751ef548afd29536cd19b6e4cade8d486626c9d77f876d54c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77335860
+file = "en/077335860.dat"
+sha256 = "bc633b3d23c69ae98e331bb62faaebf353a41b0f34c76c4df3e515d8411c5065"
+expected_sha256 = "2e88dfcd0113c1cbdb43591623e25de7a637a59c76ef882ae9d50346474c8b04"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77335890
+file = "en/077335890.dat"
+sha256 = "3228fa1200ba52eb1dd15128046c3a25296546d845205bd0223acf148dabca4b"
+expected_sha256 = "8c4d2b7ada2aa0b2f04db7e3fd5056979393db7cd77a05eca63c9b20eb2fe56f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77336281
+file = "en/077336281.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "1758f0a79ae2792796a08d414603b41707211d8459283991370c015246cdc1ce"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77336289
+file = "en/077336289.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "1758f0a79ae2792796a08d414603b41707211d8459283991370c015246cdc1ce"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77336296
+file = "en/077336296.dat"
+sha256 = "4d475263709e39682970a5028ff25f9e83a9ae71ce988f73fb17e0fb431258fc"
+expected_sha256 = "2cd8da78210ec4e0d25892d90e44f476e628e47fa2fc794ec9d9e7f0f32468de"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77336304
+file = "en/077336304.dat"
+sha256 = "4d475263709e39682970a5028ff25f9e83a9ae71ce988f73fb17e0fb431258fc"
+expected_sha256 = "2cd8da78210ec4e0d25892d90e44f476e628e47fa2fc794ec9d9e7f0f32468de"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77336312
+file = "en/077336312.dat"
+sha256 = "01fdb929c3277ead156f3eee7deb779e19071e9f9b44a6c30100cd34f95f0e14"
+expected_sha256 = "b9e00099f111d8ab2f8e46fded2da8ac2d4dad45762b2115ddb903cb3b7713ac"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77336421
+file = "en/077336421.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "cae1efc6256f7e371297970428768c6ef84dae99b697d295afae12bfdbe1ce2a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77336429
+file = "en/077336429.dat"
+sha256 = "92f089f2a70df5d960aac7c83dac8bc454c2cb1fa9a8e3061a8f6a84f338f2d1"
+expected_sha256 = "cae1efc6256f7e371297970428768c6ef84dae99b697d295afae12bfdbe1ce2a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77336436
+file = "en/077336436.dat"
+sha256 = "de8767f9170fd177dd69c5247266cb9b24928a721120a1854039f975b7010d31"
+expected_sha256 = "0948f2f0293af0c964de66432b3e5e80f61d313608fafac20020f45e15076e7b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77336444
+file = "en/077336444.dat"
+sha256 = "de8767f9170fd177dd69c5247266cb9b24928a721120a1854039f975b7010d31"
+expected_sha256 = "0948f2f0293af0c964de66432b3e5e80f61d313608fafac20020f45e15076e7b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 77336452
+file = "en/077336452.dat"
+sha256 = "f005bea1b4ab10fbc020e74efe0d0c2de70b54da19e59a139302550f0811b54c"
+expected_sha256 = "cbd01e36bb9dd1245359cfb344f62179b411714b0714bcfe33bc51e62da9926e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816620
+file = "en/080816620.dat"
+sha256 = "161c8b35c5b7a4b3fab491e283719dbe2940096608dccd2c7781d96b86740593"
+expected_sha256 = "55e2b426e68169b75c735cfdb8a29719e4d6d6f249b955c9fa640c017f303c4a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816655
+file = "en/080816655.dat"
+sha256 = "6b13da4edf4f33080a5beb7459a2d27147ef4a4dc7c32286cbb2f5d4c2ac2954"
+expected_sha256 = "af19e0a0d6df5c997a3c6f3474abd1dfb4505ad093709a4a4a1e5445480403a1"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816675
+file = "en/080816675.dat"
+sha256 = "da14ad398b2c3309907966e247a83cd471607010e9fb09ffbf6d42c0b9f3613e"
+expected_sha256 = "8bde75627541f4fbd7f4aa9590d1c2a25d662605d846c787450850d28a14b7de"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816709
+file = "en/080816709.dat"
+sha256 = "134512c4bf2b44de5775899c138c56659be3e4d2d06dda48f34bd4941d0641e1"
+expected_sha256 = "2699dea41f2bd84e095385b6a53ebb1d232e181a48dd698963aab921e5d6e3b3"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816743
+file = "en/080816743.dat"
+sha256 = "218437425dc2225148f9fe1ff754f56ae1e769a6ca03e136a5e01b7ccbb67fa1"
+expected_sha256 = "9857c95c3547afa8762bbbf5b76ee70f3691fb7a20a34a91ec5685eabdd7e3e3"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816777
+file = "en/080816777.dat"
+sha256 = "b9be65d299d2adc0b395ca06928babd742b2e1b7cc1e14ae5a1cf4286e951ef8"
+expected_sha256 = "c6c9d52fc688215a497949ed629a50292571da21adcfc0cf27fdc3b8d6b5c31f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816812
+file = "en/080816812.dat"
+sha256 = "ff2bf8f3385742e53797950bac0c8800cbf1e0be052ef0c7713feda6011f9b2f"
+expected_sha256 = "a7f53d9b9ecd791074b863a0bb164ee1d668df58fcf5105bfdba0ecc0695fd3a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816845
+file = "en/080816845.dat"
+sha256 = "15e0e07bda1fc9237e51850a9a0e0c6081399436689364358db20f56474d32e2"
+expected_sha256 = "acbed627a9542197e308dac8bc6b74ef310c1e8ac25eac88ca997f698ebb6ea8"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816879
+file = "en/080816879.dat"
+sha256 = "473ae569f75435790607bf34f0ad59cbf6d71f022177ea2bd767aea532384a20"
+expected_sha256 = "43b0df3831222c4aa849b64b89d5c209d7dda22b7cffdff6280da969140c4f02"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816913
+file = "en/080816913.dat"
+sha256 = "ed27f6da5969082a1fe96d74711dc319d5259bb1ecda62cde4160da83c9cb8d4"
+expected_sha256 = "2a091f1024fcc67ca8d269878c6f2ae6cf698ba93704c28d75944de537daf02f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816947
+file = "en/080816947.dat"
+sha256 = "34fdde6825a0d73262352ac815e2f531f4bb53c8b2f330cbb21821a966e0059b"
+expected_sha256 = "1977a6ea1a0a7469a368832ec53c771ae04b6e7a9c3832e61d34a1848137d141"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80816994
+file = "en/080816994.dat"
+sha256 = "0426be5d3a377120e7f4588b9af43a33291b0d48d50689ba94cbcbbe633c9734"
+expected_sha256 = "800470bcc554509aac4c89d6f8453961c27fa1352d042be04d756fcd431461c5"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817028
+file = "en/080817028.dat"
+sha256 = "288cce93355419790abe00bb90604ad0f9a749fba552ac36ba75258f10f82867"
+expected_sha256 = "c89bf99e8375d489c613adf1358fce40a116b8f0d3bd6be0860ec1c9d5576bfb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817062
+file = "en/080817062.dat"
+sha256 = "b389d0188c66d56133e6f7313b975d5719e44bd5c87f62bfdd8058392a61e079"
+expected_sha256 = "664077f7688909801b21de5f6a0de3554f063371e127e7300cbccc872eb47b7c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817096
+file = "en/080817096.dat"
+sha256 = "0426be5d3a377120e7f4588b9af43a33291b0d48d50689ba94cbcbbe633c9734"
+expected_sha256 = "8ec260b51dcee1c6d6b17d7208c6ad024e7a193e957ddb0de1c48dd384309442"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817128
+file = "en/080817128.dat"
+sha256 = "06d8b5299a69d32d36e035208f91a0ee395b4aa4d39e7326c0dc80f6ca8b7948"
+expected_sha256 = "1c86b09adf5a5e983d67bea9cdd339f70847d9151add532ef26d3e58dd6893a6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817162
+file = "en/080817162.dat"
+sha256 = "1acf0717f6067240d8b03491f8a7c551c23feac4aa9e8955a2f9f0ddef225744"
+expected_sha256 = "ecbe43b13030219777e4a24abf89c9e7f091200970602d083bf1f91df95fa655"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817204
+file = "en/080817204.dat"
+sha256 = "8a331fdde7032f33a71e1b2e257d80166e348e00fcb17914f48bdb57a1c63007"
+expected_sha256 = "df7e70e5021544f4834bbee64a9e3789febc4be81470df629cad6ddb03320a5c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817430
+file = "en/080817430.dat"
+sha256 = "233d26e97f6469a0a7e0369bfb9ff2504cc5e0037df310c7600d18d62deebce4"
+expected_sha256 = "d1f47e5a47cb4cb2f0639dabef187d1ed63dab221280869d910c9f60be38df47"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817464
+file = "en/080817464.dat"
+sha256 = "7a92a3685c058126a66b944e17108a8d76abfb4177486726ccf5ba524c5f2ee8"
+expected_sha256 = "172946ec69675d6896d64fe56fd21370bcd18cc75cb00a8083a1b0864a444c21"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817474
+file = "en/080817474.dat"
+sha256 = "19d9457176393d4f09549620a78e1ec8a62aa469a0b538648af36c8b4483dde0"
+expected_sha256 = "d8b86a7e9bb765ffe796f34b91ca9e0ddeb42a9594cbe000c095b6dde24ee224"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817498
+file = "en/080817498.dat"
+sha256 = "7a92a3685c058126a66b944e17108a8d76abfb4177486726ccf5ba524c5f2ee8"
+expected_sha256 = "90eb9527042b88bb56870a9ed8bc3e04b95a9c83133b7fa1f3f8001aba40b4fa"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817505
+file = "en/080817505.dat"
+sha256 = "71f37c09fdf6373a2c6afd11a4d20421862fd722ce465743c2f49f763a639f56"
+expected_sha256 = "bf5a335d6a4bcd87dc66a3151de4518ea2e8b5d3f28e4feb0c7f8c7b2f519b97"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817532
+file = "en/080817532.dat"
+sha256 = "5e088fc47da2de9fbeaf2ac8943d8461834b83e6d7f49b73d5de380a34e54085"
+expected_sha256 = "5f3f164b90d6d38c699c63c03f4477028906940549f879e693df7fd0c34c7b19"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817554
+file = "en/080817554.dat"
+sha256 = "85f97e04d754c81dac21f0ce857adc81170d08c6cfef7cf90edbbabf39d9671a"
+expected_sha256 = "8a331fdde7032f33a71e1b2e257d80166e348e00fcb17914f48bdb57a1c63007"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817562
+file = "en/080817562.dat"
+sha256 = "ebf7ccec807c50c02a0fe1a685fd90c42bb40d6cc97db7040619f284d37f51b3"
+expected_sha256 = "d2a24db8549b1a9664ddc304d0e8d624d3c6f5bebf6c6a623d57820415d83944"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817588
+file = "en/080817588.dat"
+sha256 = "85f97e04d754c81dac21f0ce857adc81170d08c6cfef7cf90edbbabf39d9671a"
+expected_sha256 = "8a331fdde7032f33a71e1b2e257d80166e348e00fcb17914f48bdb57a1c63007"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817596
+file = "en/080817596.dat"
+sha256 = "5f939db6cfce6cdcec0981b70464dd3497b12630ebbc10ca0250b288bb394d95"
+expected_sha256 = "89a4b4f139a1c2fa82a52be8b84368c0b96abf2c2f02a6ca268f59cc9ec0b636"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817622
+file = "en/080817622.dat"
+sha256 = "85f97e04d754c81dac21f0ce857adc81170d08c6cfef7cf90edbbabf39d9671a"
+expected_sha256 = "8a331fdde7032f33a71e1b2e257d80166e348e00fcb17914f48bdb57a1c63007"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817630
+file = "en/080817630.dat"
+sha256 = "42c7db9ab32cc6ba431d24660d28de5d20f812a8e795eacabc2e9ff1922ec8b3"
+expected_sha256 = "9c6f4ad35083b4427f984cc26893b8d81c1bf38312aa6a8f2da9a82d26a042ec"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817656
+file = "en/080817656.dat"
+sha256 = "85f97e04d754c81dac21f0ce857adc81170d08c6cfef7cf90edbbabf39d9671a"
+expected_sha256 = "8a331fdde7032f33a71e1b2e257d80166e348e00fcb17914f48bdb57a1c63007"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817664
+file = "en/080817664.dat"
+sha256 = "3d0c7a1fc6d56fbb69dbad17a9b3685c524e3cad94a6389783455ca6e2840973"
+expected_sha256 = "b0fc57f40b044637536c417020611a81ace588fc00b549f9fcc239fd8545c47a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817690
+file = "en/080817690.dat"
+sha256 = "b5c9a5f48292e3fbc1b4b3cd495d76cf68697ad02baf09c1740d37250f776599"
+expected_sha256 = "bb7208bc9b5d7c04f1236a82a0093a5e33f40423d5ba8d4266f7092c3ba43b62"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817696
+file = "en/080817696.dat"
+sha256 = "2357d23ef9f820135e5fb3de4790d8df14f1ebf171b626d871bbed5082a5f7e1"
+expected_sha256 = "b1021a8a47ca19851185e41734a7b369351f6970656d43564dd2664be1458622"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817724
+file = "en/080817724.dat"
+sha256 = "0a2c6ea0370d1d49c411a6e2396695fcd4eab03d96e9e7a8a3ec1ec312d9ab38"
+expected_sha256 = "49994461d6b46390f014c8c5275a8591ef8764760afe2739cee23f6fbe285778"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817730
+file = "en/080817730.dat"
+sha256 = "e636708ba8c4c8d73d936cefdfd6567fa57b857c8f01ea49b98f67feb7fb741e"
+expected_sha256 = "6824260f10a8dcba2051a7c64e59fbd47086bb7e55f3326a1f2d5059478d0eef"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817758
+file = "en/080817758.dat"
+sha256 = "fb95aa98d6e6c5827a57ec17b978d647fcc01d98c357b7e64989af57339e9ac3"
+expected_sha256 = "1dd8312636f6a0bf3d21fa2855e63072507453e93a5ced4301b364e91c9d87d6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817764
+file = "en/080817764.dat"
+sha256 = "e166355f14c10ca5874c974bf73cc8dc68efd5d6f741009b7bc71049b0e9420a"
+expected_sha256 = "fddfe90b4cbb6321da1ecd1ef70e6fcd35372c32dbbbb37ca296b99a7504c558"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817792
+file = "en/080817792.dat"
+sha256 = "2c0638de674432649704a40e814e404e0ef78a1abcc776f99be36b6b3e36596a"
+expected_sha256 = "9665f9b45a775be8e52a1792a120dab2510ec8a164c279ac4a00fea24102aa89"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817826
+file = "en/080817826.dat"
+sha256 = "75ab042d5a309266d047efe0f10530e305c5caa6133d770a63ef6ce2f21f4276"
+expected_sha256 = "1ee7ee9f8d6139533f69365545ad3404f2aec8b406f4c4181db1a11cdf22608c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817870
+file = "en/080817870.dat"
+sha256 = "4e695564c2b0faab2de0e98aca13bc65f23b78ee4c38efdf61a574979acecc49"
+expected_sha256 = "1cdf4c7b7880a4a12898457d69e1f9aa375d663c9a9353b9cf76568e9fa80474"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817881
+file = "en/080817881.dat"
+sha256 = "2c3aac95a0e76ad8a471a1023fffecd091db3dc991c7e032e886fd8535d6da64"
+expected_sha256 = "f7406ce8e816c4221bd6e13d1928372a84c5d024d6e69bb52b32952734e54e6c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817904
+file = "en/080817904.dat"
+sha256 = "38c40aac0bc2657de04dc733f9f887542dbb24f8a1ec15f32825c3e4a50f8c3e"
+expected_sha256 = "5c7e9cf7ec78728a7b49825064619a763a5eb7d365446a1b426bed1749c5d6e5"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817940
+file = "en/080817940.dat"
+sha256 = "a9cdd71e5ee2f63725e71742d69abacfcb686eb28ad6cc85550e7870e36647b8"
+expected_sha256 = "3cc5c868fd7dbfefd7578922dcaa8bdc1dce77728d17e659b87bb561a723e107"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80817974
+file = "en/080817974.dat"
+sha256 = "06bcae01584aa0b42e55f598733c854176db9be32ec0ed01a3a058ca2f8aaece"
+expected_sha256 = "0ae05ef7cf53c1ad80f6d3feba3445e4ca2011109c2a019fa1bd5393b869e858"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818037
+file = "en/080818037.dat"
+sha256 = "3da5c199770b6698291ece54d9da2d5168b04db7638739527d8bb69881e15985"
+expected_sha256 = "2b272b2033690e6ef105b42bcb4701ae4d9a0cd42c0b3d207472eb3506881592"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818247
+file = "en/080818247.dat"
+sha256 = "8a331fdde7032f33a71e1b2e257d80166e348e00fcb17914f48bdb57a1c63007"
+expected_sha256 = "334359b90efed75da5f0ada1d5e6b256f4a6bd0aee7eb39c0f90182a021ffc8b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818280
+file = "en/080818280.dat"
+sha256 = "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+expected_sha256 = "0180ae7f44c8198b62aa16351a3c91190a40c998cfe85bd9685825ef4f775b51"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818288
+file = "en/080818288.dat"
+sha256 = "9eca5459ba0b5ca0ccbb2a01ea05de319c9e97df730f0e2a55e9dc2b6ffa85ce"
+expected_sha256 = "9b21cadca3129d000e81d4ef2db5eb13f65f546e701d1da89a02412e3a1ef574"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818314
+file = "en/080818314.dat"
+sha256 = "044e2f819a4a5992c46cbcb5d18f96236da924e27274ecb6a46f93903e272ca6"
+expected_sha256 = "90eb9527042b88bb56870a9ed8bc3e04b95a9c83133b7fa1f3f8001aba40b4fa"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818322
+file = "en/080818322.dat"
+sha256 = "688a4b8a39dc38ae3061fe3996829a3064f176c5369f9113ce5099b6055c7f20"
+expected_sha256 = "a617b298b9c1af2b3456041c23ebd9380932ab04ec182dafe993c2fcb5aee149"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818346
+file = "en/080818346.dat"
+sha256 = "50ca9b16d68aa735aa176449ec264dd97c581d5ee3b564937457bf82dea0268c"
+expected_sha256 = "08a9d0720bada2ef4bd412b64dbcc667708eeb059d05ae5f4949c7ae136fd600"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818370
+file = "en/080818370.dat"
+sha256 = "0a2c6ea0370d1d49c411a6e2396695fcd4eab03d96e9e7a8a3ec1ec312d9ab38"
+expected_sha256 = "252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818378
+file = "en/080818378.dat"
+sha256 = "385dcdb38df84ce7457a8ddd593d4c9d1d2cf9fd072b646a586104b034eea8f5"
+expected_sha256 = "413cbcddc7c5f5466087d09ed081c22a0e4de59f21168eab6719354ba84cdcad"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818404
+file = "en/080818404.dat"
+sha256 = "af193a8cdcd0e3fb39e71147e59efa5cad40763d2611f5beff34a274f514362f"
+expected_sha256 = "aaa9402664f1a41f40ebbc52c9993eb66aeb366602958fdfaa283b71e64db123"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818412
+file = "en/080818412.dat"
+sha256 = "cce8d561dbf0394723afad4ac0e703be8746bba1b8cf229f9fe51f8ce887eacd"
+expected_sha256 = "4d76d385b41127af9df85cdbdbd26af44e732939ac786df93db0e59db77d6d4c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818438
+file = "en/080818438.dat"
+sha256 = "b5c9a5f48292e3fbc1b4b3cd495d76cf68697ad02baf09c1740d37250f776599"
+expected_sha256 = "bb7208bc9b5d7c04f1236a82a0093a5e33f40423d5ba8d4266f7092c3ba43b62"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818446
+file = "en/080818446.dat"
+sha256 = "ade0d1f1ad0db1b5d232d8f802596427782464a3721d4fc8f2a2c6efcea31c06"
+expected_sha256 = "21cc304c9f12c743d66d5ebf5b2c4864afb79a7993ce603d05e54322dc978959"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818472
+file = "en/080818472.dat"
+sha256 = "d4b0c0a4a8cc6c257aed34d16d39dd3c2d3539ed67fd4badd40aef16c1591715"
+expected_sha256 = "c555eab45d08845ae9f10d452a99bfcb06f74a50b988fe7e48dd323789b88ee3"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818480
+file = "en/080818480.dat"
+sha256 = "aad0cd9b1889963659ac682910c5178eab6472a3246daee14cb915e119d03a92"
+expected_sha256 = "87a78233a3eea15aa72f50372275b62b1ed196954b3070c6e3b686b276c5f094"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818506
+file = "en/080818506.dat"
+sha256 = "b5c9a5f48292e3fbc1b4b3cd495d76cf68697ad02baf09c1740d37250f776599"
+expected_sha256 = "4a64a107f0cb32536e5bce6c98c393db21cca7f4ea187ba8c4dca8b51d4ea80a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818514
+file = "en/080818514.dat"
+sha256 = "984c974738ed4e7c5cb018de9d1aa271e17c0fe47dd60d29d925077a2e8713fe"
+expected_sha256 = "aeeb8f5d54c16b9df7e6a75c21ebda9b480e4c5ecb0f5280ac66ea4d2a3b8029"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818540
+file = "en/080818540.dat"
+sha256 = "b5c9a5f48292e3fbc1b4b3cd495d76cf68697ad02baf09c1740d37250f776599"
+expected_sha256 = "4a64a107f0cb32536e5bce6c98c393db21cca7f4ea187ba8c4dca8b51d4ea80a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818548
+file = "en/080818548.dat"
+sha256 = "7fdca472280cb7a8d3186b77c776565db52c28883ebe788e97febf86bc4d51fb"
+expected_sha256 = "9e0d7b56a1dcb62401602141df8a775baad6d61f1bc5a8005872033d16cb406b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818574
+file = "en/080818574.dat"
+sha256 = "b5c9a5f48292e3fbc1b4b3cd495d76cf68697ad02baf09c1740d37250f776599"
+expected_sha256 = "4a64a107f0cb32536e5bce6c98c393db21cca7f4ea187ba8c4dca8b51d4ea80a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818582
+file = "en/080818582.dat"
+sha256 = "ddf2a8ae8efe9422f0bdeb77600a2885635db12ed100326ee64ff9dbf7b96929"
+expected_sha256 = "a1e55ff4db79a827139cd1a89fa809bfd3fce25abb86dfccaf0b4cf74b865dad"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818608
+file = "en/080818608.dat"
+sha256 = "d4b0c0a4a8cc6c257aed34d16d39dd3c2d3539ed67fd4badd40aef16c1591715"
+expected_sha256 = "c555eab45d08845ae9f10d452a99bfcb06f74a50b988fe7e48dd323789b88ee3"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818616
+file = "en/080818616.dat"
+sha256 = "0c12f6c4f75812d088d71d62aeebd00676f23f13539ec1f335e8baa26b68b9d4"
+expected_sha256 = "01e46d8e7be9439c9b8ab9673062e16fb79c6b70e55fa38bca1a1385d23006a6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818642
+file = "en/080818642.dat"
+sha256 = "d418b954d4fb740a542f1e3aaeeb19465996eff7ff5032b15652be060649d6f7"
+expected_sha256 = "401ce1c14fd2d982333fc7bbc89078a2204ff05b60d140d93b828cc94d8eb50c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818676
+file = "en/080818676.dat"
+sha256 = "169a944edcf55a0d71363687f417141c1c3735e2f0da080c31660a672fe910d8"
+expected_sha256 = "29d0553c47c2b126ea04bb474a37e6b2cb2b75793ea359c8f4d15c029d86f6a9"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818720
+file = "en/080818720.dat"
+sha256 = "06d474a1a0b099453c465eeb9e335b4d44063edafe0af6ce8237cac2b179e2cb"
+expected_sha256 = "42b6f25ca793cd60df1929f3feb6d3cad890d1df61411563edce67c00308ea02"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818756
+file = "en/080818756.dat"
+sha256 = "768d951218b3892c2d8be701364edb7ae35611f4dc2ebce4be9ec51456400a78"
+expected_sha256 = "252c59b0e289e52b11f5417edf08ac6e950f595559bd26fccdceeda8104664bb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818800
+file = "en/080818800.dat"
+sha256 = "6f496535d71b5b7383618b4e8d8db9d9a80eb71750905e8a6886255720f65bc6"
+expected_sha256 = "becd2fd0013952952e99073ff3c11c2fc8790667ce1983014aca6f2eabbd9ea2"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80818835
+file = "en/080818835.dat"
+sha256 = "59a9a8765c535212b9ad71c5c8e1e24ffadbd3331fd04b3bbe1b121ecf6004cc"
+expected_sha256 = "76369c8f0d844d3a4e284a7988be9ee6d977e490671aee060e162c67a3caef9f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819001
+file = "en/080819001.dat"
+sha256 = "8155675d252720b1ca30eca6e23468f76ea21dd9d1c7bbdba9d891315d8ec36a"
+expected_sha256 = "587875e507cbf5cdc697a25ddfd32fbf37fa0d08415945f0ba15afb83025e6aa"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819061
+file = "en/080819061.dat"
+sha256 = "d03502c43d74a30b936740a9517dc4ea2b2ad7168caa0a774cefe793ce0b33e7"
+expected_sha256 = "ee6bb86b44339392bae631c8f61dd8f009243c635adab33c0b20923a2794bf22"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819075
+file = "en/080819075.dat"
+sha256 = "c557e71380112b980eaf1145fa80621130dfbdfa1e375d87ae0018b7c60ac16b"
+expected_sha256 = "9a7b7b3a5d50781b4f4768cd7ce223168f6b449b78ad6ac594db5788c3b805d1"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819095
+file = "en/080819095.dat"
+sha256 = "df8f0a9e6bdebd80fda517fa9f1b4bf7ddad0ecc702e48af9958fe2f6840eb3b"
+expected_sha256 = "f7a4c6706be2eadb14502d86f49dc8c972073d52cae3aa4971a0d66c4674b960"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819107
+file = "en/080819107.dat"
+sha256 = "0537d79c39ade2ac704f6026cee3d8d9ab34e4ce4baa3a3072001f6bfab0c94e"
+expected_sha256 = "989dac9d7fce8056dab4c1a38b7dcb653e90edc496376b4819001d083ffa91ed"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819129
+file = "en/080819129.dat"
+sha256 = "0ee52e839da2cc5322f8bf789ec62ae4528eb55fbd01862f43514499514238bb"
+expected_sha256 = "7c98504a7142b2cdde6790a8719bf686faee4655060a335a43ed8a49a0c458a0"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819163
+file = "en/080819163.dat"
+sha256 = "e07d8c5741f7cf54b4c97b8ccee62b7a8d0ac01f0936e34cf5bbbf74c10714f9"
+expected_sha256 = "f3d8e018079bd6b2a410c6e5d8d9549f06adb812b74058f4fafd9b26da99ed22"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819194
+file = "en/080819194.dat"
+sha256 = "a0b7c3b98773f9cb7b7dbf630155f41bdf32a9ce9c7102914d1dfa5b166fd4c0"
+expected_sha256 = "1c7c24a5d93daceab0af9d46179501687bfa00e0f57669f3c8b21f4cb5ddca4a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819228
+file = "en/080819228.dat"
+sha256 = "d255a4b98e36985ce0537ebef05f0540c073478e354d03bc49850cc8ed352b40"
+expected_sha256 = "5de0d1a4a5a6ae74da6679fd5db96f8cf05bbd959dcd9cd260277e4f6fc9c676"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819262
+file = "en/080819262.dat"
+sha256 = "6a7f7246ff5b16d2e8c5038c09d11a523a2afa6f5a702979feecab3665369622"
+expected_sha256 = "559064b81f2843122a08b969eaf8db21d4a412f5d5d2482e497dc5b507638b34"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819296
+file = "en/080819296.dat"
+sha256 = "7d53a8da8fd2f3a13cee651e6cd90230ce69961fa947f278558e3d521a96388a"
+expected_sha256 = "57ee3ea5487c019e689568797154917d4c23f25ee5af304e70b2ed35c710673c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819330
+file = "en/080819330.dat"
+sha256 = "71ce1571397d61160acd25461e9446f1ac9b699a982842417e25b62146096ef3"
+expected_sha256 = "84220b7ce567ee67f626bc0080dfc37ed8b8bdbf2c1bad692d293a9c4b6b4712"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819364
+file = "en/080819364.dat"
+sha256 = "3cc37f488af7f1d9fc9927475ac47b3110f66e6d7eabfb421b02eb10665ca143"
+expected_sha256 = "d33c0a1b150e2c8dbf4d15bb04a6cc7309bc43597e859df15413e868ec490650"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819398
+file = "en/080819398.dat"
+sha256 = "ccdbb937f383e2d7618172b3a72692b46648a510e2f09d9c54b8cf1d8c3a3ab5"
+expected_sha256 = "816e620a2c1983c369655586ef2e783eb60c970e6d5e8ffbb34b4c240c32ab0c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819432
+file = "en/080819432.dat"
+sha256 = "4d13952f93125da367a5517e928c09657ea7d7411df56f19eb01c91ea841d0db"
+expected_sha256 = "f52662b03283bad64c4ee4589b39ad535b31342a229de9dc07107cccc0f9342c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819466
+file = "en/080819466.dat"
+sha256 = "a425bb19cfdbe807366b33bee8a37c924bf0f8c7bbb7aa85418d3bbc7eaa63d2"
+expected_sha256 = "ebf2c144e353e968ad9976c63a61b6c6cb5eaa282f4c9c17281d18f45efcc6e1"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819500
+file = "en/080819500.dat"
+sha256 = "5dfefa1ef903ee2d0d4131a8d42ed391f9cfea4416802172bffc4f54e81cc9ea"
+expected_sha256 = "14482143f7f8f0081abf0e8c5e057710da84495c07c7debe12a8c6bada4ccbf2"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819537
+file = "en/080819537.dat"
+sha256 = "c221615b848f57001e6f86615be22d350aeecc144407306a03db7268fcbce429"
+expected_sha256 = "1ef1a05ba1dde25c2f4d7565bb586f9e44e7b1b1a6eade5022266af6eee55e50"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819571
+file = "en/080819571.dat"
+sha256 = "4482d786ec4860186e6763cc33c2ba4db7479778964f6a01f46ff62b230c0716"
+expected_sha256 = "335b0a1bec59a214b840be12e58dbebfe54ca42fdd19dbaa619c76a6bc11c5b8"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819582
+file = "en/080819582.dat"
+sha256 = "769d3e22b2c440cabc1bcad70620923d7e61747a9f4449d3243afedf19dd7056"
+expected_sha256 = "e2dbfacee22030803550827a1e577b909b2b70039e03038fb37cafacc9e93b8c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819610
+file = "en/080819610.dat"
+sha256 = "c555eab45d08845ae9f10d452a99bfcb06f74a50b988fe7e48dd323789b88ee3"
+expected_sha256 = "7d8c5da7fd418379048e430b33dc8ffcda739e44326b8a5d647dc0ad81ed2157"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819616
+file = "en/080819616.dat"
+sha256 = "8155675d252720b1ca30eca6e23468f76ea21dd9d1c7bbdba9d891315d8ec36a"
+expected_sha256 = "587875e507cbf5cdc697a25ddfd32fbf37fa0d08415945f0ba15afb83025e6aa"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819641
+file = "en/080819641.dat"
+sha256 = "cfb7fabd97ea16353e488cc6ee9d9828f23e9521012ec253fe85a2c52ebb4c3c"
+expected_sha256 = "36f39fc739249d9dcb28d3fcd0abf02dca82d5a750745e5065d9d3b74802ac11"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80819672
+file = "en/080819672.dat"
+sha256 = "4bf5122f344554c53bde2ebb8cd2b7e3d1600ad631c385a5d7cce23c7785459a"
+expected_sha256 = "4d7b3ef7300acf70c892d8327db8272f54434adbc61a4e130a563cb59a0d0f47"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822150
+file = "en/080822150.dat"
+sha256 = "4715c5de1b17d06609fc0c679a2ca7cbcb70ebfff8d2b56d9e14679df4b407d5"
+expected_sha256 = "da8af8cdfeda5785b121d57397e74e85d2ccc419e0706f99107671bdc4b2e0e7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822215
+file = "en/080822215.dat"
+sha256 = "139343e0e46d7b59b0eef820d4d949f3e317588840e86ecf3068898a8d636ad0"
+expected_sha256 = "1149f0f2c54c415289685086c4d9e4cf620771ed6a2b8a5883c48f9948d96dc8"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822281
+file = "en/080822281.dat"
+sha256 = "2e81bbfb0dcf3cbc190d4ad494aa3273df942fd8ed2659e6daf3f88d40a32983"
+expected_sha256 = "f89aa45bf3e069bff9fbe66d9662118ddcd46951c73b46640512ab1aa74d161f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822347
+file = "en/080822347.dat"
+sha256 = "61b938673745d4bd6b237a5e88d87b11f9fccced9c2ab277788af3dffd0358b4"
+expected_sha256 = "3e241a53cdef61bb580b74a5383f5a9aafd75bcf31fc623277274012b73e6d6f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822413
+file = "en/080822413.dat"
+sha256 = "b90c580503318c926004fbaa19d04859f0ef8f861c06d1c57286320b3c7e4b5f"
+expected_sha256 = "e9ac1c25e1728efb296391cb750c5758d30da014be9cbae257cf66720ec3c818"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822479
+file = "en/080822479.dat"
+sha256 = "a45e780e305a2a29768dc3de68f2ec5550172587f3b68fadcf26c1744514624d"
+expected_sha256 = "7913bda5d5035adef664d61f3b5358704e630d6adf35582cc3d2f34f3dfc2f21"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822545
+file = "en/080822545.dat"
+sha256 = "3b898fd0b90f0b47758737fd5246eddcc6b6ac172031f9ab9aeb1a19add82d1f"
+expected_sha256 = "86409a5c03a1d8ee9633d8ae4f0d19b7a20d91802bc0cfbc4c92f0c21f0afe17"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822611
+file = "en/080822611.dat"
+sha256 = "77bca9bb858d05757b801b8f7bddf1918ae67b745a5b2359b3fbc9ebfbe70de0"
+expected_sha256 = "2f19add59e25c7522612b3c46031e4896e897fda0c10f82aba863dc431afe4d8"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822677
+file = "en/080822677.dat"
+sha256 = "8ad877f5923ce30fb0890bf94ed716244cdb90ed347080adb00acdf0b1097710"
+expected_sha256 = "f05a39d7428b214b5d21019263a2c31a5834ddf8901bbb814acd842fa5471efb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822744
+file = "en/080822744.dat"
+sha256 = "db9a6923131d367dad2f77f13d3370f908e31c612e26645d0c85902749a3148c"
+expected_sha256 = "f10a227289466e112a31163e7048d3d04d04663f04a72aa93a0e66dc9b8ec1ce"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822818
+file = "en/080822818.dat"
+sha256 = "1ac96e33c9ad311c771a65fa4932ca0bdf9af64f4451e78a72e2f32352af40ba"
+expected_sha256 = "ccbb29cb1459b37fd652cc4d02b126c423ec35f1027e7f2cfef0c9e976f91906"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822858
+file = "en/080822858.dat"
+sha256 = "e79a6b3db907cc08645ec9dc3dc9204462674c070b8232d44239b4bca215209e"
+expected_sha256 = "2fe0f95b456691bfdef670217a2d659dbd9f0163b37589abce7e79bd3d5ce23b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822884
+file = "en/080822884.dat"
+sha256 = "71f37c09fdf6373a2c6afd11a4d20421862fd722ce465743c2f49f763a639f56"
+expected_sha256 = "c366999b7242c72a928ed23f0da825fd23509e2cd6f66900a33d93910f0a2d89"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822923
+file = "en/080822923.dat"
+sha256 = "1ebcc8f6a7a4f4f57c1a48f9ec050a6aa062711e303d1b0ddcd88dc55a8294a3"
+expected_sha256 = "91eb75a4d8f7f5558134b40ec3b681e5cb99dc91708f2eab6fb2691b488aa04d"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822951
+file = "en/080822951.dat"
+sha256 = "fc354f438b9c0b4f41e9326539300cd5001f87596be8d43f6f9474885d3f0aa8"
+expected_sha256 = "f46c909bc33f1961dd737fc9ab11586e98ad0e7ab761cc397d1d1932794c8df7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80822989
+file = "en/080822989.dat"
+sha256 = "688a4b8a39dc38ae3061fe3996829a3064f176c5369f9113ce5099b6055c7f20"
+expected_sha256 = "dc5f3c5689c4f8d5b4f66c407afc71a9a99b037605c6c77252a01aef7aacf7c2"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823017
+file = "en/080823017.dat"
+sha256 = "0ad1f932c0908089d5227a28dd65112b95c47f8d46f9af788f9c4e1b1b6ccefa"
+expected_sha256 = "154add17f6d0f6d99f32050e7ab3c4cba6cb98fd6513388b8d07456ad4f92ad8"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823055
+file = "en/080823055.dat"
+sha256 = "3f0c6bd23ee6260f88840c5dfa19400bf0f7206100e4d38424f804f8f491c301"
+expected_sha256 = "0bf17cb9773641c32582b98e81f6591be95b925fe3a1c47a157824fd6b22c822"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823083
+file = "en/080823083.dat"
+sha256 = "fe57c0a19a4bfb6152b3922d51e3911b0648039c207017ec02e51a4179d4352c"
+expected_sha256 = "0b1e4280d069526aa162ce243c67bff0460234fdc1b60367af3bcd4161f8aa2e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823121
+file = "en/080823121.dat"
+sha256 = "6d6b08d806c37f6eca1dcd9668de43e55fad4058e42e6e28a105bc6373fa5a05"
+expected_sha256 = "d8dec7979e357cfee1b32894b7b1999c979215ffa786bfd537b137597a11f429"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823150
+file = "en/080823150.dat"
+sha256 = "06775aa69e10d97519f973cf85d9784523740ec97b3c03b0d5964f81be1707f9"
+expected_sha256 = "cb00ea100567c5cff39fa27cd1ec4454ca12d6b6e50a5a10bd505ed75ce5831b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823187
+file = "en/080823187.dat"
+sha256 = "82f25cf59f0507350a29cf4bb1415c3de5fafd7f568deb19fcc8389eb88cad5e"
+expected_sha256 = "7b362919c7d906887d0f2ecb9a4413ba3966669189c25d55de02617f985aadde"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823215
+file = "en/080823215.dat"
+sha256 = "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+expected_sha256 = "99be5efb88ca2013bd8e4eb035fd42d5245468fe9afa70d8ba9c1c419a48c4e8"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823252
+file = "en/080823252.dat"
+sha256 = "0ece5dd69f199bf0a135e2927f27bc088e6db3274c82dbcfdf65f903f788d16c"
+expected_sha256 = "9c8c8b2a84e0fbc818233d1d0b94cf41a155ad9aa8c41ead1444a1f20e15c439"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823318
+file = "en/080823318.dat"
+sha256 = "473459f5233892cfb555a2118c90d379b2395443aef603838e5c53d48390ae8a"
+expected_sha256 = "feb81670cec0ea26eed4e8483d54d36137409bd7bca4326746f663fa68083a99"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823384
+file = "en/080823384.dat"
+sha256 = "ce897395f7dbd8de21ab1106f031a3ddfb5e64c7407e109178432a230cfa7f24"
+expected_sha256 = "cfa2277bcda1918d548366061925861a2964c7cd6f11d36b6a6cb320ec0b62ca"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823450
+file = "en/080823450.dat"
+sha256 = "6ff9b3565cab01d2aaff112188790a4a5bdae2557d8bbbd5ccc945a050e8401a"
+expected_sha256 = "4eaefbf7ddfff60e14e92b61e1fbf96a5a5eb7830242e7512b1fd1bb0ad3bd0e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823517
+file = "en/080823517.dat"
+sha256 = "28f75ed1a59d00147b5af56e9f64c056d24fa0fbc8b602f878ec3cc510748e17"
+expected_sha256 = "66f558b5ec628102594e6e48c1fe63854673869a579183590c3de850d049dea0"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823583
+file = "en/080823583.dat"
+sha256 = "b1ba27effa0711f889151a5ee9e40e20b0fc9df4b57cbd8eadb2f34b40ba5944"
+expected_sha256 = "9343a4280fd504ba54ad82ed2734204f70954b6828cbbc7ca780b9f749faf4fa"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823649
+file = "en/080823649.dat"
+sha256 = "f85fa8dcfac21b934411729a04d39800ff566c226d94d23b40fce2cff75100a8"
+expected_sha256 = "cb4518bc80664acd2d95ba83250d751059d815ca616abe8d76a01ca81350cc72"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823714
+file = "en/080823714.dat"
+sha256 = "aca8fbc45241374faecc84fd3b4d1bd3a491924af6bc33b97a39c510864b04c0"
+expected_sha256 = "e984c1d62a10aa2ac8d88317928d64b672a09fdd53f2ab8d21008938b0d259b8"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823781
+file = "en/080823781.dat"
+sha256 = "9e710b37a95266fecd2bfc74821d5aa3dd1a96dc511bf07bb8d997fb6ebc8447"
+expected_sha256 = "9fdda28ba74931c3b1494bba4f58d16fc205febcc0d73e1ca0fe2a9cf3e6b8a7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80823847
+file = "en/080823847.dat"
+sha256 = "0ce5b7366ae8048def430fc837f821df0417923739f6be3d4539478ca1d10c6b"
+expected_sha256 = "0771eb1be6746f7841e9c6fa5479f5771b71b94423e3cabce3261f46fde023c2"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824081
+file = "en/080824081.dat"
+sha256 = "0461a67049370f4e1010f976057a73a58c39f60e590074d7a0fe39cf5062d722"
+expected_sha256 = "5c23d704c630b98771dc5f6ce3ee7cd210f36c11c804560e3be970bd359f7f8f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824149
+file = "en/080824149.dat"
+sha256 = "badf1582fb1cd64f30d1acbac52760952b7b81bcf32f11b3503f17824ee86266"
+expected_sha256 = "8453438fbfbf98c53d8da8394506b9965e5378f8b8c3555216de4fe6eb062645"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824215
+file = "en/080824215.dat"
+sha256 = "86e0a6caf61e1a4d905a8e82e7ffb76bd3b0d52c3ee055dd2b2cb2b6e9c3da8d"
+expected_sha256 = "3bfbfaebdab2342c598e9008d5a8c85d831b968fea5c693ed47743f83a5cf674"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824276
+file = "en/080824276.dat"
+sha256 = "1a5d1abd42a6e8be70cb63d844a63676ab72bbd110bfbea8ac48ce20bca54c44"
+expected_sha256 = "19c68e4c33cd1b93ba2c2d0b8d37e9d85fb582cec3aefb71834b79c6950c2290"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824342
+file = "en/080824342.dat"
+sha256 = "6b9e9d65dce8169ff87c56ad03443ec5b64b5704138bac265b971da62082b440"
+expected_sha256 = "ead4954acc212bca0c5a37ba3eeac9d47393e2022701958d606130a675bfea82"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824408
+file = "en/080824408.dat"
+sha256 = "6178f2ccdf165b9d183a132ee565c515593f54f9b21b7e00887382bb59c362ea"
+expected_sha256 = "a03f1deb78deaf3a2bf17e6e9ff67f6e78df70dac4d5f88d929309ab6f2988a7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824474
+file = "en/080824474.dat"
+sha256 = "06f0d19eb7f729e88e81b253d9e803791c03de523625e567c1cdd3f75f2deea2"
+expected_sha256 = "661865a597b9359f6a046a8377097e6a43423e07de9d1ab43b44233f1a48cfa5"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824509
+file = "en/080824509.dat"
+sha256 = "8a331fdde7032f33a71e1b2e257d80166e348e00fcb17914f48bdb57a1c63007"
+expected_sha256 = "8de0b3c47f112c59745f717a626932264c422a7563954872e237b223af4ad643"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824540
+file = "en/080824540.dat"
+sha256 = "4960156059aa49d8647163736d404b1e50d8f3b68a9cee808e1509882c34f92b"
+expected_sha256 = "ebc8d4b0af95b4dcfdd83499f61c7337a5aa74deee02538454b24398849d2d1d"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824575
+file = "en/080824575.dat"
+sha256 = "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+expected_sha256 = "cb00f18f27fd8c1e727b27e727c3a26d4216e433ecccfa46be785d25a7874914"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824584
+file = "en/080824584.dat"
+sha256 = "91ea5e4bc61c0b803b882d66f8b5006e2741a5330f151e1803896f4755536b7b"
+expected_sha256 = "a436ad6d7bdde1072136f1d704a3dea0c5d63315af6aea7b1af4cb35cbc8c8f5"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824606
+file = "en/080824606.dat"
+sha256 = "29a523e2e14558e0141f2a1080355a4e8475c972875faab35d5ae52621eb9154"
+expected_sha256 = "36ee79ced1246019528f8cd8f29b4908deb5ee86399b8c448af9e158584b3683"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824641
+file = "en/080824641.dat"
+sha256 = "ee2fefc4ac7c10852bb9bb24c6c73f44289341efbab86b036447d0880d408e0c"
+expected_sha256 = "c837510ae65f5cc196e2b78ca31eb0963e53622131f7e4715b12eb3b7b4f6e2d"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824672
+file = "en/080824672.dat"
+sha256 = "84c16574698a05ba449ac15ef753e013f18f1fa0f668c3f9841bf251f907b078"
+expected_sha256 = "5bbb6828a0e029717ee87f51635c81994a828a0950102115fe71d29b523b578a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824704
+file = "en/080824704.dat"
+sha256 = "a4c06e5ad708f85f72098e32eb702ce4fb2459eff47a39d38cba803ec8dda6b9"
+expected_sha256 = "895face28389338447d8eb0b8b81efb60f9ec5bff67833cabcb077f5315b5c01"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824738
+file = "en/080824738.dat"
+sha256 = "84c16574698a05ba449ac15ef753e013f18f1fa0f668c3f9841bf251f907b078"
+expected_sha256 = "932c6418a2563ba7489b8ded4e02b79e3d1536222e3025ef543d6927a147d934"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824770
+file = "en/080824770.dat"
+sha256 = "6e9ea7883ed5bc2332a7996ae55a376787c788089767231d59c235527640b94f"
+expected_sha256 = "d7cd2ad95e1e4f3ecdbb32b7481893885834bfaf4a565c5e038ee6d01d64854d"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824804
+file = "en/080824804.dat"
+sha256 = "4dd28f746b4d73ef1b36bb013d60e8ec77d3516c4ecbf2071ecc284b51a69441"
+expected_sha256 = "d6ab9394114d91bb1ace1ee422e8395b0b69a584dcbe1bcc118b5b9b8aab5e15"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824838
+file = "en/080824838.dat"
+sha256 = "d81225d54291fb0fba3b12ac400145d3ddeecf2f2250b0f9ed3ec8bd60bc02df"
+expected_sha256 = "c7e504fc5b49f5015551e605c6bc3728f730e5c3ac1675f0440dd8e2fc0489c4"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824870
+file = "en/080824870.dat"
+sha256 = "2476f73f2c3e80174e52059777ceb6aa9eb0663975d876d5c789dd74d2a6a7db"
+expected_sha256 = "fc43060ff5e9916bfc35163a1d8a7e2aea6f3c120a1d95aac17ba0f2f3c71a26"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824904
+file = "en/080824904.dat"
+sha256 = "d0ccea64080d1e8469c4cd94951ec76fc1d8a35bf81713e981e7ef1878127ead"
+expected_sha256 = "913dbb3f2182a3236b93d7d55226e97ea3788724de574a2e42fbe1834ec118bb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824940
+file = "en/080824940.dat"
+sha256 = "871526babc9056f853b2819b5e64716925cb9b71233c91fcc9d940fc55457a04"
+expected_sha256 = "875d9ba1fe57fede043135c0eb7e62772ebcd09fa78856498aea72da3672c482"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80824970
+file = "en/080824970.dat"
+sha256 = "c267b2d33d4e109d2efef8929744aac3904c988f4a80585d861807010df1a4af"
+expected_sha256 = "a0832aea8aed3b3c39f3122e38f82076d06087c79e6b182484ad8035e6eab827"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825006
+file = "en/080825006.dat"
+sha256 = "13d17c584ce1463ee4fbdcfa26902ff702f70f02bcfe8a150e0ad3d6089b846e"
+expected_sha256 = "18c9e754321790402e0f688ff77f2973ccaf46dca46def273ca6dc94afe641f5"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825035
+file = "en/080825035.dat"
+sha256 = "acd0e9956f1770ec24ab4d1561ce1216d4d34e9dff4d0e5f901573d32acac557"
+expected_sha256 = "12f08cd65319cd54bba570944f259873036ea80fe6ad91a055a65262d18fd454"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825072
+file = "en/080825072.dat"
+sha256 = "8847f79bfbbc2707830ec88ecd3498397cfad39afb0041cea320bd119411d374"
+expected_sha256 = "39a5c59983a2a4667c5efac09e7fdc9d0d915ac80dbf6523fade9b122e2af201"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825097
+file = "en/080825097.dat"
+sha256 = "861dc2a0bb31eb694a2253bef27d2e028d34e5154692d621d601209140e5e4a4"
+expected_sha256 = "6606279fe239d93c6e2e4976ecdf2cb13fbe8e2408b6a4979b6f7089daa701a9"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825138
+file = "en/080825138.dat"
+sha256 = "6b840b40892feac94a50b7df64751442e9c1e57b194aa9c3fe77cd537b5c28f0"
+expected_sha256 = "9f9366a536d357a4499446887607cca5cd6d7e5ac351ee2d27f2e7b30206f4bf"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825167
+file = "en/080825167.dat"
+sha256 = "c13f4a92803d2a92a54638fb4a945c0fc367336df1e80b9d5168fe5a5bc6ae5f"
+expected_sha256 = "9e0305cc77384c42b3288ee34579493d90d94963131f2c348578445544b8e57e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825232
+file = "en/080825232.dat"
+sha256 = "f1aaeaf789f6110c8466baa37cd04e9db5cff5f8529e5c6511267d3ac87afed1"
+expected_sha256 = "65c56006caf3f4e32d7b9bd99cb1f29120572e005fd024b6d5e29120a6dce2df"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825298
+file = "en/080825298.dat"
+sha256 = "3c8d0fa30573be8e84fc51d8ff2031ce3e0a49ba5e426d64fa6c649110a9cc53"
+expected_sha256 = "eff8b0a70e527d6284c8b3e8a50a449020e9d3360db2b1f5394b78db4a639f85"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825365
+file = "en/080825365.dat"
+sha256 = "e0c0fc7eaa52b0b100f42e3bed3060b4d980b877ce8befcf54e0b8db1bcf0d1b"
+expected_sha256 = "95354ad5823ac128456d87a931d0f98ed1aa450cc6d257c0dc16c9e56ad5f598"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825430
+file = "en/080825430.dat"
+sha256 = "be7199a7b538bdffafb461f36c5b76884bb3ac308e1ba6d01d21ad6259d0b5ac"
+expected_sha256 = "8a1b2bb92617bd5c01282470de45ec1eb78e1a3b889a466a1e3eb5fe51731a50"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825498
+file = "en/080825498.dat"
+sha256 = "ed145a27a539714c13ee78e438fdcf2115728ba01f6379289ce1f10692dd37ab"
+expected_sha256 = "6951965da32b026ccb98e35dea2ee9e870afb420ff92717b22117a5d2ddb82a0"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825564
+file = "en/080825564.dat"
+sha256 = "0c861ce35d3276bfb67a2a3076d4bf848157b75dfbb9a2e4ae77f8bba7f50fbc"
+expected_sha256 = "5c3ee1d75f8fd6c55262ecd31db32685d230432da1f1f624b30d5bf6d84b96eb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825866
+file = "en/080825866.dat"
+sha256 = "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+expected_sha256 = "cdb22dd8b1910ea14c15df70f83b416536144215f780e093a381dc6028868038"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825875
+file = "en/080825875.dat"
+sha256 = "51af46e28aa95bf13e5ee28122ef14dbc9e51b30cdd451b78febb10dc7ccaf66"
+expected_sha256 = "e352b57060ab962f86d8247a3cfbd9c13d9dd0ddb1e10dd0f2f6ee4cb89ea6f3"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825932
+file = "en/080825932.dat"
+sha256 = "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+expected_sha256 = "b5dad468efe98d1bad84da043989bc364ce948eee36d67a90b0b18051ec75bd9"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825941
+file = "en/080825941.dat"
+sha256 = "14353980c863b18de84555e1087a15a3ee86e9022dc2351f1ca6bd02f2fb846c"
+expected_sha256 = "be3a31e996f7666f95b508dc97e8ddd56408c8e5ccec534a4c62b4cda98e4336"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80825998
+file = "en/080825998.dat"
+sha256 = "867d237d410d30d110017617d397831dfbf4298453e01162a6fc7a3544cb6fb8"
+expected_sha256 = "0b22e3d7b97ada151ae12f976d8ca842b3940cdb868c6de3d489595906e8d406"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826063
+file = "en/080826063.dat"
+sha256 = "ceab4b280d3c35ca827b46be38f1ea2cf3f96a9ce1b6feea0fd5fd78584b0f98"
+expected_sha256 = "8c0e2716fc450912e30d4c3d3d52664c9423976d15ff52d48e55bea4135a2628"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826129
+file = "en/080826129.dat"
+sha256 = "1e270cf9cf08dabd2096e82aaee4247c20d7c6b03b5b3bd24d50faf5b9068f17"
+expected_sha256 = "fca6e31371a392089309ae436738f8e77fde04401f50f8508151e1d05ae38bd2"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826159
+file = "en/080826159.dat"
+sha256 = "8a331fdde7032f33a71e1b2e257d80166e348e00fcb17914f48bdb57a1c63007"
+expected_sha256 = "5d5c7d20a3aab9c158f23304df4bec3bd9d56c517db3caeaa519d4d05624d7a0"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826166
+file = "en/080826166.dat"
+sha256 = "0ad1f932c0908089d5227a28dd65112b95c47f8d46f9af788f9c4e1b1b6ccefa"
+expected_sha256 = "6b99a427fd965a1c99a63054c726720738bdd20ff9529800f8f803434d70765a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826196
+file = "en/080826196.dat"
+sha256 = "57a017a62d61f3dc9bcf285f5f712dc1909cfe19874be74dc220755acaea1524"
+expected_sha256 = "1fa74b356f75c737b93a66153cb03d83df2fcf17e4129a03d6f8b6bca8bb1f21"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826224
+file = "en/080826224.dat"
+sha256 = "b6d267efe80a3dbcf2f2d67e21d8c15783a2f031427f827d43b6222fe9c4bf02"
+expected_sha256 = "7e152f7dd0074cddf1d56a3aa97c86166d78551f2ace520be435d94d94f47d1d"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826232
+file = "en/080826232.dat"
+sha256 = "0ad1f932c0908089d5227a28dd65112b95c47f8d46f9af788f9c4e1b1b6ccefa"
+expected_sha256 = "3ace9a96bfb48f5f3d38fa6a6afe4f0c09e6e0d87e4c6ddae5c20ea78e3ed8fa"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826256
+file = "en/080826256.dat"
+sha256 = "dea36d9cc8a3497a6dc125358840bef087aee46a35c24ebfe410d2deae5b3090"
+expected_sha256 = "dbf7c58d523ecece9b9286c6f34f2f5d2c5c5736e0f191b3fa1fc14590fb8b55"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826290
+file = "en/080826290.dat"
+sha256 = "56d99751ed9990c1840f2fab666aa3f9676dc70c8df8ed686f89b7856c18277e"
+expected_sha256 = "5740d1b33f895c8d7241a503ddea22edb6cf1bd293d7daa5a481fa6f5327f72f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826298
+file = "en/080826298.dat"
+sha256 = "64f0634b95448ea8212685aa5f241d5022f02eeaf0433c29b9380fdabac370fe"
+expected_sha256 = "2de43a5880ab568ac9ecf6f372c44ca0a87b77477920820e9febbc5a898a79c7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826322
+file = "en/080826322.dat"
+sha256 = "09bac849e72456f832b810efeba9d80ba7a1a036014b5904a941fa0e23190003"
+expected_sha256 = "32b4dc27ed40b825123fc7fe676ba127939a0cd727512c0da6c78d7464bfed0e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826355
+file = "en/080826355.dat"
+sha256 = "af03ee3672b4284c8abbfe29e8adb160b300f8ee44926ab58cd77bfb2c4944b5"
+expected_sha256 = "6026e9b5e85621daba939702d52c69a3b42a8c9f65699c3f9c7add2b3ba2839e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826388
+file = "en/080826388.dat"
+sha256 = "de4692f7106c03de0510a866de0b46d2f8d36ac376a64ee66c77b1a1289eee4e"
+expected_sha256 = "5a00a123444d7cba03b07bf941101d4e204697b1605dba8faff75f18befc5ce7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826422
+file = "en/080826422.dat"
+sha256 = "2edec9888c02037494368d735eae4d72080bfe125b871aeb92796eebb901f766"
+expected_sha256 = "ae0351fbeee88a757a09aa641ebeb1b5fa4f2b5109c22cc8fba0b1ce1dba2866"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826454
+file = "en/080826454.dat"
+sha256 = "e68998e3b106cc7748b9e2b42f05439dfb4e64b0012f43085507e1c434556f88"
+expected_sha256 = "fc864149c7328a0371ffdc8d439f57a564f9ae177416984fae8b605af120ad11"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826487
+file = "en/080826487.dat"
+sha256 = "8ecfc944b2ced426afeb4d1ef3c110a6adbb57e1ea95fc717c5e0cff09c7077e"
+expected_sha256 = "1f5658907a16df219c0d96b121f3f8c7a70c88d469a166c15564f651b04659e7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826520
+file = "en/080826520.dat"
+sha256 = "4e083a8d0329c0c3e070a9a17d66390833d5dd4ce87c88e0da2c63bc60f7de64"
+expected_sha256 = "89d13fe45aa83951f9ab4322b0b5c90a9f0b5e645b8b89444d1bf1bfe89a0ce6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826554
+file = "en/080826554.dat"
+sha256 = "0f2cbeecaf5024f6d983dd12ae9944aa929b783e7a45b4c5b92c1638599738c9"
+expected_sha256 = "2aacd57c56a813720f07f6c3c8862eff7d3f3c820cef78493ec441631fb3e05f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826586
+file = "en/080826586.dat"
+sha256 = "e5cc551da9c942bd9a436cfcf8ae98b9cb0f1554765afe57ba3352ce91d0d078"
+expected_sha256 = "40969b8374108232b0ee64684b8bafce2631908e10a7ff5ef9973820a4aa1408"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826620
+file = "en/080826620.dat"
+sha256 = "f6843ec136cd139e29a0bfc49ce7c7d18a4fed3884f4bdf7738e753539bb5ca5"
+expected_sha256 = "6423a03426217c24ca281a90817efb762802834ee7325fe5fc1220a6843c3a5d"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826652
+file = "en/080826652.dat"
+sha256 = "812522d5d90249d41fba2226811ae4e6214122734ee187f11b330632098a6978"
+expected_sha256 = "6ba8aac9604927fea7aa2c3ec20cf862a749e3f198593466e87d060a8b053b2c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826685
+file = "en/080826685.dat"
+sha256 = "6498f95ed2a3d9f5c87c244edc12edbc080354874d3ab131fcc242625235e915"
+expected_sha256 = "552a787166b126a096ac24a3d3a20f51271ec248ff22532663b7c144bc4d4e55"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826718
+file = "en/080826718.dat"
+sha256 = "1e3aba3d4491a9a7d838d693a4631becd794def6a6a4e79ae9eb43ea42809052"
+expected_sha256 = "992547e5a327226f0f13966f4aa922f6d664898bd93e3ec659615557d6d1ea9c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826751
+file = "en/080826751.dat"
+sha256 = "d3ed72a080e716e74038005b0b5087f29c062cf0a8d9514487ebe38fe2cc0bc3"
+expected_sha256 = "f892807a4093899905e5c8ee9dbb0764e0f9687658c330c3ccbdad9154ddb158"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826784
+file = "en/080826784.dat"
+sha256 = "93a4ea8fdf03ebe1d759746fcf756429e8a09a4a684dc43804e0f92bd00ca77f"
+expected_sha256 = "e05a84614d6c1f18558dfbfd680bd0436380f3f4c652a03b79e832204a92cd19"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826816
+file = "en/080826816.dat"
+sha256 = "6d16c6a38b7216941f0b4555dfe7e6b93c14edf341d4388f7e4c611575be5c86"
+expected_sha256 = "9886b4778c6e91eb80324302ea653e1abba3bf24e59b4e930ce19dc547099b97"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826850
+file = "en/080826850.dat"
+sha256 = "ae0d3c38a1656163dc86984bd3db00bc133b766bc681c7a44ccd262db509ade4"
+expected_sha256 = "f21eca46492a761fe580f0a2e04fd9dff6addc2d9ed735842464140c760f8088"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826882
+file = "en/080826882.dat"
+sha256 = "6d200bf509b722447fec48fa7c2457b68f9a56b4cfa3f58f5ae87461ff58ebbf"
+expected_sha256 = "cbc33abad6b1299a8e7bcf485a2fe0f6be9960b8bb9a1c3251180aac9880b3f3"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826917
+file = "en/080826917.dat"
+sha256 = "cb7d4e545c225268d10f205dec7092c7144a2dd0fca4c7c0a4440da59471a1b3"
+expected_sha256 = "02e349865f05e1e2bc929780cf2ff7d93070fe0f17217f8fad4f5805a3ebac58"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80826949
+file = "en/080826949.dat"
+sha256 = "03495cd5e1ad11f9eeaa2dcc7ef31d42b5c2c0f7a4a001668168c3e81c95650f"
+expected_sha256 = "4cfa9987445ec0725eeab9be083ef80584f53ebf4cc76283b669de23986db85e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827014
+file = "en/080827014.dat"
+sha256 = "f70e988417d0be9b7c1aed749a1c6645e19bc0240d718f107a090a02ab055630"
+expected_sha256 = "062f2cb311558fc50ee5f6c73b10af4c9b8d7e14e653042681c6a0a632f9bc12"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827081
+file = "en/080827081.dat"
+sha256 = "090735ec634ec847fc8d6ebfc734f1438ad5f5e22e671a88206c15cc8e2c0154"
+expected_sha256 = "369f18957d07a5458ca2a8c72df89c5fbc3be09281f19c35dc838615488f5f92"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827148
+file = "en/080827148.dat"
+sha256 = "704b2ac4bba09fd1ed23e75cdbb6b36c314f790eb240794ee320dd3485a187e3"
+expected_sha256 = "72fc742dbfd3b944d35cc593717c01baeb66c9f4aace132c6596bd44c4701cb5"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827214
+file = "en/080827214.dat"
+sha256 = "29f6ebcea38a606f1ff1174a52f549e37455c5b449f00d94bb2cb7138e1d0230"
+expected_sha256 = "bf5a03787f8e2fe059da0aaa19ea89de4aae74df00e3481a35a77df667a91d80"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827225
+file = "en/080827225.dat"
+sha256 = "b6d267efe80a3dbcf2f2d67e21d8c15783a2f031427f827d43b6222fe9c4bf02"
+expected_sha256 = "709e80c88487a2411e1ee4dfb9f22a861492d20c4765150c0c794abd70f8147c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827284
+file = "en/080827284.dat"
+sha256 = "d486745c2f915598079e05a1b76e88b6a8596149fa15fe5924ce8a55f493fe0f"
+expected_sha256 = "d20fc24dc350c4d28779ec318a56a2dab14f105b1a09982a0e751895df9a53ba"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827655
+file = "en/080827655.dat"
+sha256 = "448bc334a9290a89997828cb73296ae862df8c971de241cbe009529523be5ad3"
+expected_sha256 = "85e3d9c486f907887ada26eb294a753eeec54d9c46587ed53feb5431bb4b55c9"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827712
+file = "en/080827712.dat"
+sha256 = "4c4a19fb94089707cb371b910c4c604397124b291fd1d9501125c834fcc93b4f"
+expected_sha256 = "e80b3c8cccae3b910663dc0e531dc205c256c43df065e2f23d2284901d979281"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827778
+file = "en/080827778.dat"
+sha256 = "394197a32ef155ce8278eaa75c36d2bd4704cb5a18b245f4e95023ac4b146a4c"
+expected_sha256 = "4855ac90daec83e93d6579d009d4351a7a5c9dae86298b23a097dc079bf7ad11"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827809
+file = "en/080827809.dat"
+sha256 = "688a4b8a39dc38ae3061fe3996829a3064f176c5369f9113ce5099b6055c7f20"
+expected_sha256 = "4499cef9f4bc96f04fbfce0dd5a1c51184c4e1d35faf7697b42dff1703cf0a3b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827822
+file = "en/080827822.dat"
+sha256 = "71f37c09fdf6373a2c6afd11a4d20421862fd722ce465743c2f49f763a639f56"
+expected_sha256 = "16f00a96cbc8c270c514b7d5895c3e27ea5388cb8d3c9ddd6ed0da632c746b9b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827844
+file = "en/080827844.dat"
+sha256 = "9a427335731c25e3d5d6c6d7004b3caf6bb4f5b21caa57b56904468e31d8802d"
+expected_sha256 = "475310ebf8bf978ce6685ccf03667b64f0684649194d6513cf6d00903b5fee73"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827875
+file = "en/080827875.dat"
+sha256 = "0ad1f932c0908089d5227a28dd65112b95c47f8d46f9af788f9c4e1b1b6ccefa"
+expected_sha256 = "e12c15b2b8e770a99274b7794a887bfb4d59315ca7544db9d834d734a9785071"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827888
+file = "en/080827888.dat"
+sha256 = "1ebcc8f6a7a4f4f57c1a48f9ec050a6aa062711e303d1b0ddcd88dc55a8294a3"
+expected_sha256 = "5dc5430ed146f3cd116a38899a260c583a120939d361baf6ac04c0929b78123f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827910
+file = "en/080827910.dat"
+sha256 = "94ac50e94b453dde8d1c74a4144db6194bbaac8e8b80cad017092b6f2fede2d1"
+expected_sha256 = "4e2ac489ddb7e25dc99148b159ca12bf4998559b69889e2a3ec779b9da69f954"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827939
+file = "en/080827939.dat"
+sha256 = "2ea60d52f749a48870159def50492a75b8d2118839d087f90920b0d35f82e0f9"
+expected_sha256 = "739c5bf24db1f5d23662462398d165ea09f6cfb909fd8f062967eb034eb21c96"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80827972
+file = "en/080827972.dat"
+sha256 = "b0a915d05549a165dd3b1dfe5e7c1be26e6fd458398b633c5f45fad05dd770a8"
+expected_sha256 = "16dc60458fa7c33412a2e0768a6f7b5d5826308e5a970e8c65edcf1e870330fb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828005
+file = "en/080828005.dat"
+sha256 = "2460fa1c89387ad25abac7566688904958c4226e08e970330528456697f346dd"
+expected_sha256 = "0a5b96e19e1c79bf118d656ba8aa059eb6052eea52fca1951ebaa51d838d3fea"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828040
+file = "en/080828040.dat"
+sha256 = "7e22165da776b897b49ad258363898fefcbc71c8eff60b89522b78a65bd610b3"
+expected_sha256 = "ae2762b5a39c3568263eac8e13e0d79d59b516062a82eff2488887f4e1aa4722"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828071
+file = "en/080828071.dat"
+sha256 = "9647fdf181e8a60b65f89ebb0f51e85c794fd42ba43eb6dcbcda537a8c6f4c5e"
+expected_sha256 = "62ab733eaafcf342c1b8bf87f99d8bf481bb2b8e0a6a585decabb2883295eddb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828106
+file = "en/080828106.dat"
+sha256 = "9d9f959ab674b097bb102177cb496932bafd52adf5699988b248d52ddd1a9628"
+expected_sha256 = "aeee7ff5b48d09e8a1e49d33fb5f0548008c8c5e6d7183173dd0f4196dbf0176"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828137
+file = "en/080828137.dat"
+sha256 = "2803f581048300ccbce9f5d3a906eb385e00fc6d8c5dc9980388f8e2035494ed"
+expected_sha256 = "0ba26a09037e13b2491bbbc178f860690183fd297163b14662d6cde57a2883aa"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828172
+file = "en/080828172.dat"
+sha256 = "dfe83f4b1e303df4291f3bf5fb8d81c072c75ca61ca996b56efc92030f37ac4f"
+expected_sha256 = "f1f8dd849c81496c2f4f5287db8690733b8318504c67af998119d9f8b9bcf85c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828204
+file = "en/080828204.dat"
+sha256 = "f2796e26b9469f5a19e8e37f85e8a84b3d23809e258479854490c28a9cdff31c"
+expected_sha256 = "982956d7e564b4ea4b06e6737c3963dbd83244d711310a1fd45b339d7abb8dfb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828238
+file = "en/080828238.dat"
+sha256 = "385a70e90e585e3a8b75921c63b5ded66096eae7189c5989d57c55611a80c322"
+expected_sha256 = "fa494d18b0f493fd111cb05573220e50fcfbf250bf395930ea7c48bd4e4ee5a3"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828270
+file = "en/080828270.dat"
+sha256 = "cd822649f10aa194989d178854a61eb569478c3aef4702014d490dc8d477eafa"
+expected_sha256 = "253cf4ef3ac23b868fc2d1b0d5e81cb6ee241113800b6cbbbbb43f1ecfa1b847"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828304
+file = "en/080828304.dat"
+sha256 = "d8348f6c623312e874b41f31af2c444cd15bf659fda08f7354661545268758e5"
+expected_sha256 = "49b1bdfd4466fc12098e1c2d5711247c0c7c81d036f289752c88897bb06c75b5"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828336
+file = "en/080828336.dat"
+sha256 = "44effd3b1e6c2978575a0d3173c40e9aed0617c72041153fadb199e5908950f5"
+expected_sha256 = "71c257d949cfafd3f0a794d85ed234566616ede9c1bc6cc6a0a97ef67f3a3d1f"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828370
+file = "en/080828370.dat"
+sha256 = "c7df3d9548f9ae07570af65830857915f9017689ab6eb73c7c0042273ec12b17"
+expected_sha256 = "6235ee067405346161cb498435da7f51fa785586c2792c98d61716e108933a8a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828402
+file = "en/080828402.dat"
+sha256 = "9562283c6e94b03f9b3390bb47e7a17b61e5503f66a9f37bda2452496b8daf1d"
+expected_sha256 = "c532c1659f8a943f29393da29c1138c7790e44d8a815bd190bcade3f43b8142a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828436
+file = "en/080828436.dat"
+sha256 = "8efe2a8ad1fcb5e24371f8f9930edf797bf94155ad1f903e09497abe73bb849c"
+expected_sha256 = "c7bc81fadc461b0da0e0d26c610f2348267059dc4aa5ead1474db88c454a9d29"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828468
+file = "en/080828468.dat"
+sha256 = "e99cdc76275e44d3312d7dd9847764908935218b89ff10ffc877bafbb1774fe6"
+expected_sha256 = "4e262122f2e31d74014fd8a5ecaea909b452038479d2ed80441d216f47b10156"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828502
+file = "en/080828502.dat"
+sha256 = "51b60af11855de14bc609c28777a82b9510e0f4e34e947a2cf0a109a08fa4621"
+expected_sha256 = "90d9331717bbcbc53c1e346cd219e9fdbf0ed968c5caba4daa605e1127222a48"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828533
+file = "en/080828533.dat"
+sha256 = "97a4bef56343d54bdbd7b3a0b8105df453dc978d4cb988617954fe1c9b2f0ba4"
+expected_sha256 = "f4b5cf548f70fa8e7a141d740cb00303411c6a1d6eefef6223f96bccdf8018a1"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828568
+file = "en/080828568.dat"
+sha256 = "9e918c552ed21c14992ca85fc38e816dc902d1c037ed9e94b50f9ce3b04a9275"
+expected_sha256 = "f7043323936b1a9ce2ad293864a74d86e1cf71799d5f69eec23df755f079311c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828599
+file = "en/080828599.dat"
+sha256 = "71f37c09fdf6373a2c6afd11a4d20421862fd722ce465743c2f49f763a639f56"
+expected_sha256 = "6b49eed61fb528edd2b3bbffea1900edbc5f4ee6c1946c0ed944f85b8ede7e19"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828614
+file = "en/080828614.dat"
+sha256 = "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+expected_sha256 = "b9480a070a71f9fc257c102916d39b0bf259385d3d4ab137e5e0cc46b549c596"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828641
+file = "en/080828641.dat"
+sha256 = "5fb424e3a5a53f8012719d7c1ce5478d906d90875c6ec9a30246b09ea1d3753c"
+expected_sha256 = "dcc335b811e5340fe41c6d9cc00963c23ded64312d3ee53eeff90b396bbfaa52"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828665
+file = "en/080828665.dat"
+sha256 = "64f0634b95448ea8212685aa5f241d5022f02eeaf0433c29b9380fdabac370fe"
+expected_sha256 = "bf43eb03007b8b090d3b2927b089e761b28de055a2f2c4fc1d8c935d68bf5eb6"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828680
+file = "en/080828680.dat"
+sha256 = "12ae32cb1ec02d01eda3581b127c1fee3b0dc53572ed6baf239721a03d82e126"
+expected_sha256 = "4f6c0f6b0c641946fa2328bfdfac951c88e874148a699c297c291d561f129a09"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828732
+file = "en/080828732.dat"
+sha256 = "dbc1b4c900ffe48d575b5da5c638040125f65db0fe3e24494b76ea986457d986"
+expected_sha256 = "4d7b3ef7300acf70c892d8327db8272f54434adbc61a4e130a563cb59a0d0f47"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80828798
+file = "en/080828798.dat"
+sha256 = "36a9e7f1c95b82ffb99743e0c5c4ce95d83c9a430aac59f84ef3cbfab6145068"
+expected_sha256 = "7d8c5da7fd418379048e430b33dc8ffcda739e44326b8a5d647dc0ad81ed2157"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80833364
+file = "en/080833364.dat"
+sha256 = "675b50019fcd8b4bf998b1463077038d9e7aa448367d9a7c4f11d8eeef49be11"
+expected_sha256 = "b79e68f23804f3f8381c28752a4fc04a592a70cd3250359a1e51749b1cabdfdd"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80857439
+file = "en/080857439.dat"
+sha256 = "0a324ff19c452fa87b6038b9a47f5bb92373d89863643ee98c1ff69bb766b33f"
+expected_sha256 = "6093b39428e86888dd8844d4509b02c15a876adc05c5c62eeb72d7ac047e44c7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80858315
+file = "en/080858315.dat"
+sha256 = "4e903c67111eeabf6b96963e82778207464d74976bdb763f7fb08ea1897b8a34"
+expected_sha256 = "18e58acf74eac0a63110b484234527e42c002a35172f75f2d240fbfff47973e3"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80858421
+file = "en/080858421.dat"
+sha256 = "229e099c94208fcb5e0375eeb5f9f0792b8a6737c636537ab06187fbcaac9334"
+expected_sha256 = "67e17968efd0ba754538d0393f96f98cbf10bdc02c229c7e08f084507d38d93b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80858553
+file = "en/080858553.dat"
+sha256 = "e3f6e384ff1667bc870501fd4ee5647498238799ab55948a049b965e5fcb0093"
+expected_sha256 = "3703c8fbe3fcb0a90be08ff09a7837899ab15bc89608155696de6c8cd4aefa6a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80858801
+file = "en/080858801.dat"
+sha256 = "c8c2444d04eaf6bb04cbd2c2e9c3f4ba1fd360d5532f73665c3759de3d768555"
+expected_sha256 = "550cc263629408fef55a11e8594706f4eb67891bea6d405d6c301d4f57453125"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80859403
+file = "en/080859403.dat"
+sha256 = "a53ad7311a0c455a73d415758bfac8a6d7d8b23ca12e5e52bc01c02873861a3d"
+expected_sha256 = "0c2057c5e44584f7e297f52e0b0993cd40c7110ed6718dcf2e63ecd8931f1f81"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80859453
+file = "en/080859453.dat"
+sha256 = "bf94d08f8b7738016be973063ba83142123ff42cdef3152a2cbee0fed53621a0"
+expected_sha256 = "7230ebd2ffedb70240b781ec731ad02891946b4bdb2b868cb4b269a5a21ab608"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80859491
+file = "en/080859491.dat"
+sha256 = "4ada977548f4f98c15260e9741a4bae8f3ebc448613f80b18294689cc5b1d7ad"
+expected_sha256 = "e54505b6affa9cff5e3d840a61e2e67ab37e00cbba474a4cdbbdd1fe7187ba65"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80859503
+file = "en/080859503.dat"
+sha256 = "10fd42beb5c4185735b1bcb0369ff4bc66a0ec5fcc945201ab538c36c3c835af"
+expected_sha256 = "aaf73a094612f7291296d2519e2f0470e048117a523777384b872870eeb4d034"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80859572
+file = "en/080859572.dat"
+sha256 = "fe52439383f59f9ce7b3c611b946a932b1fd341e275ae65d22ad2217e68f3567"
+expected_sha256 = "98239f06e6f8d24e15c09331493029605df01e5932a025f4935a7c64dbfd11ea"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80859599
+file = "en/080859599.dat"
+sha256 = "9a70bc234c2cfe56ee2bffe7b66904b44e31fc922c4aba3ebd8194c1d91ed0c6"
+expected_sha256 = "177ce4d5a69c726c6438c16daa2e271a31651436a0a097ec172520529b7a5880"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80859656
+file = "en/080859656.dat"
+sha256 = "40ed9b45487f729423bb354309d73aafdbcf2f9d9cb904b39e6ee605ba3f2700"
+expected_sha256 = "20bc1ba192e3eef933d75ed8fe5955eeb47ff745b44304679bb18b419b1176e5"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80860521
+file = "en/080860521.dat"
+sha256 = "6151f24f17173db06cd30494959bc9078353a61e2bb24689df5a6502e0d6765f"
+expected_sha256 = "2bfdb52d32f0f2cb48617aff367b52e9bef2e3b50052a277a3ca39e7c57b5999"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80860574
+file = "en/080860574.dat"
+sha256 = "6981d8810a425e601c57b23140a44fdd009e84b2d9826162c21b883dc9a96492"
+expected_sha256 = "1b904bbbde6521282144ba3ff76e5ec61f5023add6072db3e00230191fcaecfa"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80860596
+file = "en/080860596.dat"
+sha256 = "8e2332010246154283235824326f5da3ab9009a34dc7c01dd99a9d60bea399ed"
+expected_sha256 = "ed5ac9ccd250d779a2b469b92cdc520f1651003d726498c8c75fb14250561d02"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80860673
+file = "en/080860673.dat"
+sha256 = "4a072520700b35ad63137df5cf4d2dc3519ccba7e4bee2e1fb2c913ab4c32665"
+expected_sha256 = "a82ff9655b415f75a11ad1ac1051f7a75403a28922db3c4f05e97a2de075afb8"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80860965
+file = "en/080860965.dat"
+sha256 = "ec0afa87a89240f0de1ca7e1e064ffe34a8a23f29947a8d81d438d0af6e94f14"
+expected_sha256 = "7fa296d9885c2568dd7a0cdbaeb459483ddaa41bbb080e1fa7f3ab79b9069736"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80861277
+file = "en/080861277.dat"
+sha256 = "196a1cd35e40a667e682cf43791bccb69f34a764d5a5f7585b01004c2ed45dca"
+expected_sha256 = "b0baa1122a94d1bbb1a0cfb508341a923dcf743060fa5d2d376be94112e74cea"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80862056
+file = "en/080862056.dat"
+sha256 = "5d13bb2b2462550bbe591a80e9b27504f6747382029b41c5719c440089c954d4"
+expected_sha256 = "f03803616be4d4139e1b1b18495f414338c7a53b0cfdde0ef6a35bd1f81c46b3"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80863028
+file = "en/080863028.dat"
+sha256 = "7156fc69bce88eaaa68037065ae15d9f5628c67420dc2a8d10b1c82ddfbb518e"
+expected_sha256 = "1b74406c1a4dc5ff36f67f27d7d81edc7c4c540f7a5416ee33dbc6aa696dcc87"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80863047
+file = "en/080863047.dat"
+sha256 = "5876d3ac60e477084ff9a62d4b3681ea0cb83cede90dfbe9eaabd72066f4c853"
+expected_sha256 = "45e3e2eb1b0b62f076dc20d20b1867d7d168dea736c4a2f3932ed74de8607047"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80864456
+file = "en/080864456.dat"
+sha256 = "4e15014d9fa1a8a3dbec5e3594c0db2f5af1ae065e15e791a16f5cf4e9cfb7cb"
+expected_sha256 = "9039901fe0e93f50e3f39422baa84de7a60c5574238068d43931fbf53cef68cc"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80865185
+file = "en/080865185.dat"
+sha256 = "487cdb4cf4232ae5a1034156fbdf24874c0648a1188d03f9aacfc8d9915e2473"
+expected_sha256 = "2e2d7676c74db676f0a48f1a9e1236a0d161fc43221a41d890650bc246132b05"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80865272
+file = "en/080865272.dat"
+sha256 = "9337951591f2e544cc03982efabeba07093c76d7900cb66c93a8a33f92af4e29"
+expected_sha256 = "32e0ac4e338ed3050681c66b1d715381e045a8664f5d7fd70b8db2f1dcd882c7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80865832
+file = "en/080865832.dat"
+sha256 = "88f0e82d0469427c76bf2987c16f6105f197de2498583bd6ccc2c1360ee526ae"
+expected_sha256 = "a30c5acfb82411ab9eeda88d6f60a571988f76a89bb2ef575b3b4a229daab7ab"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80866932
+file = "en/080866932.dat"
+sha256 = "35abd6da6df4c41309f430867e82b24cd437095d394084cc8175e84c417c9b3d"
+expected_sha256 = "3c9a2c67540d2878908193d7f32a5e2505ea9d3c9b17fd689cb2cb3d7d3aa2cf"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80867236
+file = "en/080867236.dat"
+sha256 = "1d418caf02073b6dbffd6e3dc70ceb99380e67a316855afa65390802e5be04a5"
+expected_sha256 = "e5414e3afc702782058fe726efb2c70f7a01889e0113843dbbd94e9decf2ca2c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80868041
+file = "en/080868041.dat"
+sha256 = "6d7271afb297ef3225a9795a8e1f8d483482d77bb3773f750981ec0067e47f38"
+expected_sha256 = "c068c57b20fd683507e3f7350814b3d0ff2f3c1ccbd391d4bea33c52cfbaf933"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80868264
+file = "en/080868264.dat"
+sha256 = "33b5ce964e1f93ea326776ca49ddf41489a46fc25abd14c062b2ef96d0fd87f2"
+expected_sha256 = "f2d06ac25af19cec93d211343fcc17b36b6948ab83f08d47943df777046f4fb7"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80868752
+file = "en/080868752.dat"
+sha256 = "820904b8e6c3d397951647d6fa407cffebdf43f8b9f00a9e5702ef5a754f88f9"
+expected_sha256 = "25e82f159f20f8fea92afa0b6c3b3644ae4a2a0567130545f0138a9d966a0c56"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80869088
+file = "en/080869088.dat"
+sha256 = "7fe090f792891d91ed8e4f312005546ba250ce54f4b9168c635f013d298c1ec2"
+expected_sha256 = "c6929bf9b1f0a21463811480d1694846422d7481c100b3783f571d3a1611aa62"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80869269
+file = "en/080869269.dat"
+sha256 = "c404012b5fd796f562e319a5e80906070f271f31e177449f73b878c7475ab153"
+expected_sha256 = "2fc8cdadf490049e78319d787b4236f27cce93651f70be71b63172d8f0c25157"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80869564
+file = "en/080869564.dat"
+sha256 = "df1ff4c4cf28749f6c4533bd4e2ba1fecbb7daf9a6e0244f2621a6ff1fe328f8"
+expected_sha256 = "fe6ccbf7ceab5ef10d44de4553e08a25c7554f7a8ae0bd6188ced60f0c66a442"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80870649
+file = "en/080870649.dat"
+sha256 = "1fdd825d45006ee0e07bc1db175573e992d722b25defeba26e540e776238845d"
+expected_sha256 = "57ebb38f92e9179e1142356f284905191abd4dee842f69fd4ce506989ed438cb"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80872549
+file = "en/080872549.dat"
+sha256 = "92d50b2eef033e4878713c5cfb88877628ad7ab5d18dbeae2437b2a25a993616"
+expected_sha256 = "21648afe44dfd4e75821543abc7a3b307702599a07ab7eb91b95762d8da5fa60"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80873480
+file = "en/080873480.dat"
+sha256 = "f5dbebf3ec8778993dd052d83aefcc2849bf72e8473366ed18ea83a9262c24e8"
+expected_sha256 = "e89e3789e7bf5c6a03081b30fde467d8b0d49fcf02f9658295bcb6d10355c13a"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80874292
+file = "en/080874292.dat"
+sha256 = "fe06b6b1d8b8f06c19fab88efcbaa91a1f525f4b32de7809f2b30e3457aef9ac"
+expected_sha256 = "74fe8aef969fc9ed1c13056abf55e29a53059455080f5ed0c677c9290834b9be"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80876176
+file = "en/080876176.dat"
+sha256 = "cc72463521cc0832f84c8cf943cd8c730ad5463597909cb41a96d33c02335635"
+expected_sha256 = "653a997864b1f99dd0377e511dd7b860cb0b4b7a2293c066090534d13862ab4e"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80876435
+file = "en/080876435.dat"
+sha256 = "06269b11ce0824bf70903c86e4e2675bd6e1efe3d607ef1527fb9c9d38cd5512"
+expected_sha256 = "c62cd2b9f549f040a9b8862ac12786ef0f091f6fe4a504bd4a79d9039df2df2b"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80878900
+file = "en/080878900.dat"
+sha256 = "e0bffe1febff880980cbf60bca268ee437911b4caa19334a1f3d38c20f69dafc"
+expected_sha256 = "4ffe262693d764d3b3c5c53c3aea78bdb8192ae3a4509c0758fbf98f9ebee542"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 80879200
+file = "en/080879200.dat"
+sha256 = "0363aa0f27c9360bcb00bb051a1f3aead608cf26e60770487a5231d45c977b77"
+expected_sha256 = "d42008574c8e53114ca5bdce71f95d82f81ac4adb2ce91efb5791374b2f1d9dd"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 462515376
+file = "en/462515376.dat"
+sha256 = "dde52abc609f8fd10372177a6ee6a8dc1e6946f8aefa5a1d3ba9a0155ef2140b"
+expected_sha256 = "95fe410b08ad34e4d46e53f05157f625b2bc623199274940e8f1979e6e54ea90"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 462515868
+file = "en/462515868.dat"
+sha256 = "ac03a42d4f77a6b710452f140e39a3e378987e47748350278ca6939e0267fe3c"
+expected_sha256 = "26072c894811a7b9958917e501775aa1543b9dfcc2ce2c81fa7cace943490800"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 462515915
+file = "en/462515915.dat"
+sha256 = "dff821eb815ac1e4c1551d3daf5f7bd1a5e0be64e09351bab7fddc8f03f49a38"
+expected_sha256 = "1482aeae2cff0aab41fdfc4b684ca0b014c7b80a5dac8f8c78fe30f584c6c28c"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 462516079
+file = "en/462516079.dat"
+sha256 = "17a74b56b4a7d95c1a673466e559dd4d354b2480cdb18d00e0192351f6b5f976"
+expected_sha256 = "5ac85a25836e53f6e39437ac929ecc2e91f5932fcb1fb4006864fab952e23a95"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 462516165
+file = "en/462516165.dat"
+sha256 = "17e8bc8180a1086c89816ef1611ccfdae213bb4b3c02e71a3d71b3e610be0797"
+expected_sha256 = "411c370cfca1ea47a86e30505e7096fce3763f32a110743dc27bfa5b1a9a2f27"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 462516187
+file = "en/462516187.dat"
+sha256 = "173a06e1eca2662edca8757d2202409f4bca70b218e4abe8eaeda9f10b51e8aa"
+expected_sha256 = "dc077074d31ce4ca9a43bc6eff0d01e24ab7a890b920c5eeeef56df54e4b6b9d"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 462517998
+file = "en/462517998.dat"
+sha256 = "17beaf8f18aa7f3acd9e6a836cb82dfc295779a175a9dad54bf64c5996696453"
+expected_sha256 = "85b27402251e57ca1e5734e8141906d3d1fabf76ab68a56a54a7a543f0e71796"
+when = { lang = "en" }
+
+[[overlay]]
+feature = "language"
+target = "disc_user"
+offset = 462518190
+file = "en/462518190.dat"
+sha256 = "7fda27cb9e40892aa4656043f9b6e25b42fa21e199b5219f1a21e3f7ae30f841"
+expected_sha256 = "4fb4120e7effd4b699c4f518b0247261b9b37751248ffd4efc75e61b5f46da57"
+when = { lang = "en" }

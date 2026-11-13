@@ -78,10 +78,9 @@ Como foi feito:
       jogador (`docs/KIT.md`)
 - [x] Setup no Windows sem CMD, com barra de progresso (patch no framework,
       `patches/`)
-- [x] Protótipo de idioma: mod de inglês gerado da tradução v1.00b, liga e
-      desliga sem gerar código de novo (`docs/IDIOMAS.md`)
-- [ ] Decidir distribuição do inglês (permissão ou arquivo do jogador)
-- [ ] Português e opção única de idioma no launcher
+- [x] Mod de idioma `tobal2.language` no catálogo do jogo: japonês (mod
+      desligado) ou English, sem gerar código de novo (`docs/IDIOMAS.md`)
+- [ ] Português (texto + letras com acento na fonte)
 - [ ] Releases automáticos Windows / Linux / Mac no GitHub
 
 ## Fase 5: Publicação
