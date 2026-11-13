@@ -132,7 +132,12 @@ jobs:
 
       - name: Install deps (macOS)
         if: runner.os == 'macOS'
-        run: brew install cmake ninja pkg-config sdl3 || brew install cmake ninja pkg-config
+        # bash: macOS ships bash 3.2, which aborts on empty arrays under
+        # `set -u` in the framework's packaging scripts; brew's bash comes
+        # first on PATH, so `bash` and `#!/usr/bin/env bash` pick it up.
+        run: |
+          brew install bash cmake ninja pkg-config sdl3 || brew install bash cmake ninja pkg-config
+          bash --version | head -1
 
       - name: Install zip (Windows)
         if: runner.os == 'Windows'
@@ -202,8 +207,16 @@ jobs:
           ZIP="$(ls dist/tobal2-*-${{ matrix.artifact }}.zip)"
           unzip -Z1 "${ZIP}" > kit-files.txt
           echo "$(wc -l < kit-files.txt) files in ${ZIP}"
-          if grep -iE '\.(bin|cue|iso|chd|img|mcd|mcr)$|SLPM_|SCPH|(^|/)generated/SLPM' kit-files.txt \
-               | grep -viE '(^|/)bios/openbios\.bin$|psxrecomp/bios/openbios\.bin$'; then
+          # Forbidden: disc images, any .bin except the free OpenBIOS image
+          # (retail BIOS dumps are .bin), anything named after the game's
+          # executable, generated game C, and memory cards outside the
+          # framework's synthetic test fixtures. SCPH*.toml BIOS *profiles*
+          # and seed lists are framework config text, not BIOS data.
+          BAD="$( { grep -iE '\.(cue|iso|chd|img|ccd|sub)$|SLPM_|(^|/)generated/SLPM' kit-files.txt || true;
+                    grep -iE '\.bin$' kit-files.txt | grep -viE '(^|/)openbios\.bin$' || true;
+                    grep -iE '\.(mcd|mcr)$' kit-files.txt | grep -vE '^psxrecomp/runtime/tests/' || true; } )"
+          if [[ -n "${BAD}" ]]; then
+            printf '%s\n' "${BAD}"
             echo "::error::game data found in the kit"; exit 1
           fi
           grep -q 'mods/preloaded/packages/tobal2.language/' kit-files.txt
