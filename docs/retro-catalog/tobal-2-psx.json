@@ -39,7 +39,7 @@
     "enabled": true,
     "source": {
       "github": "MatheusLeffa/Tobal2Recomp",
-      "ref": "v0.1.0"
+      "ref": "main"
     },
     "toolchain": {
       "id": "cmake-clang-v1",

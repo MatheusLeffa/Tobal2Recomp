@@ -12,7 +12,7 @@ formato do `SCHEMA.md` de lá.
   casam com os `asset_glob` `*windows*` / `*linux*` / `*macos*`. O ZIP
   automático do GitHub não traz os submódulos nem os nossos patches; os kits
   trazem.
-- [x] `build.source.ref` = `v0.1.0`; `toolchain.min_version` = `1.0.14`.
+- [x] `build.source.ref` = `main` (o Retro usa o kit da release mais recente; o ref só é usado se o kit não trouxer o código); `toolchain.min_version` = `1.0.14`, a versão com que os kits foram testados.
 - [ ] Enviar pelo formulário (precisa do login do dono no GitHub).
 
 ## Como enviar
