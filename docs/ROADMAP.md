@@ -72,6 +72,15 @@ Como foi feito:
 - Mods de jogabilidade (`.psxmod`).
 - Netplay com rollback, como no Toshinden.
 
+## Kit de instalação (caminho A) ← em andamento
+
+- [x] Launcher sem código do jogo (setup host) que gera e compila no PC do
+      jogador (`docs/KIT.md`)
+- [x] Setup no Windows sem CMD, com barra de progresso (patch no framework,
+      `patches/`)
+- [ ] Seleção de idioma no launcher (japonês + primeira tela traduzida)
+- [ ] Releases automáticos Windows / Linux / Mac no GitHub
+
 ## Fase 5: Publicação
 
 - Publicar o repositório no GitHub (sem disco, BIOS nem código gerado).

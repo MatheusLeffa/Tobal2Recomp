@@ -6,7 +6,7 @@
 #include "psxrecomp_codegen_host.h"
 
 static const PsxrecompCodegenHostConfig kCodegenConfig = {
-    .display_name = "Tobal2",
+    .display_name = "Tobal 2",
     .project_root_env = "TOBAL2RECOMP_PROJECT_ROOT",
     .build_dir_env = "TOBAL2RECOMP_BUILD_DIR",
     .force_setup_env = "TOBAL2RECOMP_FORCE_SETUP",
@@ -16,15 +16,20 @@ static const PsxrecompCodegenHostConfig kCodegenConfig = {
     .gen_marker_relpath = "generated/SLPM_860.33_dispatch.c",
     .build_dir_name = "build-release",
     .cmake_target = "psx-runtime",
-    .exe_basename = "Tobal2_Recompiled",
+    /* Must match the OUTPUT_NAME runtime.cmake derives from WINDOW_TITLE
+     * ("Tobal 2 Recompiled" -> Tobal_2_Recompiled); the setup host forwards
+     * to build-release/<exe_basename> once the game is built. */
+    .exe_basename = "Tobal_2_Recompiled",
     .prepare_note =
-        "Uses your legal disc with the local psxrecomp SDK to generate "
-        "BIOS + game C, then cmake --build. The product lives under "
-        "build-release/; reopening this setup exe forwards there.",
+        "Builds Tobal 2 from your own disc, right on this computer: first "
+        "it converts the game code, then it compiles it (about 3 to 5 "
+        "minutes the first time). Nothing from your disc leaves this PC. "
+        "When it finishes, the game opens here.",
     .prepare_note_windows =
-        "Uses your legal disc with the local psxrecomp SDK to generate "
-        "BIOS + game C, then quits and rebuilds via a helper. Afterward, "
-        "this setup exe forwards to build-release/ (bios, mods, settings).",
+        "Builds Tobal 2 from your own disc, right on this computer: first "
+        "it converts the game code, then it compiles it (about 3 to 5 "
+        "minutes the first time). Nothing from your disc leaves this PC. "
+        "When it finishes, the game opens here.",
     .prepare_note_no_cmake =
         "Uses your legal disc with the local psxrecomp SDK to generate "
         "BIOS + game C. Rebuild into build-release/, then relaunch this "

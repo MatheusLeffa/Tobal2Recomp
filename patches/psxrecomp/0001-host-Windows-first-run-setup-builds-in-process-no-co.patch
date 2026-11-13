@@ -1,0 +1,132 @@
+From b257ab7c522c5f3361b76a76754ba86d14e65055 Mon Sep 17 00:00:00 2001
+From: Matt <83082324+MatheusLeffa@users.noreply.github.com>
+Date: Thu, 12 Nov 2026 21:26:23 -0300
+Subject: [PATCH] host: Windows first-run setup builds in-process, no console
+ window
+
+The deferred rebuild .cmd helper exists because Windows cannot overwrite a
+running executable. A first-run setup host is a different file from the
+product exe (zip root vs build-release/), so it can run `rebuild` through
+run_cli_win with --json-progress and report progress in the wizard, as the
+POSIX path already does. Rebuilds started from the product exe itself, and
+PGO runs, keep the helper.
+
+run_cli_win now passes CREATE_NO_WINDOW: the wizard is a GUI process, so a
+console child (python, cmake, ninja, clang) otherwise opened a visible
+console window that players read as an error.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ host/psxrecomp_codegen_host.c | 82 ++++++++++++++++++++++++++++++++++-
+ 1 file changed, 80 insertions(+), 2 deletions(-)
+
+diff --git a/host/psxrecomp_codegen_host.c b/host/psxrecomp_codegen_host.c
+index dec25b94..b9a18896 100644
+--- a/host/psxrecomp_codegen_host.c
++++ b/host/psxrecomp_codegen_host.c
+@@ -35,6 +35,7 @@ static int toolchain_bin_is_healthy(const char* bin);
+ static void heal_broken_toolchain_pointers(void);
+ static void clear_project_toolchain_stamp(void);
+ static int host_paths_same_file(const char* a, const char* b);
++static int host_self_exe_path(char* out, size_t cap);
+ static void prune_old_toolchain_tags(const char* keep_pack);
+ #if defined(_WIN32)
+ static int junction_dir(const char* link_path, const char* target_path);
+@@ -1892,8 +1893,12 @@ static int run_cli_win(const char* cmdline,
+ 
+     char mutable_cmd[4096];
+     snprintf(mutable_cmd, sizeof(mutable_cmd), "%s", cmdline);
+-    if (!CreateProcessA(NULL, mutable_cmd, NULL, NULL, TRUE, 0, NULL,
+-                        g_project_root, &si, &pi)) {
++    /* CREATE_NO_WINDOW: the wizard is a GUI process with no console, so a
++     * console child (python, then cmake/ninja/clang under it) would otherwise
++     * pop a visible console window that looks like an error to players. All
++     * output already flows through the pipe into the progress UI. */
++    if (!CreateProcessA(NULL, mutable_cmd, NULL, NULL, TRUE, CREATE_NO_WINDOW,
++                        NULL, g_project_root, &si, &pi)) {
+         CloseHandle(rd);
+         CloseHandle(wr);
+         snprintf(err_msg, err_cap, "Failed to spawn %s.", fail_label);
+@@ -4271,6 +4276,79 @@ static int host_rebuild_game_ex(const char* disc_path, int force_pgo,
+     }
+ 
+ #if defined(_WIN32)
++    /* The deferred .cmd helper exists because Windows cannot overwrite a
++     * running executable: rebuilding from the product exe itself must quit
++     * first. A first-run setup host is a different file (zip root vs
++     * build-release/), so it can build in-process and show progress in the
++     * wizard like the POSIX path, instead of opening a console window. */
++    {
++        char self_exe[1100];
++        const int self_is_target =
++            host_self_exe_path(self_exe, sizeof(self_exe)) &&
++            host_paths_same_file(self_exe, g_exe_path);
++        if (!force_pgo && !self_is_target) {
++            char cmdline[4096];
++            char published_path[1200];
++            char published_name[256];
++            const char* final_exe = g_exe_path;
++            FILE* pf;
++            if (on_progress)
++                on_progress(progress_ctx, 0.05f, "Starting rebuild (cmake)…");
++            snprintf(cmdline, sizeof(cmdline),
++                     "\"%s\" \"%s\" rebuild --project-root \"%s\" "
++                     "--config \"%s\" --build-dir \"%s\" --target \"%s\" "
++                     "--exe-basename \"%s\" --no-pgo "
++                     "--prune-after build-intermediates --json-progress",
++                     g_python, g_cli_path, g_project_root, g_game_toml,
++                     g_build_dir, g_cmake_target, g_exe_basename);
++            if (!run_cli_win(cmdline, on_progress, progress_ctx, err_msg,
++                             err_cap, "psxrecomp rebuild"))
++                return 0;
++            /* runtime.cmake publishes the OUTPUT_NAME it really used; it
++             * wins over the configured basename (same rule as the helper). */
++            {
++                char rel[300];
++                snprintf(rel, sizeof(rel), "psxrecomp_exe_name-%s.txt",
++                         g_cmake_target);
++                if (!join_path(published_path, sizeof(published_path),
++                               g_build_dir, rel))
++                    published_path[0] = '\0';
++            }
++            pf = published_path[0] ? fopen(published_path, "rb") : NULL;
++            if (pf) {
++                if (fgets(published_name, sizeof(published_name), pf)) {
++                    size_t n = strlen(published_name);
++                    while (n > 0 && (published_name[n - 1] == '\n' ||
++                                     published_name[n - 1] == '\r' ||
++                                     published_name[n - 1] == ' '))
++                        published_name[--n] = '\0';
++                    if (n > 0) {
++                        char candidate[1200];
++                        char file_name[300];
++                        snprintf(file_name, sizeof(file_name), "%s.exe",
++                                 published_name);
++                        if (join_path(candidate, sizeof(candidate), g_build_dir,
++                                      file_name) &&
++                            path_is_file(candidate)) {
++                            snprintf(g_exe_path, sizeof(g_exe_path), "%s",
++                                     candidate);
++                            final_exe = g_exe_path;
++                        }
++                    }
++                }
++                fclose(pf);
++            }
++            if (!path_is_file(final_exe)) {
++                snprintf(err_msg, err_cap,
++                         "Build succeeded but binary missing: %s", final_exe);
++                return 0;
++            }
++            snprintf(out_exe_path, out_cap, "%s", final_exe);
++            if (on_progress)
++                on_progress(progress_ctx, 1.0f, "Build complete");
++            return 1;
++        }
++    }
+     if (on_progress)
+         on_progress(progress_ctx, 0.4f,
+                     force_pgo ? "Scheduling Windows PGO optimize after exit…"
+-- 
+2.52.0.windows.1
+
