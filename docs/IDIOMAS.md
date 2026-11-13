@@ -2,11 +2,19 @@
 
 ## Como funciona
 
-O idioma é o mod **`tobal2.language`**
-(`mods/preloaded/packages/tobal2.language/`), que vem no catálogo do jogo:
+Para o jogador, o idioma é uma **configuração na tela inicial do launcher**:
+o cartão **LANGUAGE**, ao lado dos cartões de memória, com **English**
+(pré-selecionado) e **Japanese (original)**.
 
-- **Ligado em English** (padrão numa instalação nova).
-- **Desligado**: japonês original, idêntico ao disco. A opção *Language / Idioma* escolhe o idioma quando ligado.
+Por baixo, é o pacote **`tobal2.language`**
+(`mods/preloaded/packages/tobal2.language/`):
+
+- feature `language` com `hidden = true`, `default_enabled = true` e
+  `group = "Language"`; com `[runtime] hide_hidden_mod_features = true` no
+  `game.toml`, ela não aparece na página Mods;
+- opção `lang`: `en` aplica a tradução, `ja` não aplica nada (disco original);
+- o cartão LANGUAGE vem do patch `patches/recomp-ui/0001-...`: o launcher
+  mostra como seletor qualquer feature do grupo "Language".
 
 O mod troca só os bytes de texto e de fonte que mudam no disco, na hora em
 que o jogo lê o CD. O código recompilado é o mesmo para todos os idiomas, então
@@ -35,7 +43,7 @@ Gerado a partir da tradução de fã v1.00b. Ela muda só dados (32 setores):
 
 Verificado (12/11/2026): disco original + mod = disco em inglês, byte a byte;
 título (TOURNAMENT / VS / QUEST / TRAINING / OPTIONS), Quest (NEW GAME,
-Pick Fighter, história do imperador Udan) em inglês; mod desligado = japonês.
+Pick Fighter, história do imperador Udan) em inglês; opção `ja` = japonês.
 
 ### Ajustes de layout (`mods/lang_extra/en.toml`)
 

@@ -78,8 +78,9 @@ Como foi feito:
       jogador (`docs/KIT.md`)
 - [x] Setup no Windows sem CMD, com barra de progresso (patch no framework,
       `patches/`)
-- [x] Mod de idioma `tobal2.language` no catálogo do jogo: japonês (mod
-      desligado) ou English, sem gerar código de novo (`docs/IDIOMAS.md`)
+- [x] Idioma como configuração na tela inicial do launcher (cartão
+      LANGUAGE): English (padrão) ou Japanese (original), sem gerar código de
+      novo (`docs/IDIOMAS.md`, patch no recomp-ui)
 - [ ] Português (texto + letras com acento na fonte)
 - [ ] Releases automáticos Windows / Linux / Mac no GitHub
 

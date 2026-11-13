@@ -1,0 +1,139 @@
+From db57c6c0f7b3e60630674b597942672920d73c4e Mon Sep 17 00:00:00 2001
+From: Matt <83082324+MatheusLeffa@users.noreply.github.com>
+Date: Thu, 12 Nov 2026 23:32:58 -0300
+Subject: [PATCH] dashboard: LANGUAGE card for a title's "Language" mod feature
+
+A title that ships its translations as a mod package can mark the feature
+`group = "Language"` (usually also `hidden = true` with [runtime]
+hide_hidden_mod_features, so it never appears on the Mods page). The
+dashboard then shows the feature's first choice option as a LANGUAGE card
+next to the memory cards, one radio button per choice. Selecting a choice
+is an ordinary feature_set_option, so persistence and plan preparation stay
+with the provider, exactly as on the Mods page. Titles without such a
+feature are unchanged.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ src/common/backends/imgui/launcher_imgui.cpp | 81 ++++++++++++++++++--
+ 1 file changed, 76 insertions(+), 5 deletions(-)
+
+diff --git a/src/common/backends/imgui/launcher_imgui.cpp b/src/common/backends/imgui/launcher_imgui.cpp
+index 8959ef7..f362d11 100644
+--- a/src/common/backends/imgui/launcher_imgui.cpp
++++ b/src/common/backends/imgui/launcher_imgui.cpp
+@@ -2913,6 +2913,22 @@ static int dash_card_columns(float availw, float gap, float cardw, int count) {
+ 
+ static void draw_quick_mods(LauncherModel* m,const LauncherTheme& th);
+ 
++/* Title language as a dashboard setting. A title that ships its translations
++ * as a mod package can mark that feature `group = "Language"` (normally also
++ * `hidden = true` with [runtime] hide_hidden_mod_features, so it never shows on
++ * the Mods page). The dashboard then presents the feature's first choice
++ * option as a plain LANGUAGE card -- one radio button per choice -- next to
++ * the memory cards. Selecting a choice is an ordinary feature_set_option, so
++ * persistence and plan preparation are the provider's, exactly as on the Mods
++ * page. Titles without such a feature are unchanged. */
++struct LanguageCard {
++    RecompLauncherCModFeature feature;
++    RecompLauncherCModOption option;
++};
++static bool find_language_card(LauncherModel* m, LanguageCard* out);
++static void draw_language_card(LauncherModel* m, const LauncherTheme& th,
++                               const LanguageCard& card);
++
+ #include "card_manager_imgui.hpp"
+ 
+ void panel_save_draw(LauncherModel* m, const LauncherTheme* th) {
+@@ -2934,7 +2950,10 @@ void panel_save_draw(LauncherModel* m, const LauncherTheme* th) {
+             m, (prof->save.slots > 0 && prof->save.slots <= 2) ? prof->save.slots : 2);
+         const float gap = px(th->spacing_sm);
+         const float avail = ImGui::GetContentRegionAvail().x;
+-        const int cards=slots+(m->dashboard_quick_controls?1:0);
++        LanguageCard lang_card{};
++        const bool has_lang = find_language_card(m, &lang_card);
++        const int lang_cards = has_lang ? 1 : 0;
++        const int cards=slots+lang_cards+(m->dashboard_quick_controls?1:0);
+         const float cw = dash_card_width(avail, gap, cards);
+         const int cols = dash_card_columns(avail, gap, cw, cards);
+         // Multitap fill-height: slot cards take the reserved band under the
+@@ -2947,14 +2966,17 @@ void panel_save_draw(LauncherModel* m, const LauncherTheme* th) {
+             else if (slot) ImGui::Dummy(ImVec2(0, gap));
+             char cid[16]; snprintf(cid, sizeof(cid), "mcc%d", slot);
+             char pid[16]; snprintf(pid, sizeof(pid), "mcp%d", slot);
+-            const bool quick=slot>=slots;
+-            const float height=quick?px(250):do_fill?fill_h:0.0f;
++            const bool lang=has_lang && slot==slots;
++            const bool quick=slot>=slots+lang_cards;
++            const float height=quick?px(250):(do_fill && !lang)?fill_h:0.0f;
+             begin_container(cid, ImVec2(cw, height),
+-                            quick || do_fill ? ImGuiChildFlags_None : ImGuiChildFlags_AutoResizeY);
++                            quick || (do_fill && !lang) ? ImGuiChildFlags_None : ImGuiChildFlags_AutoResizeY);
+                 // The container is already sized in physical pixels. A zero
+                 // inner width fills it without applying DPI scaling twice.
+-                if (begin_panel(pid, 0, quick || do_fill, quick?false:do_fill)) {
++                if (begin_panel(pid, 0, quick || (do_fill && !lang),
++                                quick||lang?false:do_fill)) {
+                     if(slot<slots)draw_memcard_slot(m,*th,slot);
++                    else if(lang)draw_language_card(m,*th,lang_card);
+                     else draw_quick_mods(m,*th);
+                 }
+                 end_panel();
+@@ -12927,6 +12949,55 @@ static void draw_quick_mods(LauncherModel* m,const LauncherTheme& th) {
+     (void)th;
+ }
+ 
++static bool find_language_card(LauncherModel* m, LanguageCard* out) {
++    const auto* mods = m ? m->mods : nullptr;
++    if (!out || !mods || !mods->feature_count || !mods->feature_get ||
++        !mods->feature_option_get || !mods->feature_choice_get ||
++        !mods->feature_set_option)
++        return false;
++    for (int i = 0, n = mods->feature_count(mods->ctx); i < n; ++i) {
++        RecompLauncherCModFeature feature{};
++        if (!mods->feature_get(mods->ctx, i, &feature)) continue;
++        if (std::strcmp(feature.group, "Language") != 0 || !feature.enabled) continue;
++        for (int k = 0; k < feature.option_count; ++k) {
++            RecompLauncherCModOption option{};
++            if (mods->feature_option_get(mods->ctx, feature.package_id, feature.id,
++                                         k, &option) &&
++                option.type == RECOMP_MOD_OPTION_CHOICE && option.choice_count > 0) {
++                out->feature = feature;
++                out->option = option;
++                return true;
++            }
++        }
++    }
++    return false;
++}
++
++static void draw_language_card(LauncherModel* m, const LauncherTheme& th,
++                               const LanguageCard& card) {
++    const auto* mods = m->mods;
++    eyebrow("LANGUAGE");
++    ImGui::BeginDisabled(!launcher_model_can_open_mods(m));
++    for (int c = 0; c < card.option.choice_count; ++c) {
++        RecompLauncherCModChoice choice{};
++        if (!mods->feature_choice_get(mods->ctx, card.feature.package_id,
++                                      card.feature.id, card.option.id, c, &choice))
++            continue;
++        ImGui::PushID(c);
++        const bool selected = std::strcmp(choice.value, card.option.value) == 0;
++        if (ImGui::RadioButton(ui_text(choice.label), selected) && !selected &&
++            !mods->feature_set_option(mods->ctx, card.feature.package_id,
++                                      card.feature.id, card.option.id,
++                                      choice.value))
++            mod_note_error(m);
++        ImGui::PopID();
++    }
++    ImGui::EndDisabled();
++    if (m->in_session && ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
++        ImGui::SetTooltip("Close the game before changing the language.");
++    (void)th;
++}
++
+ void draw_mods(LauncherModel* m, const LauncherTheme& th) {
+     const auto* mods = m ? m->mods : nullptr;
+     if (!m || (!mods && !m->rom_patch_supported)) return;
+-- 
+2.52.0.windows.1
+

@@ -14,7 +14,9 @@ SAIDA_DIR/tobal2.language/<versão>/:
                     fonte); nada do conteúdo original do jogo vai junto. Cada
                     trecho é guardado pelo SHA-256 do trecho original.
 
-Mod desligado = jogo em japonês, idêntico ao disco original.
+O mod é escondido e sempre ligado; a escolha --original-choice (padrão "ja") não
+aplica nada, ou seja, é o disco original. O launcher mostra a opção como
+seletor de idioma na tela inicial.
 Para publicar, use SAIDA_DIR = mods/preloaded/packages.
 """
 import argparse
@@ -109,16 +111,19 @@ def main():
                          "(ex.: mods/lang_extra/en.toml)")
     ap.add_argument("--version", default="0.1.0")
     ap.add_argument("--game-id", default="SLPM-86033")
-    ap.add_argument("--default", dest="default_lang", default=None,
-                    help="idioma ligado por padrão numa instalação nova "
-                         "(omitido = mod desligado = japonês)")
+    ap.add_argument("--default", dest="default_lang", default="ja",
+                    help="idioma escolhido numa instalação nova (padrão: ja)")
+    ap.add_argument("--original-choice", dest="orig_choice", nargs=2,
+                    default=["ja", "Japanese (original)"],
+                    metavar=("CODIGO", "NOME"),
+                    help="escolha que mantém o disco original, sem trocas")
     a = ap.parse_args()
-    codes = {v[0] for v in a.variant}
+    codes = {v[0] for v in a.variant} | {a.orig_choice[0]}
     for code, _ in a.extra:
         if code not in codes:
             raise SystemExit(f"--extra {code}: idioma não está entre os --variant")
-    if a.default_lang and a.default_lang not in codes:
-        raise SystemExit(f"--default {a.default_lang}: idioma não está entre os --variant")
+    if a.default_lang not in codes:
+        raise SystemExit(f"--default {a.default_lang}: idioma desconhecido")
 
     pkg = "tobal2.language"
     root = os.path.join(a.out, pkg, a.version)
@@ -131,9 +136,9 @@ def main():
         "format_version = 5",
         f'id = "{pkg}"',
         f'version = "{a.version}"',
-        'name = "Tobal 2 - Language / Idioma"',
+        'name = "Tobal 2 - Language"',
         'author = "Tobal2Recomp"',
-        'description = "Changes the game text and font. Off = original Japanese."',
+        'description = "Game text language."',
         'resolver = "declarative"',
         'save_compatibility = "shared"',
         "",
@@ -141,24 +146,30 @@ def main():
         f'game_id = "{a.game_id}"',
         f'disc_sha256 = "{disc_sha}"',
         "",
+        "# Configuração, não mod: escondido da página Mods (game.toml",
+        "# [runtime] hide_hidden_mod_features) e sempre ligado. O launcher mostra",
+        '# o grupo "Language" como seletor na tela inicial (patch do recomp-ui).',
         "[[feature]]",
         'id = "language"',
-        'name = "Language / Idioma"',
-        'description = "Game language. Disabled = original Japanese."',
-        'group = "Localization"',
-        f"default_enabled = {'true' if a.default_lang else 'false'}",
+        'name = "Language"',
+        'description = "Game text language."',
+        'group = "Language"',
+        "hidden = true",
+        "default_enabled = true",
         "",
         "[[option]]",
         'feature = "language"',
         'id = "lang"',
-        'label = "Language / Idioma"',
+        'label = "Language"',
         'description = "Text language used in menus, Quest mode and dialogue."',
-        'group = "Localization"',
+        'group = "Language"',
         'type = "choice"',
-        f'default = "{a.default_lang or a.variant[0][0]}"',
+        f'default = "{a.default_lang}"',
     ]
     for code, label, _ in a.variant:
         lines += ["", "[[option.choice]]", f'value = "{code}"', f'label = "{label}"']
+    lines += ["", "[[option.choice]]", f'value = "{a.orig_choice[0]}"',
+              f'label = "{a.orig_choice[1]}"']
 
     total = 0
     for code, label, path in a.variant:

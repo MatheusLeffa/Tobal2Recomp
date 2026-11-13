@@ -17,7 +17,7 @@ PC dela. Nada do jogo é distribuído.
 ## Montar o kit (Windows)
 
 Pré-requisitos: recompilador compilado (`build-recompiler/`, ver `AMBIENTE.md`)
-e os patches de `patches/` aplicados no submódulo.
+e os patches de `patches/` aplicados nos submódulos (`psxrecomp/` e `recomp-ui/`).
 
 ```bash
 # 1. Launcher sem código do jogo

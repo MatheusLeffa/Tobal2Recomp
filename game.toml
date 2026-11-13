@@ -38,6 +38,9 @@ strict = true
 window_title = "Tobal 2 Recompiled"
 memcard_dir = "saves"
 overlay_cache = true
+# O idioma (mod tobal2.language) é uma configuração da tela inicial do
+# launcher, não um mod: features hidden não aparecem na página Mods.
+hide_hidden_mod_features = true
 
 [video]
 renderer = "opengl"
