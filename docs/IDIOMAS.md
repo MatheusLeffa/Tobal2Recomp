@@ -5,8 +5,8 @@
 O idioma é o mod **`tobal2.language`**
 (`mods/preloaded/packages/tobal2.language/`), que vem no catálogo do jogo:
 
-- **Desligado** (padrão): japonês original, idêntico ao disco.
-- **Ligado**: opção *Language / Idioma* escolhe o idioma (hoje: English).
+- **Ligado em English** (padrão numa instalação nova).
+- **Desligado**: japonês original, idêntico ao disco. A opção *Language / Idioma* escolhe o idioma quando ligado.
 
 O mod troca só os bytes de texto e de fonte que mudam no disco, na hora em
 que o jogo lê o CD. O código recompilado é o mesmo para todos os idiomas, então
@@ -63,12 +63,13 @@ redesenhado junto com as letras acentuadas do português.
 ```bash
 python tools/make_lang_mod.py "iso/Tobal 2 (Japan) (v1.1).bin" mods/preloaded/packages \
   --variant en English "iso/referencia-en/<disco em inglês>.bin" \
-  --extra en mods/lang_extra/en.toml \
+  --extra en mods/lang_extra/en.toml --default en \
   [--variant pt "Português" "iso/<disco em português>.bin"]
 ```
 
-Cada `--variant` vira uma escolha da opção *Language / Idioma*. O gerador só
-aceita discos do mesmo tamanho do original (trocas no lugar).
+Cada `--variant` vira uma escolha da opção *Language / Idioma*. `--default`
+liga o mod naquele idioma numa instalação nova (sem ele, o padrão é japonês).
+O gerador só aceita discos do mesmo tamanho do original (trocas no lugar).
 
 (A versão do VincentNL, com letras de meia largura, muda **código**; não serve
 para este gerador.)

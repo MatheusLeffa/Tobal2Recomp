@@ -109,11 +109,16 @@ def main():
                          "(ex.: mods/lang_extra/en.toml)")
     ap.add_argument("--version", default="0.1.0")
     ap.add_argument("--game-id", default="SLPM-86033")
+    ap.add_argument("--default", dest="default_lang", default=None,
+                    help="idioma ligado por padrão numa instalação nova "
+                         "(omitido = mod desligado = japonês)")
     a = ap.parse_args()
     codes = {v[0] for v in a.variant}
     for code, _ in a.extra:
         if code not in codes:
             raise SystemExit(f"--extra {code}: idioma não está entre os --variant")
+    if a.default_lang and a.default_lang not in codes:
+        raise SystemExit(f"--default {a.default_lang}: idioma não está entre os --variant")
 
     pkg = "tobal2.language"
     root = os.path.join(a.out, pkg, a.version)
@@ -141,7 +146,7 @@ def main():
         'name = "Language / Idioma"',
         'description = "Game language. Disabled = original Japanese."',
         'group = "Localization"',
-        "default_enabled = false",
+        f"default_enabled = {'true' if a.default_lang else 'false'}",
         "",
         "[[option]]",
         'feature = "language"',
@@ -150,7 +155,7 @@ def main():
         'description = "Text language used in menus, Quest mode and dialogue."',
         'group = "Localization"',
         'type = "choice"',
-        f'default = "{a.variant[0][0]}"',
+        f'default = "{a.default_lang or a.variant[0][0]}"',
     ]
     for code, label, _ in a.variant:
         lines += ["", "[[option.choice]]", f'value = "{code}"', f'label = "{label}"']

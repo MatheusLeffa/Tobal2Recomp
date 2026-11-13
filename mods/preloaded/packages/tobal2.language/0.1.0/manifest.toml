@@ -16,7 +16,7 @@ id = "language"
 name = "Language / Idioma"
 description = "Game language. Disabled = original Japanese."
 group = "Localization"
-default_enabled = false
+default_enabled = true
 
 [[option]]
 feature = "language"
