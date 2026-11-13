@@ -78,7 +78,10 @@ Como foi feito:
       jogador (`docs/KIT.md`)
 - [x] Setup no Windows sem CMD, com barra de progresso (patch no framework,
       `patches/`)
-- [ ] Seleção de idioma no launcher (japonês + primeira tela traduzida)
+- [x] Protótipo de idioma: mod de inglês gerado da tradução v1.00b, liga e
+      desliga sem gerar código de novo (`docs/IDIOMAS.md`)
+- [ ] Decidir distribuição do inglês (permissão ou arquivo do jogador)
+- [ ] Português e opção única de idioma no launcher
 - [ ] Releases automáticos Windows / Linux / Mac no GitHub
 
 ## Fase 5: Publicação
