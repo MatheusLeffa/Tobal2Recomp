@@ -11,7 +11,8 @@
 
 O toolchain fica em
 `%USERPROFILE%\.local\share\retcomm\toolchains\cmake-clang-v1\latest`
-e já está no PATH.
+(no Linux/macOS: `~/.local/share/retcomm/toolchains/cmake-clang-v1/latest`)
+e o setup do PSXRecomp o coloca no PATH.
 
 ## Clonar com os submódulos
 

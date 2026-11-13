@@ -26,7 +26,7 @@
 ## Comandos (depois que o disco existir)
 
 ```bash
-python psxrecomp/psxrecomp_cli.py generate --config game.toml --project-root . --disc "iso/Tobal 2 (Japan).cue"
+python psxrecomp/psxrecomp_cli.py generate --config game.toml --project-root . --disc "iso/Tobal 2 (Japan) (v1.1).cue"
 python psxrecomp/psxrecomp_cli.py rebuild --config game.toml --project-root . --build-dir build-release --no-pgo
 ```
 

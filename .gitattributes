@@ -2,3 +2,5 @@
 *.patch -text
 # Payloads de mods: bytes exatos, conferidos por SHA-256.
 *.dat binary
+# Scripts de shell sempre com LF (rodam no Linux/macOS e no CI).
+*.sh text eol=lf

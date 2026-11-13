@@ -1,12 +1,12 @@
 {
   "format_version": 1,
   "game": {
-    "name": "Tobal2",
+    "name": "Tobal 2",
     "id": "SLPM-86033",
     "boot_exe": "SLPM_860.33"
   },
   "marketing": {
-    "description": "Tobal 2 static recompilation",
+    "description": "Tobal 2 (Japan) statically recompiled to native code with psxrecomp. English or original Japanese text.",
     "publisher": "Square",
     "year": "1997",
     "region": "Japan",
@@ -23,7 +23,8 @@
       "size": 669555600,
       "md5": "9d583bcc0ee949f42e07fa8613939d8d",
       "sha1": "50edccaaccf002673a817047905372603e63e208",
-      "crc32": "479f1388"
+      "crc32": "479f1388",
+      "sha256": "04e79535b4616963e045957b4f9b87126753e94b01d35d32c60214df04bf5a5a"
     },
     "disc_fp": "6aa977c4b850e107deacce25d0f7d9d908feec9bfc9e533b955b4b70615f6c57"
   },
@@ -38,7 +39,7 @@
     "source": "boot_exe_jal"
   },
   "warnings": [
-    "cue has only 1 TRACK \u2014 Track-01-only dumps fail multi-track netplay/catalog gates; prefer a full Redump cue."
+    "cue has only 1 TRACK — Track-01-only dumps fail multi-track netplay/catalog gates; prefer a full Redump cue."
   ],
   "notes": [
     "entry_pc/load_address/text_size/stack_base taken from PS-X EXE header.",

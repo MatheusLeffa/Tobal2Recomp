@@ -29,8 +29,8 @@ o `.cue` e **todos** os `.bin` que ele cita:
 ```text
 Tobal2Recomp/
 └── iso/
-    ├── Tobal 2 (Japan).cue
-    └── Tobal 2 (Japan).bin        (ou Track 01, Track 02, ...)
+    ├── Tobal 2 (Japan) (v1.1).cue
+    └── Tobal 2 (Japan) (v1.1).bin        (ou Track 01, Track 02, ...)
 ```
 
 ## 4. Conferir
