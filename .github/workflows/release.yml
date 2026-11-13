@@ -1,0 +1,249 @@
+# Release kits for Tobal 2 Recompiled.
+#
+# WHAT THIS SHIPS: a setup kit per OS -- the launcher built WITHOUT game code
+# (-DPSXRECOMP_FORCE_SETUP_HOST=ON) plus the patched psxrecomp / recomp-ui
+# trees, the emitters and this project's config. On first run the player picks
+# their own disc and the launcher generates + compiles the game locally (the
+# same zips are what Retro Launcher installs from).
+#
+# WHAT NEVER SHIPS: disc images, BIOS dumps, or code generated from the game.
+# CI has no disc and never needs one.
+#
+# Run it from Actions -> "Release kits" -> Run workflow. Leave "publish" off to
+# only build the kits (downloadable as workflow artifacts); turn it on to tag
+# vX.Y.Z and create the GitHub Release with the kits attached.
+
+name: Release kits
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version (X.Y.Z). Empty = use the VERSION file.'
+        required: false
+        type: string
+        default: ''
+      publish:
+        description: 'Tag vX.Y.Z and publish a GitHub Release with the kits'
+        required: true
+        type: boolean
+        default: false
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-kits-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Resolve version
+    runs-on: ubuntu-24.04
+    outputs:
+      version: ${{ steps.meta.outputs.version }}
+      tag: ${{ steps.meta.outputs.tag }}
+      publish: ${{ steps.meta.outputs.publish }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - id: meta
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "push" ]]; then
+            RAW="${{ github.ref_name }}"; PUBLISH=true
+          else
+            RAW="${{ github.event.inputs.version }}"; PUBLISH="${{ github.event.inputs.publish }}"
+          fi
+          RAW="$(printf '%s' "${RAW}" | tr -d '[:space:]')"
+          [[ -z "${RAW}" ]] && RAW="$(tr -d '[:space:]' < VERSION)"
+          VER="${RAW#v}"
+          if [[ ! "${VER}" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.+-][A-Za-z0-9.+-]*)?$ ]]; then
+            echo "::error::invalid version '${RAW}' (want X.Y.Z)"; exit 1
+          fi
+          TAG="v${VER}"
+          if [[ "${{ github.event_name }}" != "push" && "${PUBLISH}" == "true" ]] && \
+             git rev-parse -q --verify "refs/tags/${TAG}" >/dev/null; then
+            echo "::error::tag ${TAG} already exists"; exit 1
+          fi
+          echo "version=${VER}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "publish=${PUBLISH}" >> "$GITHUB_OUTPUT"
+          echo "version ${VER}, tag ${TAG}, publish ${PUBLISH}"
+
+  build:
+    name: ${{ matrix.artifact }}
+    needs: prepare
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            artifact: linux-x64
+          - os: windows-2022
+            artifact: windows-x64
+          - os: macos-15
+            artifact: macos-arm64
+          - os: macos-15-intel
+            artifact: macos-x64
+    defaults:
+      run:
+        shell: bash
+    env:
+      RELEASE_VERSION: ${{ needs.prepare.outputs.version }}
+      MACOSX_DEPLOYMENT_TARGET: '11.0'
+    steps:
+      - name: Checkout (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 1
+
+      - name: Apply our patches to psxrecomp / recomp-ui
+        run: |
+          bash tools/apply_patches.sh
+          bash tools/apply_patches.sh --check
+
+      - name: Pin VERSION
+        run: |
+          printf '%s\n' "${RELEASE_VERSION}" > VERSION
+          echo "VERSION=$(cat VERSION)"
+
+      - name: Record framework revisions
+        run: bash psxrecomp/tools/ci/record_pins.sh
+
+      - name: Install deps (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential cmake ninja-build pkg-config \
+            libgl1-mesa-dev libxtst-dev libx11-dev libxext-dev libxrandr-dev \
+            libxcursor-dev libxfixes-dev libxi-dev libxss-dev libxkbcommon-dev \
+            libwayland-dev wayland-protocols libdecor-0-dev libdrm-dev libgbm-dev \
+            libegl1-mesa-dev libasound2-dev libpulse-dev libudev-dev libdbus-1-dev \
+            zip unzip
+
+      - name: Install deps (macOS)
+        if: runner.os == 'macOS'
+        run: brew install cmake ninja pkg-config sdl3 || brew install cmake ninja pkg-config
+
+      - name: Install zip (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: choco install zip -y --no-progress
+
+      # Windows builds everything with the portable llvm-mingw pack (static
+      # CRT, no MinGW DLLs to ship) -- the same pack players download.
+      - name: Fetch portable toolchain (Windows)
+        if: runner.os == 'Windows'
+        uses: ./psxrecomp/.github/actions/fetch-toolchain
+        with:
+          artifact: ${{ matrix.artifact }}
+
+      - name: Prefetch SDL3 source
+        if: runner.os != 'macOS'
+        run: |
+          set -euo pipefail
+          bash psxrecomp/tools/ci/prefetch_sdl3.sh --out-dir .cache/sdl3-src
+          ABS=".cache/sdl3-src"
+          if command -v cygpath >/dev/null 2>&1; then ABS="$(cygpath -m "${ABS}")"; else ABS="$(cd "${ABS}" && pwd)"; fi
+          echo "PSX_SDL3_SOURCE_DIR=${ABS}" >> "$GITHUB_ENV"
+
+      - name: Build recompiler tools (emitters)
+        uses: ./psxrecomp/.github/actions/build-emitters
+
+      - name: Build the launcher without game code (setup host)
+        run: |
+          set -euo pipefail
+          if [[ -n "${PSXRECOMP_TOOLCHAIN_DIR:-}" ]]; then
+            export PATH="${PSXRECOMP_TOOLCHAIN_DIR}/bin:${PATH}"
+          fi
+          ARGS=(-S . -B build-setuphost -G Ninja -DCMAKE_BUILD_TYPE=Release
+                -DPSXRECOMP_FORCE_SETUP_HOST=ON)
+          if [[ "${RUNNER_OS}" == "Windows" ]]; then
+            ARGS+=(-DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++)
+          fi
+          cmake "${ARGS[@]}" 2>&1 | tee configure.log
+          # Must be the no-game setup host, never a build that links game C.
+          grep -q "setup host (no game C" configure.log
+          cmake --build build-setuphost --target psx-runtime
+
+      - name: Package the setup kit
+        run: |
+          set -euo pipefail
+          if [[ -n "${PSXRECOMP_TOOLCHAIN_DIR:-}" ]]; then
+            export PATH="${PSXRECOMP_TOOLCHAIN_DIR}/bin:${PATH}"
+          fi
+          bash psxrecomp/tools/package_setup_host.sh \
+            --build-dir build-setuphost --artifact "${{ matrix.artifact }}" \
+            --zip-prefix tobal2 --exe-name Tobal_2_Recompiled \
+            --display-name "Tobal 2 Recompiled" --recompiler-build build-recompiler \
+            --disc-hint "your own Tobal 2 (Japan) disc, SLPM-86033 v1.1" \
+            --project-file game.toml --project-file game_options.toml \
+            --project-file CMakeLists.txt --project-file codegen_setup.c \
+            --project-file codegen_setup.h --project-file symbols.toml \
+            --project-file psx_symbols.h --project-file VERSION \
+            --project-file catalog_identity.json --project-file LICENSE \
+            --project-dir seeds --project-dir assets --project-dir mods
+          ls -la dist
+
+      # The kit must never carry game data: no disc images, BIOS dumps or
+      # generated game C. OpenBIOS (MIT) is the only BIOS image allowed.
+      - name: Audit kit contents
+        run: |
+          set -euo pipefail
+          ZIP="$(ls dist/tobal2-*-${{ matrix.artifact }}.zip)"
+          unzip -Z1 "${ZIP}" > kit-files.txt
+          echo "$(wc -l < kit-files.txt) files in ${ZIP}"
+          if grep -iE '\.(bin|cue|iso|chd|img|mcd|mcr)$|SLPM_|SCPH|(^|/)generated/SLPM' kit-files.txt \
+               | grep -viE '(^|/)bios/openbios\.bin$|psxrecomp/bios/openbios\.bin$'; then
+            echo "::error::game data found in the kit"; exit 1
+          fi
+          grep -q 'mods/preloaded/packages/tobal2.language/' kit-files.txt
+          echo "kit audit ok"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tobal2-${{ needs.prepare.outputs.version }}-${{ matrix.artifact }}
+          path: dist/tobal2-*-${{ matrix.artifact }}.zip
+          if-no-files-found: error
+
+  release:
+    name: Publish GitHub Release
+    needs: [prepare, build]
+    if: needs.prepare.outputs.publish == 'true'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: kits
+          merge-multiple: true
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.prepare.outputs.tag }}
+        run: |
+          set -euo pipefail
+          ls -la kits
+          cat > notes.md <<'EOF'
+          Setup kits for **Tobal 2 Recompiled**: one per system. No game data is
+          included -- you need your own Tobal 2 (Japan) disc, SLPM-86033 v1.1
+          (BIN/CUE; hashes in the README).
+
+          1. Extract the kit for your system and run `Tobal_2_Recompiled`
+             (Python 3 is required for the first-time setup).
+          2. Pick your `.cue` and click **Generate & rebuild**. The game is
+             converted and compiled on your computer (a few minutes).
+          3. Choose **English** or **Japanese (original)** on the home screen
+             and press **PLAY**.
+          EOF
+          gh release create "${TAG}" kits/*.zip --target "${GITHUB_SHA}" \
+            --title "Tobal 2 Recompiled ${TAG}" --notes-file notes.md
