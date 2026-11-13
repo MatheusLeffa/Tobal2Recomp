@@ -84,8 +84,9 @@ Como foi feito:
 - [ ] Português (texto + letras com acento na fonte)
 - [x] Releases automáticos Windows / Linux / Mac no GitHub (workflow "Release
       kits", testado nos 4 sistemas; `docs/KIT.md`)
-- [ ] Publicar a release v0.1.0 e enviar ao catálogo do Retro Launcher
-      (`docs/retro-catalog/`)
+- [x] Release v0.1.0 publicada com os 4 kits (13/11/2026):
+      https://github.com/MatheusLeffa/Tobal2Recomp/releases/tag/v0.1.0
+- [ ] Enviar ao catálogo do Retro Launcher (`docs/retro-catalog/`)
 
 ## Fase 5: Publicação
 

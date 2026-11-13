@@ -1,21 +1,32 @@
 # Retro Launcher (catálogo)
 
-`tobal-2-psx.json` é o rascunho do manifest do Tobal 2 para o
+`tobal-2-psx.json` é o manifest do Tobal 2 para o
 [Retro Catalog](https://github.com/RetroPortingToolKit/Retro-Catalog), no
 formato do `SCHEMA.md` de lá.
 
-## Antes de enviar
+## Situação
 
-1. Conferir o dono do repositório (`MatheusLeffa/Tobal2Recomp`, 3 lugares).
-2. Ter uma **release** no GitHub com um kit por sistema, com nomes contendo
-   `windows`, `linux` e `macos` (ex.: `tobal2-0.1.0-windows-x64.zip`). O ZIP
-   automático do GitHub não traz os submódulos nem os nossos patches, então o
-   Retro precisa desses kits.
-3. Conferir `build.source.ref` (tag da release) e `toolchain.min_version`.
-4. Enviar pelo formulário oficial (login no GitHub):
-   <https://retroportingtoolkit.github.io/Retro-Catalog/submit/>. Ele lê o
-   repositório, preenche os hashes e abre uma issue para os mantenedores
-   aprovarem.
+- [x] Repositório público: `MatheusLeffa/Tobal2Recomp`.
+- [x] Release **v0.1.0** com um kit por sistema
+  (`tobal2-0.1.0-{windows-x64,linux-x64,macos-arm64,macos-x64}.zip`), que
+  casam com os `asset_glob` `*windows*` / `*linux*` / `*macos*`. O ZIP
+  automático do GitHub não traz os submódulos nem os nossos patches; os kits
+  trazem.
+- [x] `build.source.ref` = `v0.1.0`; `toolchain.min_version` = `1.0.14`.
+- [ ] Enviar pelo formulário (precisa do login do dono no GitHub).
+
+## Como enviar
+
+1. Abrir <https://retroportingtoolkit.github.io/Retro-Catalog/submit/> e
+   entrar com a conta do GitHub.
+2. Plataforma **PSX**; repositório `MatheusLeffa/Tobal2Recomp`. O formulário
+   lê o repositório e preenche hashes e nomes dos kits.
+3. Conferir os campos com `tobal-2-psx.json` (principalmente `launch` =
+   `Tobal_2_Recompiled` / `Tobal_2_Recompiled.exe`, `install_dir_name`, a seção
+   `build` e os hashes). O formulário pede que você calcule os hashes do seu
+   disco localmente: eles devem bater com os do manifest.
+4. Enviar. Ele abre uma issue no Retro-Catalog; um mantenedor aprova (label
+   `approved`) e o título entra no próximo `catalog.zip`.
 
 Os hashes vêm do `game.toml` (`[prepare_disc]`) e batem com o Redump do disco
 original (SLPM-86033 v1.1). Netplay não está ligado, então o manifest não tem
