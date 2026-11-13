@@ -1,0 +1,2 @@
+# Patches precisam dos bytes exatos (git am / git apply).
+*.patch -text
