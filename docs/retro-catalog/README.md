@@ -6,7 +6,7 @@ formato do `SCHEMA.md` de lá.
 
 ## Antes de enviar
 
-1. Trocar `OWNER` pelo dono do repositório no GitHub (3 lugares).
+1. Conferir o dono do repositório (`MatheusLeffa/Tobal2Recomp`, 3 lugares).
 2. Ter uma **release** no GitHub com um kit por sistema, com nomes contendo
    `windows`, `linux` e `macos` (ex.: `tobal2-0.1.0-windows-x64.zip`). O ZIP
    automático do GitHub não traz os submódulos nem os nossos patches, então o

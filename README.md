@@ -63,7 +63,7 @@ Requirements: Git, Python 3, and either the
 toolchain pack or CMake + Ninja + a C/C++ compiler.
 
 ```bash
-git clone --recurse-submodules https://github.com/<owner>/Tobal2Recomp.git
+git clone --recurse-submodules https://github.com/MatheusLeffa/Tobal2Recomp.git
 cd Tobal2Recomp
 bash tools/apply_patches.sh          # our changes to psxrecomp / recomp-ui
 python psxrecomp/psxrecomp_cli.py generate --config game.toml --project-root . --disc "path/to/Tobal 2 (Japan) (v1.1).cue"

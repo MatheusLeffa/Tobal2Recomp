@@ -4,7 +4,7 @@
   "kind": "recomp",
   "platform": "psx",
   "description": "Tobal 2 (Japan) recompiled for the Sony PlayStation using psxrecomp. English (default) or original Japanese text, chosen on the launcher's home screen.",
-  "homepage": "https://github.com/OWNER/Tobal2Recomp",
+  "homepage": "https://github.com/MatheusLeffa/Tobal2Recomp",
   "rom_identity": {
     "crc32": ["479f1388"],
     "md5": ["9d583bcc0ee949f42e07fa8613939d8d"],
@@ -18,7 +18,7 @@
   },
   "rom_extensions": [".cue", ".bin"],
   "release": {
-    "github": "OWNER/Tobal2Recomp",
+    "github": "MatheusLeffa/Tobal2Recomp",
     "asset_glob": {
       "linux": "*linux*",
       "windows": "*windows*",
@@ -38,7 +38,7 @@
   "build": {
     "enabled": true,
     "source": {
-      "github": "OWNER/Tobal2Recomp",
+      "github": "MatheusLeffa/Tobal2Recomp",
       "ref": "v0.1.0"
     },
     "toolchain": {
