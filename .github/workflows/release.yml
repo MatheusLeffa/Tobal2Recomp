@@ -254,10 +254,12 @@ jobs:
           included -- you need your own Tobal 2 (Japan) disc, SLPM-86033 v1.1
           (BIN/CUE; hashes in the README).
 
-          1. Extract the kit for your system and run `Tobal_2_Recompiled`
-             (Python 3 is required for the first-time setup).
+          1. Extract the kit for your system and run `Tobal_2_Recompiled`.
           2. Pick your `.cue` and click **Generate & rebuild**. The game is
-             converted and compiled on your computer (a few minutes).
+             converted and compiled on your computer (a few minutes); the tools
+             it needs are downloaded automatically (internet needed once).
+             Nothing else to install on Windows; on macOS, Apple's Command
+             Line Tools are needed for the compiler.
           3. Choose **English** or **Japanese (original)** on the home screen
              and press **PLAY**.
           EOF

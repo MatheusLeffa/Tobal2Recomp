@@ -62,11 +62,11 @@ contents, so the file names do not matter, as long as the `.cue` names the
    [Releases](../../releases) (or install through the
    [Retro Launcher](https://github.com/RetroPortingToolKit/Retro-Launcher)
    once the title is in its catalog).
-2. Extract it and run `Tobal_2_Recompiled` (Python 3 is required for the
-   first-time setup).
+2. Extract it and run `Tobal_2_Recompiled`.
 3. Pick your `.cue`, click **Generate & rebuild** and wait a few minutes. The
-   launcher downloads the compiler it needs, converts the game code and builds
-   it on your computer.
+   launcher downloads the tools it needs (internet needed once), converts the
+   game code and builds it on your computer. Nothing else to install on
+   Windows; on macOS, Apple's Command Line Tools are needed for the compiler.
 4. Choose the language on the home screen and press **PLAY**.
 
 The home screen shows the game's cover. No artwork ships with this project:

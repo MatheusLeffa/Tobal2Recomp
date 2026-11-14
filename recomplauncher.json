@@ -5,7 +5,7 @@
   "repo": "MatheusLeffa/Tobal2Recomp",
   "game": {
     "kind": "iso",
-    "label": "Your disc image of Tobal 2 for PlayStation (Japan, SLPM-86033): the .cue file, kept next to its .bin file. The first start builds the game from it on this PC (a few minutes, needs Python 3)."
+    "label": "Your disc image of Tobal 2 for PlayStation (Japan, SLPM-86033): the .cue file, kept next to its .bin file. The first start builds the game from it on this PC in a few minutes; the tools it needs are downloaded automatically."
   },
   "start": {
     "program": ["Tobal_2_Recompiled.exe", "Tobal_2_Recompiled"],
