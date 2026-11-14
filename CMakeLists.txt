@@ -60,6 +60,37 @@ if(WIN32)
     target_link_libraries(psx-runtime PRIVATE user32)
 endif()
 
+# Launcher cover art. No artwork ships with this project (it belongs to Square
+# Enix): when the player's own build has no cover yet, it is downloaded once,
+# on the player's computer, from the libretro-thumbnails archive (the same
+# source RetroArch uses) into <exe dir>/artwork/SLPM-86033/, where the
+# launcher looks for it. Any image already in that folder (the player's own
+# cover) is kept and nothing is downloaded. Never in CI or in the setup kit.
+# Opt out with -DTOBAL2_NO_COVER_DOWNLOAD=ON. A failed download is ignored.
+set(TOBAL2_COVER_URL
+    "https://thumbnails.libretro.com/Sony%20-%20PlayStation/Named_Boxarts/Tobal%202%20(Japan,%20Asia).png"
+    CACHE STRING "Where the launcher cover is downloaded from")
+option(TOBAL2_NO_COVER_DOWNLOAD "Do not download the launcher cover art" OFF)
+if(NOT TOBAL2_NO_COVER_DOWNLOAD AND NOT PSXRECOMP_FORCE_SETUP_HOST
+   AND NOT DEFINED ENV{CI})
+    set(_tobal2_cover_dir "${CMAKE_BINARY_DIR}/artwork/SLPM-86033")
+    file(GLOB _tobal2_covers "${_tobal2_cover_dir}/*.png" "${_tobal2_cover_dir}/*.jpg"
+                             "${_tobal2_cover_dir}/*.jpeg" "${_tobal2_cover_dir}/*.webp")
+    if(NOT _tobal2_covers)
+        file(DOWNLOAD "${TOBAL2_COVER_URL}" "${_tobal2_cover_dir}/front.png.part"
+             TIMEOUT 20 STATUS _tobal2_cover_status)
+        list(GET _tobal2_cover_status 0 _tobal2_cover_code)
+        if(_tobal2_cover_code EQUAL 0)
+            file(RENAME "${_tobal2_cover_dir}/front.png.part" "${_tobal2_cover_dir}/front.png")
+            message(STATUS "Tobal 2: launcher cover downloaded to ${_tobal2_cover_dir}")
+        else()
+            file(REMOVE "${_tobal2_cover_dir}/front.png.part")
+            message(STATUS "Tobal 2: launcher cover not downloaded (${_tobal2_cover_status}); "
+                           "the launcher shows a placeholder")
+        endif()
+    endif()
+endif()
+
 # Stage runtime configs next to the exe for direct build/ launches. Only copy
 # files that exist — never fail POST_BUILD when game_options.toml is absent.
 foreach(_PSX_RUNTIME_CONFIG game.toml game_options.toml)

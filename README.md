@@ -67,10 +67,12 @@ contents, so the file names do not matter, as long as the `.cue` names the
    it on your computer.
 4. Choose the language on the home screen and press **PLAY**.
 
-The home screen shows your game's cover if you add one: put a front cover
-image (`.jpg` or `.png`, with "front" in the name) in
-`artwork/SLPM-86033/` next to `Tobal_2_Recompiled`. No artwork ships with this
-project.
+The home screen shows the game's cover. No artwork ships with this project:
+the first build on your computer downloads the original cover once from the
+[libretro-thumbnails](https://github.com/libretro-thumbnails) archive (the one
+RetroArch uses) into `artwork/SLPM-86033/` next to `Tobal_2_Recompiled`. To use
+your own, put an image there instead (with "front" in the name); to skip the
+download, configure with `-DTOBAL2_NO_COVER_DOWNLOAD=ON`.
 
 ## Building from source
 
@@ -130,5 +132,5 @@ trocar com o jogo aberto pelo menu da barra de título da janela.
 
 Faça o dump do disco em **BIN/CUE** (não `.iso`). O nome dos arquivos não
 importa: o disco é reconhecido pelo conteúdo. Para jogar, siga os passos de
-**Playing** acima. Para a capa aparecer na tela inicial, coloque uma imagem
-da capa (com "front" no nome) em `artwork/SLPM-86033/`, ao lado do programa.
+**Playing** acima. A capa aparece sozinha na tela inicial: a primeira instalação baixa a capa
+original do acervo do libretro (o mesmo do RetroArch) no seu PC.
