@@ -35,21 +35,10 @@ saves in every mode. Reports are welcome in Issues.
 
 | Game | Serial | Region | Format |
 | --- | --- | --- | --- |
-| Tobal 2 (v1.1) | SLPM-86033 | Japan (NTSC-J) | BIN/CUE, 1 track |
+| Tobal 2 | SLPM-86033 | Japan (NTSC-J) | BIN/CUE, 1 track |
 
-Data track (`Tobal 2 (Japan) (v1.1).bin`, 669,555,600 bytes):
-
-| Hash | Value |
-| --- | --- |
-| CRC32 | `479f1388` |
-| MD5 | `9d583bcc0ee949f42e07fa8613939d8d` |
-| SHA-1 | `50edccaaccf002673a817047905372603e63e208` |
-| SHA-256 | `04e79535b4616963e045957b4f9b87126753e94b01d35d32c60214df04bf5a5a` |
-
-This matches the Redump dump of the retail disc. Other revisions and patched
-images are rejected. The game ships in Japanese only, so do **not** use a
-pre-translated image: the English text is applied by this project on top of
-the original disc.
+The game ships in Japanese only, so do **not** use a pre-translated image: the
+English text is applied by this project on top of the original disc.
 
 Dump the disc as **BIN/CUE** (for example with ImgBurn, redumper or
 DiscImageCreator), not as a 2048-byte `.iso`. The disc is recognized by its
@@ -86,7 +75,7 @@ toolchain pack or CMake + Ninja + a C/C++ compiler.
 git clone --recurse-submodules https://github.com/MatheusLeffa/Tobal2Recomp.git
 cd Tobal2Recomp
 bash tools/apply_patches.sh          # our changes to psxrecomp / recomp-ui
-python psxrecomp/psxrecomp_cli.py generate --config game.toml --project-root . --disc "path/to/Tobal 2 (Japan) (v1.1).cue"
+python psxrecomp/psxrecomp_cli.py generate --config game.toml --project-root . --disc "path/to/Tobal 2 (Japan).cue"
 python psxrecomp/psxrecomp_cli.py rebuild  --config game.toml --project-root . --build-dir build-release --no-pgo
 ```
 
