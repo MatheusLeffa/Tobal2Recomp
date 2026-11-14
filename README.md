@@ -119,20 +119,3 @@ game. Use your own legally obtained disc.
 which parts of this repository derive. `recomp-ui` is MIT licensed. Release
 packages include OpenBIOS (MIT) from PCSX-Redux.
 
----
-
-## Português
-
-Port nativo do Tobal 2 para PC por recompilação estática, feito com o
-PSXRecomp. Você precisa do **seu disco original japonês** (SLPM-86033 v1.1);
-o jogo é gerado e compilado no seu computador. O idioma (**English** por
-padrão ou **japonês original**) é escolhido na tela inicial do launcher.
-
-Na tela inicial também dá para liberar todos os personagens (cartão
-**CHARACTERS**), inclusive os secretos, sem mexer no save. No Windows, dá para
-trocar com o jogo aberto pelo menu da barra de título da janela.
-
-Faça o dump do disco em **BIN/CUE** (não `.iso`). O nome dos arquivos não
-importa: o disco é reconhecido pelo conteúdo. Para jogar, siga os passos de
-**Playing** acima. A capa aparece sozinha na tela inicial: a primeira instalação baixa a capa
-original do acervo do libretro (o mesmo do RetroArch) no seu PC.
