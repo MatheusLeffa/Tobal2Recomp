@@ -39,6 +39,12 @@ endif()
 
 psxrecomp_add_game_runtime(psx-runtime
     PRELOADED_MODS_DIR "${PSX_PRELOADED_MODS}"
+    # Framework mods that do nothing for a Tobal 2 player: there are no HD
+    # texture packs for it, and the TCP debug server is a developer tool
+    # (PSX_DEBUG_SERVER=1 still turns it on for tests).
+    EXCLUDE_BUILTIN_MODS
+        psx.enhancement.hd-textures
+        psx.integration.debug-server
     ENABLE_SETUP_WIZARD
     WINDOW_TITLE "Tobal 2 Recompiled"
     DEFAULT_GAME_CONFIG_PATH "game.toml"
