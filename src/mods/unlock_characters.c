@@ -17,9 +17,9 @@
  * hold either its original or its unlocked value before anything is written,
  * so other code or data at those addresses is never touched.
  *
- * On Windows the game window gets a menu bar, Options > Unlock all characters,
- * that switches the option, saves it to mods/state.toml and applies it at
- * once. The bar is hidden in fullscreen.
+ * On Windows the game window's title-bar menu (the icon at the top left, or a
+ * right click on the bar) gets an "Unlock all characters" item that switches
+ * the option, saves it to mods/state.toml and applies it at once.
  */
 #include "mod_plugins.h"
 
@@ -79,83 +79,37 @@ static void apply_words(void) {
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 
-#define MENU_UNLOCK_ID 0x7A01u
-#define MSG_SYNC_MENU (WM_APP + 0x7A0)
+#define TITLE_MENU_ID 0x0110u /* WM_SYSCOMMAND ids: below 0xF000, low 4 bits 0 */
 #define WINDOW_TITLE L"Tobal 2 Recompiled"
 
 static HWND g_window;
 static WNDPROC g_previous_proc;
-static HMENU g_menu_bar;
 static unsigned g_vblanks_until_check;
 
-static void toggle_unlock(void) {
-    const char* value = g_want_unlocked ? "off" : "on";
-    if (!psx_mod_feature_set_option(PKG, FEATURE, OPTION, value)) return;
-    if (psx_mod_set_option_live(PKG, FEATURE, OPTION, value) < 0) {
-        /* Refused (netplay): keep the running game as it is. */
-        (void)psx_mod_feature_set_option(PKG, FEATURE, OPTION,
-                                         g_want_unlocked ? "on" : "off");
-        return;
-    }
-    (void)psx_mod_save_selection();
+static void sync_menu_check(HWND window) {
+    HMENU menu = GetSystemMenu(window, FALSE);
+    if (menu)
+        CheckMenuItem(menu, TITLE_MENU_ID,
+                      MF_BYCOMMAND | (g_want_unlocked ? MF_CHECKED : MF_UNCHECKED));
 }
 
-/* Window thread only. The bar is shown while the window has a title bar and
- * hidden in fullscreen (no caption), where it would cover the game. Adding it
- * grows the window by the bar's height, so the game area keeps its size. */
-static void sync_menu_bar(HWND window) {
-    if (!g_menu_bar) {
-        HMENU options = CreatePopupMenu();
-        g_menu_bar = CreateMenu();
-        if (!options || !g_menu_bar) return;
-        AppendMenuW(options, MF_STRING, MENU_UNLOCK_ID, L"Unlock all characters");
-        AppendMenuW(g_menu_bar, MF_POPUP, (UINT_PTR)options, L"Options");
-    }
-    CheckMenuItem(g_menu_bar, MENU_UNLOCK_ID,
-                  MF_BYCOMMAND | (g_want_unlocked ? MF_CHECKED : MF_UNCHECKED));
-    const LONG style = GetWindowLongW(window, GWL_STYLE);
-    const int windowed = (style & WS_CAPTION) == WS_CAPTION;
-    const int attached = GetMenu(window) == g_menu_bar;
-    if (windowed == attached) return;
-    RECT before, after;
-    GetClientRect(window, &before);
-    SetMenu(window, windowed ? g_menu_bar : NULL);
-    if (windowed && !IsZoomed(window)) {
-        GetClientRect(window, &after);
-        const int grow = (before.bottom - before.top) - (after.bottom - after.top);
-        RECT outer;
-        if (grow > 0 && GetWindowRect(window, &outer))
-            SetWindowPos(window, NULL, 0, 0, outer.right - outer.left,
-                         outer.bottom - outer.top + grow,
-                         SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE);
-    }
-}
-
-static LRESULT CALLBACK game_window_proc(HWND window, UINT message, WPARAM wparam,
-                                         LPARAM lparam) {
-    switch (message) {
-    case MSG_SYNC_MENU:
-        sync_menu_bar(window);
-        return 0;
-    case WM_INITMENUPOPUP:
-        if (g_menu_bar)
-            CheckMenuItem(g_menu_bar, MENU_UNLOCK_ID,
-                          MF_BYCOMMAND | (g_want_unlocked ? MF_CHECKED : MF_UNCHECKED));
-        break;
-    case WM_COMMAND:
-        if (HIWORD(wparam) == 0 && LOWORD(wparam) == MENU_UNLOCK_ID) {
-            toggle_unlock();
-            sync_menu_bar(window);
-            return 0;
+static LRESULT CALLBACK title_menu_proc(HWND window, UINT message, WPARAM wparam,
+                                        LPARAM lparam) {
+    if (message == WM_INITMENUPOPUP && HIWORD(lparam)) {
+        sync_menu_check(window);
+    } else if (message == WM_SYSCOMMAND && (wparam & 0xFFF0u) == TITLE_MENU_ID) {
+        const char* value = g_want_unlocked ? "off" : "on";
+        if (psx_mod_feature_set_option(PKG, FEATURE, OPTION, value)) {
+            if (psx_mod_set_option_live(PKG, FEATURE, OPTION, value) < 0) {
+                /* Refused (netplay): keep the running game as it is. */
+                (void)psx_mod_feature_set_option(PKG, FEATURE, OPTION,
+                                                 g_want_unlocked ? "on" : "off");
+            } else {
+                (void)psx_mod_save_selection();
+            }
         }
-        break;
-    case WM_STYLECHANGED:
-        /* Fullscreen on/off changes the caption: show or hide the bar after
-         * the change settles. */
-        PostMessageW(window, MSG_SYNC_MENU, 0, 0);
-        break;
-    default:
-        break;
+        sync_menu_check(window);
+        return 0;
     }
     return CallWindowProcW(g_previous_proc, window, message, wparam, lparam);
 }
@@ -177,9 +131,8 @@ static BOOL CALLBACK find_game_window(HWND window, LPARAM lparam) {
     return FALSE;
 }
 
-/* Find the game window and hook it; again if the window is ever recreated.
- * Checked about twice a second, never on every frame. The menu itself is
- * built and attached on the window's own thread (MSG_SYNC_MENU). */
+/* Find the game window and add the menu item; again if the window is ever
+ * recreated. Checked about twice a second, never on every frame. */
 static void ensure_title_menu(void) {
     if (g_vblanks_until_check) {
         --g_vblanks_until_check;
@@ -187,18 +140,23 @@ static void ensure_title_menu(void) {
     }
     g_vblanks_until_check = 30;
     if (g_window && IsWindow(g_window) &&
-        (WNDPROC)GetWindowLongPtrW(g_window, GWLP_WNDPROC) == game_window_proc)
+        (WNDPROC)GetWindowLongPtrW(g_window, GWLP_WNDPROC) == title_menu_proc)
         return;
     FindWindowArgs args = {GetCurrentProcessId(), NULL};
     EnumWindows(find_game_window, (LPARAM)&args);
     if (!args.found) return;
+    HMENU menu = GetSystemMenu(args.found, FALSE);
+    if (!menu) return;
+    if (GetMenuState(menu, TITLE_MENU_ID, MF_BYCOMMAND) == (UINT)-1) {
+        AppendMenuW(menu, MF_SEPARATOR, 0, NULL);
+        AppendMenuW(menu, MF_STRING, TITLE_MENU_ID, L"Unlock all characters");
+    }
     WNDPROC previous = (WNDPROC)SetWindowLongPtrW(args.found, GWLP_WNDPROC,
-                                                  (LONG_PTR)game_window_proc);
+                                                  (LONG_PTR)title_menu_proc);
     if (!previous) return;
-    if (previous != game_window_proc) g_previous_proc = previous;
-    if (g_window != args.found) g_menu_bar = NULL; /* destroyed with the old window */
+    if (previous != title_menu_proc) g_previous_proc = previous;
     g_window = args.found;
-    PostMessageW(g_window, MSG_SYNC_MENU, 0, 0);
+    sync_menu_check(g_window);
 }
 #else
 static void ensure_title_menu(void) {}

@@ -21,9 +21,9 @@ and [recomp-ui](https://github.com/RetroPortingToolKit/recomp-ui).
 - **Characters: Original or All unlocked**, picked on the launcher's home
   screen (default Original). All unlocked makes every fighter selectable from
   the start, secret ones included; saves are not changed. On Windows it can
-  also be switched while playing, from the game window's menu bar (**Options →
-  Unlock all characters**; hidden in fullscreen): it applies the next time the
-  character select screen opens.
+  also be switched while playing, from the game window's title-bar menu (click
+  the icon at the top left): it applies the next time the character select
+  screen opens.
 - High internal resolution (4x by default, OpenGL renderer).
 
 Not yet verified end to end: the whole Quest mode, every ending, memory-card
@@ -121,7 +121,7 @@ padrão ou **japonês original**) é escolhido na tela inicial do launcher.
 
 Na tela inicial também dá para liberar todos os personagens (cartão
 **CHARACTERS**), inclusive os secretos, sem mexer no save. No Windows, dá para
-trocar com o jogo aberto pelo menu **Options** no topo da janela.
+trocar com o jogo aberto pelo menu da barra de título da janela.
 
 Faça o dump do disco em **BIN/CUE** (não `.iso`). O nome dos arquivos não
 importa: o disco é reconhecido pelo conteúdo. Para jogar, siga os passos de
