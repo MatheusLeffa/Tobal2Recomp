@@ -66,6 +66,7 @@ starvation_dump.jsonl
 !/.recomp.json
 !/catalog_identity.json
 !/disc_set.json
+!/recomplauncher.json
 CMakeCache.txt
 CMakeFiles/
 compile_commands.json

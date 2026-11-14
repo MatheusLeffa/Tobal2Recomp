@@ -1,0 +1,31 @@
+{
+  "$schema": "https://recomplauncher.com/schema/recomplauncher.json",
+  "format": 1,
+  "name": "Tobal 2 Recompiled",
+  "repo": "MatheusLeffa/Tobal2Recomp",
+  "game": {
+    "kind": "iso",
+    "label": "Your disc image of Tobal 2 for PlayStation (Japan, SLPM-86033): the .cue file, kept next to its .bin file. The first start builds the game from it on this PC (a few minutes, needs Python 3)."
+  },
+  "start": {
+    "program": ["Tobal_2_Recompiled.exe", "Tobal_2_Recompiled"],
+    "args": ["--disc", "{game}"]
+  },
+  "saves": [
+    "{install}/saves",
+    "{install}/build-release/saves"
+  ],
+  "folders": {
+    "saves": [
+      { "path": "{install}/build-release/saves", "if": "{install}/build-release/saves" },
+      { "path": "{install}/saves" }
+    ],
+    "logs": [
+      { "path": "{install}/build-release", "if": "{install}/build-release" },
+      { "path": "{install}" }
+    ]
+  },
+  "actions": [
+    { "id": "saves", "label": "Saves", "help": "Your memory cards.", "open": "saves" }
+  ]
+}

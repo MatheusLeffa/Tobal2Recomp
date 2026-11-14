@@ -196,6 +196,7 @@ jobs:
             --project-file codegen_setup.h --project-file symbols.toml \
             --project-file psx_symbols.h --project-file VERSION \
             --project-file catalog_identity.json --project-file LICENSE \
+            --project-file recomplauncher.json \
             --project-dir seeds --project-dir assets --project-dir mods --project-dir src
           ls -la dist
 
@@ -220,6 +221,8 @@ jobs:
             echo "::error::game data found in the kit"; exit 1
           fi
           grep -q 'mods/preloaded/packages/tobal2.language/' kit-files.txt
+          # RecompLauncher reads its Easy Setup file from the top of the zip.
+          grep -qx 'recomplauncher.json' kit-files.txt
           echo "kit audit ok"
 
       - uses: actions/upload-artifact@v4
