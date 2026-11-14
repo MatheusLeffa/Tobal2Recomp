@@ -1,0 +1,158 @@
+From 7f870efb5518c619a27b13b35a145bf339200be8 Mon Sep 17 00:00:00 2001
+From: Matt <83082324+MatheusLeffa@users.noreply.github.com>
+Date: Sat, 14 Nov 2026 11:22:42 -0300
+Subject: [PATCH] mods: read a renamed bin beside a broken cue, like the mount
+ does
+
+A cue whose only FILE names a bin that does not exist (the bin was renamed,
+the cue was not) mounts fine through resolve_disc_path, and Generate accepts
+it too, but the mod runtime took the launcher's cue path as-is. Pressing Play
+with an overlay mod enabled then failed with "cannot open stock image range"
+on the old bin name, and the player had to pick the .bin by hand.
+
+Every mod-runtime entry point that takes a disc path now resolves a cue
+fallback to the sibling image first (usable_disc_path), and the stock-range
+checksum and derived-disc source do the same. A usable cue is passed through
+untouched, so its track map is kept.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ runtime/src/mod_runtime.cpp | 43 +++++++++++++++++++++++++++----------
+ 1 file changed, 32 insertions(+), 11 deletions(-)
+
+diff --git a/runtime/src/mod_runtime.cpp b/runtime/src/mod_runtime.cpp
+index bfcf80de..e14a315b 100644
+--- a/runtime/src/mod_runtime.cpp
++++ b/runtime/src/mod_runtime.cpp
+@@ -705,8 +705,19 @@ bool offline_disc_digest(const std::filesystem::path& path, std::string& digest,
+     return true;
+ }
+ 
+-std::filesystem::path raw_image_path(const std::filesystem::path& path,
++// The disc the mod runtime should read for `disc`. A cue whose payload is
++// missing (the bin was renamed, the cue was not) becomes the image beside it,
++// the same recovery resolve_disc_path gives the mount; any other path stays
++// exactly what the caller passed, so a usable cue keeps its track map.
++std::filesystem::path usable_disc_path(const std::filesystem::path& disc) {
++    if (disc.empty()) return disc;
++    const DiscPathResolution resolved = resolve_disc_path(disc);
++    return resolved.cue_fallback ? resolved.mount : disc;
++}
++
++std::filesystem::path raw_image_path(const std::filesystem::path& requested,
+                                      std::string* error) {
++    const std::filesystem::path path = usable_disc_path(requested);
+     std::string extension = path.extension().string();
+     std::transform(extension.begin(), extension.end(), extension.begin(),
+         [](unsigned char c) { return (char)std::tolower(c); });
+@@ -741,9 +752,10 @@ std::filesystem::path raw_image_path(const std::filesystem::path& path,
+     return {};
+ }
+ 
+-bool sha256_disc_range(const std::filesystem::path& image,
++bool sha256_disc_range(const std::filesystem::path& requested,
+                        ModPatchTarget target, uint64_t location, size_t size,
+                        std::string& out, std::string* error) {
++    const std::filesystem::path image = usable_disc_path(requested);
+     std::string extension = image.extension().string();
+     std::transform(extension.begin(), extension.end(), extension.begin(),
+         [](unsigned char c) { return (char)std::tolower(c); });
+@@ -2030,8 +2042,9 @@ bool mod_runtime_netplay_settings_fingerprint(const PsxLobbyMatchCaps& caps,
+     return prepare_profile_settings(profile, &caps, plan, fingerprint, error);
+ }
+ 
+-bool mod_runtime_commit_netplay(const std::filesystem::path& disc_path,
++bool mod_runtime_commit_netplay(const std::filesystem::path& requested_disc,
+                                 std::string* error) {
++    const std::filesystem::path disc_path = usable_disc_path(requested_disc);
+     if (!mod_runtime_clear_for_netplay(error)) return false;
+     const PSXModNetplayProfile* profile = psx_mod_netplay_profile();
+     if (!profile) return true;
+@@ -2339,7 +2352,8 @@ static bool prepare_resources(const std::filesystem::path& disc_path, std::strin
+     return true;
+ }
+ 
+-bool mod_runtime_prepare_resources(const std::filesystem::path& disc_path, std::string* error) {
++bool mod_runtime_prepare_resources(const std::filesystem::path& requested_disc, std::string* error) {
++    const std::filesystem::path disc_path = usable_disc_path(requested_disc);
+     return prepare_resources(disc_path, error, true);
+ }
+ 
+@@ -2482,7 +2496,8 @@ static bool install_plan(RuntimeMods& s, ModResolution plan,
+     return true;
+ }
+ 
+-bool mod_runtime_commit(const std::filesystem::path& disc_path, std::string* error, bool save_selection) {
++bool mod_runtime_commit(const std::filesystem::path& requested_disc, std::string* error, bool save_selection) {
++    const std::filesystem::path disc_path = usable_disc_path(requested_disc);
+     HostLaunchTimingScope timing(HOST_LAUNCH_COMMIT);
+     RuntimeMods& s = state();
+     // Base-disc policy cannot be bypassed by disabling every package.
+@@ -2565,8 +2580,9 @@ bool mod_runtime_commit(const std::filesystem::path& disc_path, std::string* err
+     return ok;
+ }
+ 
+-bool mod_runtime_prepare_for_launcher(const std::filesystem::path& disc_path, std::string* error,
++bool mod_runtime_prepare_for_launcher(const std::filesystem::path& requested_disc, std::string* error,
+                                       const ModPrepareProgress& progress) {
++    const std::filesystem::path disc_path = usable_disc_path(requested_disc);
+     struct Scope {
+         const ModPrepareProgress* previous;
+         explicit Scope(const ModPrepareProgress& current) : previous(active_prepare_progress) {
+@@ -2578,7 +2594,8 @@ bool mod_runtime_prepare_for_launcher(const std::filesystem::path& disc_path, st
+     return mod_runtime_commit(disc_path, error, true);
+ }
+ 
+-bool mod_runtime_try_prepare_cached(const std::filesystem::path& disc_path) {
++bool mod_runtime_try_prepare_cached(const std::filesystem::path& requested_disc) {
++    const std::filesystem::path disc_path = usable_disc_path(requested_disc);
+ #if defined(PSX_LAUNCHER_MOD_COMMIT_WORKER_SAFE)
+     try {
+         auto& s = state();
+@@ -2612,8 +2629,9 @@ const std::string& mod_runtime_session_plan_fp() {
+     return session_plan_fp();
+ }
+ 
+-std::string mod_runtime_plan_fingerprint_portable(const std::filesystem::path& disc_path,
++std::string mod_runtime_plan_fingerprint_portable(const std::filesystem::path& requested_disc,
+                                                  std::string* error) {
++    const std::filesystem::path disc_path = usable_disc_path(requested_disc);
+     RuntimeMods& s = state();
+     if (!s.initialized) return {};
+     // Portable means path-independent, never independent of exact disc identity.
+@@ -2655,8 +2673,9 @@ bool mod_runtime_verify_session_plan_fp(std::string* error) {
+ static bool commit_netplay_own_features(const std::filesystem::path& disc_path,
+                                         std::string* error, bool host_only_features);
+ 
+-bool mod_runtime_commit_for_netplay(const std::filesystem::path& disc_path,
++bool mod_runtime_commit_for_netplay(const std::filesystem::path& requested_disc,
+                                     std::string* error) {
++    const std::filesystem::path disc_path = usable_disc_path(requested_disc);
+     if (psx_mod_netplay_profile()) return mod_runtime_commit_netplay(disc_path, error);
+     RuntimeMods& s = state();
+     const PsxLobbyMatchCaps* caps = psx_lobby_match_caps();
+@@ -2687,8 +2706,9 @@ bool mod_runtime_commit_for_netplay(const std::filesystem::path& disc_path,
+     return true;
+ }
+ 
+-bool mod_runtime_commit_for_direct_netplay(const std::filesystem::path& disc_path,
++bool mod_runtime_commit_for_direct_netplay(const std::filesystem::path& requested_disc,
+                                            std::string* error) {
++    const std::filesystem::path disc_path = usable_disc_path(requested_disc);
+     if (psx_mod_netplay_profile()) return mod_runtime_commit_netplay(disc_path, error);
+     RuntimeMods& s = state();
+     /* No mod runtime (no mods root): vanilla on every peer, no content gate. */
+@@ -2834,8 +2854,9 @@ static bool commit_netplay_own_features(const std::filesystem::path& disc_path,
+     return true;
+ }
+ 
+-bool mod_runtime_commit_netplay_view(const std::filesystem::path& disc_path,
++bool mod_runtime_commit_netplay_view(const std::filesystem::path& requested_disc,
+                                      std::string* error) {
++    const std::filesystem::path disc_path = usable_disc_path(requested_disc);
+     if (psx_mod_netplay_profile()) return mod_runtime_commit_netplay(disc_path, error);
+     return commit_netplay_own_features(disc_path, error, false);
+ }
+-- 
+2.52.0.windows.1
+
