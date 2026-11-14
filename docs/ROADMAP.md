@@ -86,7 +86,8 @@ Como foi feito:
       kits", testado nos 4 sistemas; `docs/KIT.md`)
 - [x] Release v0.1.0 publicada com os 4 kits (13/11/2026):
       https://github.com/MatheusLeffa/Tobal2Recomp/releases/tag/v0.1.0
-- [ ] Enviar ao catálogo do Retro Launcher (`docs/retro-catalog/`)
+- [x] Enviar ao catálogo do Retro Launcher (`docs/retro-catalog/`): issue RetroPortingToolKit/Retro-Catalog#61, 13/11/2026
+- [ ] Aprovação de um mantenedor (label `approved`) e conferir o jogo no Retro Launcher
 
 ## Fase 5: Publicação
 

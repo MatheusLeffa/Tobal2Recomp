@@ -1,6 +1,6 @@
 # Retro Launcher (catálogo)
 
-`tobal-2-psx.json` é o manifest do Tobal 2 para o
+`tobal2-psx.json` é o manifest do Tobal 2 para o
 [Retro Catalog](https://github.com/RetroPortingToolKit/Retro-Catalog), no
 formato do `SCHEMA.md` de lá.
 
@@ -13,7 +13,17 @@ formato do `SCHEMA.md` de lá.
   automático do GitHub não traz os submódulos nem os nossos patches; os kits
   trazem.
 - [x] `build.source.ref` = `main` (o Retro usa o kit da release mais recente; o ref só é usado se o kit não trouxer o código); `toolchain.min_version` = `1.0.14`, a versão com que os kits foram testados.
-- [ ] Enviar pelo formulário (precisa do login do dono no GitHub).
+- [x] Enviado pelo formulário em 13/11/2026:
+  <https://github.com/RetroPortingToolKit/Retro-Catalog/issues/61>
+  (id `tobal2-psx`). O envio saiu com `min_version` 1.0.3 e `build_dir`
+  `build`; os dois funcionam (a versão é só o mínimo aceito, e a pasta de
+  build é só um nome).
+- [ ] Um mantenedor aprova (label `approved`), o título entra no
+  `catalog.zip` e aparece no Retro Launcher. Depois disso, testar a
+  instalação pelo launcher.
+
+Para mudar o manifest depois de aprovado, envie de novo pelo formulário; o
+mantenedor usa o label `approved-update`.
 
 ## Como enviar
 
@@ -21,7 +31,7 @@ formato do `SCHEMA.md` de lá.
    entrar com a conta do GitHub.
 2. Plataforma **PSX**; repositório `MatheusLeffa/Tobal2Recomp`. O formulário
    lê o repositório e preenche hashes e nomes dos kits.
-3. Conferir os campos com `tobal-2-psx.json` (principalmente `launch` =
+3. Conferir os campos com `tobal2-psx.json` (principalmente `launch` =
    `Tobal_2_Recompiled` / `Tobal_2_Recompiled.exe`, `install_dir_name`, a seção
    `build` e os hashes). O formulário pede que você calcule os hashes do seu
    disco localmente: eles devem bater com os do manifest.
