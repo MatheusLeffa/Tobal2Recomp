@@ -1,0 +1,80 @@
+From 117d3e61208096d40c4893504de205168a858fcc Mon Sep 17 00:00:00 2001
+From: Matt <83082324+MatheusLeffa@users.noreply.github.com>
+Date: Sat, 14 Nov 2026 01:11:20 -0300
+Subject: [PATCH 2/2] launcher: [launcher] dashboard = "cards" selects the cards
+ home
+
+game.toml [launcher] dashboard = "cards" sets GameInfo.dashboard_cards
+(recomp-ui RECOMP_LAUNCHER_HAS_DASHBOARD_CARDS): the cover on the left and
+four cards on the right. Any other value keeps the default dashboard.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ recompiler/src/config_loader.cpp | 4 ++++
+ recompiler/src/config_loader.h   | 4 ++++
+ runtime/src/main.cpp             | 5 +++++
+ 3 files changed, 13 insertions(+)
+
+diff --git a/recompiler/src/config_loader.cpp b/recompiler/src/config_loader.cpp
+index ea413b55..19c94b17 100644
+--- a/recompiler/src/config_loader.cpp
++++ b/recompiler/src/config_loader.cpp
+@@ -1188,6 +1188,10 @@ static RuntimeConfig parse_runtime_block(const toml::value& cfg, const fs::path&
+         if (launcher.contains("quick_controls")) {
+             rt.launcher_quick_controls = toml::find<bool>(launcher, "quick_controls");
+         }
++        if (launcher.contains("dashboard")) {
++            rt.launcher_dashboard_cards =
++                toml::find<std::string>(launcher, "dashboard") == "cards";
++        }
+     }
+ 
+     // Optional [audio] block.
+diff --git a/recompiler/src/config_loader.h b/recompiler/src/config_loader.h
+index 5237049c..7587c1c0 100644
+--- a/recompiler/src/config_loader.h
++++ b/recompiler/src/config_loader.h
+@@ -670,6 +670,10 @@ struct RuntimeConfig {
+     // [launcher] quick_controls: show the Quick Mods card next to the memory
+     // cards on the launcher dashboard. Off by default.
+     bool                  launcher_quick_controls = false;
++    // [launcher] dashboard = "cards": the launcher home shows the cover on the
++    // left and four cards (disc, controllers, title settings) on the right.
++    // Any other value, or none, keeps the default dashboard.
++    bool                  launcher_dashboard_cards = false;
+ 
+     // texture_window_batching: OpenGL only. Let textured primitives with
+     // different GP0(E2h) texture windows share one draw (the window rides in
+diff --git a/runtime/src/main.cpp b/runtime/src/main.cpp
+index 292a5b5c..bc19de01 100644
+--- a/runtime/src/main.cpp
++++ b/runtime/src/main.cpp
+@@ -1632,6 +1632,7 @@ static int           g_render_thread = 0;
+ static bool          g_launcher_vulkan_available = false;
+ static bool          g_offer_render_pipeline = true;
+ static bool          g_launcher_quick_controls = false;  /* game.toml [launcher] quick_controls */
++static bool          g_launcher_dashboard_cards = false; /* game.toml [launcher] dashboard = "cards" */
+ static int           g_render_thread_frames = 2;
+ /* [video] frame_generation (docs/FRAME_GENERATION.md), with the render thread. */
+ static int           g_frame_generation = 0;
+@@ -17046,6 +17047,9 @@ namespace {
+         gi->artwork_root = regional_artwork.empty() ? nullptr : regional_artwork.c_str();
+         gi->disc_selection_locked = PSXRecompV4::regional::disc_selection_locked ? 1 : 0;
+         gi->dashboard_quick_controls = g_launcher_quick_controls ? 1 : 0;
++#endif
++#if defined(RECOMP_LAUNCHER_HAS_DASHBOARD_CARDS)
++        gi->dashboard_cards = g_launcher_dashboard_cards ? 1 : 0;
+ #endif
+         gi->name = game_name_c;
+         gi->region = region_c;
+@@ -18313,6 +18317,7 @@ int main(int argc, char** argv) {
+             g_render_thread = gc.runtime.video_render_thread ? 1 : 0;
+             g_offer_render_pipeline = gc.runtime.video_offer_render_pipeline;
+             g_launcher_quick_controls = gc.runtime.launcher_quick_controls;
++            g_launcher_dashboard_cards = gc.runtime.launcher_dashboard_cards;
+             g_frame_generation = gc.runtime.video_frame_generation ? 1 : 0;
+             g_frame_generation_method = gc.runtime.video_frame_generation_method;
+             /* [timing] guest_cycle_scale is a title constant from game.toml
+-- 
+2.52.0.windows.1
+

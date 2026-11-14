@@ -1,0 +1,198 @@
+From bbf9fe1797d9765bbeb85cb47fa12358f9c4ef63 Mon Sep 17 00:00:00 2001
+From: Matt <83082324+MatheusLeffa@users.noreply.github.com>
+Date: Sat, 14 Nov 2026 01:11:20 -0300
+Subject: [PATCH 3/3] dashboard: "cards" layout (cover + disc, controllers and
+ settings cards)
+
+GameInfo.dashboard_cards (appended) selects a compact home: the cover on the
+left and four cards on the right -- game disc (file, verdict, Change disc),
+controllers (per-player source combo + Configure) and the title's settings
+cards (Language, Characters). Zero keeps the existing dashboard.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ src/common/backends/imgui/launcher_imgui.cpp | 113 +++++++++++++++++++
+ src/common/launcher_model.c                  |   1 +
+ src/common/launcher_model.h                  |   1 +
+ src/recomp_launcher.h                        |   7 ++
+ 4 files changed, 122 insertions(+)
+
+diff --git a/src/common/backends/imgui/launcher_imgui.cpp b/src/common/backends/imgui/launcher_imgui.cpp
+index 5281521..5203565 100644
+--- a/src/common/backends/imgui/launcher_imgui.cpp
++++ b/src/common/backends/imgui/launcher_imgui.cpp
+@@ -3836,8 +3836,14 @@ void panel_controller_draw(LauncherModel* m, const LauncherTheme* th) {
+ // (SAVES only when the game has SRAM, folded into the GAME card — see
+ // draw_save_row). A different system's profile simply contributes a
+ // different panel list.
++static void draw_cards_dashboard(LauncherModel* m, const LauncherTheme& th, int logical_w);
++
+ void draw_dashboard(LauncherModel* m, const LauncherTheme& th, int logical_w) {
+     g_game_visible_h = ImGui::GetWindowHeight();
++    if (m->dashboard_cards) {
++        draw_cards_dashboard(m, th, logical_w);
++        return;
++    }
+     const SystemProfile* prof = (const SystemProfile*)m->profile;
+     const LauncherPanel* game_p = find_composed(prof->panels_dashboard, "game", m);
+     const LauncherPanel* ctrl_p = find_composed(prof->panels_dashboard, "controller", m);
+@@ -13027,6 +13033,113 @@ static void draw_settings_card(LauncherModel* m, const LauncherTheme& th,
+     (void)th;
+ }
+ 
++/* "Cards" dashboard (GameInfo.dashboard_cards): the cover on the left and
++ * four cards on the right -- game disc, controllers, and the title's settings
++ * cards (Language, Characters). Memory cards keep their defaults and are not
++ * on this screen; Settings and Mods stay in the header. */
++static void cards_disc_card(LauncherModel* m, const LauncherTheme& th) {
++    const float w = ImGui::GetContentRegionAvail().x;
++    eyebrow("GAME DISC");
++    ImGui::PushTextWrapPos(ImGui::GetCursorPosX() + w);
++    ImGui::TextUnformatted(m->rom_file[0] ? m->rom_file : ui_text("No disc selected"));
++    ImGui::PopTextWrapPos();
++    const int verdict = m->verify.verdict;  // 0 none, 1 ok, 2 warn, 3 bad
++    const bool ok = verdict == 1;
++    state_mark(ok, th);
++    ImGui::SameLine(0, px(6));
++    ImGui::TextColored(ok ? col(th.good) : col(th.warn), "%s",
++                       ui_text(ok ? "Disc verified"
++                                  : verdict == 0 ? "Choose your disc"
++                                                 : "Not the expected disc"));
++    if (m->setup_error[0]) {
++        ImGui::PushTextWrapPos(ImGui::GetCursorPosX() + w);
++        ImGui::TextColored(col(th.warn), "%s", m->setup_error);
++        ImGui::PopTextWrapPos();
++    }
++    ImGui::Dummy(ImVec2(0, px(6)));
++    if (m->disc_selection_locked) {
++        ImGui::TextDisabled("%s", ui_text("Chosen before the game started."));
++        return;
++    }
++    if (ImGui::Button(ui_text("Change disc"), ImVec2(w, px(32)))) {
++        const SystemProfile* prof = (const SystemProfile*)m->profile;
++        const RomFilterSpec filter = active_rom_filter(m, prof);
++        request_rom_picker(m, "Select disc", filter.patterns, filter.pattern_count,
++                           filter.desc, false);
++    }
++}
++
++static void cards_controller_card(LauncherModel* m, const LauncherTheme& th) {
++    eyebrow("CONTROLLERS");
++    const int players = launcher_model_visible_player_count(m);
++    const float gap = px(th.spacing_sm);
++    const float label_w = px(32);
++    const float btn_w = px(96);
++    for (int p = 0; p < players; ++p) {
++        ImGui::PushID(p);
++        const float x0 = ImGui::GetCursorPosX();
++        const float w = ImGui::GetContentRegionAvail().x;
++        ImGui::AlignTextToFramePadding();
++        ImGui::TextColored(col(th.text_muted), "P%d", p + 1);
++        ImGui::SameLine(x0 + label_w);
++        float combo_w = w - label_w - btn_w - gap;
++        if (combo_w < px(60)) combo_w = px(60);
++        ImGui::SetNextItemWidth(combo_w);
++        if (ImGui::BeginCombo("##src", ui_text(launcher_model_player_src_label(m, p)))) {
++            draw_source_selectables(m, p);
++            ImGui::EndCombo();
++        }
++        ImGui::SameLine(0, gap);
++        if (ImGui::Button(ui_text("Configure"), ImVec2(btn_w, 0)))
++            launcher_model_open_config(m, p);
++        ImGui::PopID();
++    }
++}
++
++static void draw_cards_dashboard(LauncherModel* m, const LauncherTheme& th, int logical_w) {
++    const float gap = px(th.spacing_md);
++    SettingsCard settings[kMaxSettingsCards]{};
++    const int setting_count = find_settings_cards(m, settings, kMaxSettingsCards);
++    const bool wide = logical_w >= 820;
++    const float avail = ImGui::GetContentRegionAvail().x;
++    const float cover_w = wide ? px(320) : avail;
++
++    begin_container("cards_l", ImVec2(cover_w, 0), ImGuiChildFlags_AutoResizeY);
++    if (begin_panel("cards_cover", 0, false, true)) {
++        const float inner = ImGui::GetContentRegionAvail().x;
++        draw_artwork_gallery(m, wide ? inner : px(220), inner);
++    }
++    end_panel();
++    end_container();
++    if (wide) ImGui::SameLine(0, gap);
++    else ImGui::Dummy(ImVec2(0, gap));
++
++    begin_container("cards_r", ImVec2(0, 0), ImGuiChildFlags_AutoResizeY);
++    const float rw = ImGui::GetContentRegionAvail().x;
++    const int cols = rw >= px(440) ? 2 : 1;
++    const float cw = cols == 2 ? (rw - gap) * 0.5f : rw;
++    const int count = 2 + setting_count;
++    for (int i = 0; i < count; ++i) {
++        if (i % cols) ImGui::SameLine(0, gap);
++        else if (i) ImGui::Dummy(ImVec2(0, gap));
++        char cid[16]; snprintf(cid, sizeof(cid), "cardc%d", i);
++        char pid[16]; snprintf(pid, sizeof(pid), "cardp%d", i);
++        begin_container(cid, ImVec2(cw, px(196)));
++        if (begin_panel(pid, 0, true)) {
++            if (i == 0) cards_disc_card(m, th);
++            else if (i == 1) cards_controller_card(m, th);
++            else {
++                ImGui::PushID(i);
++                draw_settings_card(m, th, settings[i - 2]);
++                ImGui::PopID();
++            }
++        }
++        end_panel();
++        end_container();
++    }
++    end_container();
++}
++
+ void draw_mods(LauncherModel* m, const LauncherTheme& th) {
+     const auto* mods = m ? m->mods : nullptr;
+     if (!m || (!mods && !m->rom_patch_supported)) return;
+diff --git a/src/common/launcher_model.c b/src/common/launcher_model.c
+index b06b913..33a9e5d 100644
+--- a/src/common/launcher_model.c
++++ b/src/common/launcher_model.c
+@@ -945,6 +945,7 @@ void launcher_model_init(LauncherModel* m,
+         m->disc_selection_locked=game && game->disc_selection_locked;
+         m->artwork_root=game?game->artwork_root:NULL;
+         m->dashboard_quick_controls=game && game->dashboard_quick_controls;
++        m->dashboard_cards=game && game->dashboard_cards;
+     }
+ 
+     // Password/mantra save: read the current one-line password file so the
+diff --git a/src/common/launcher_model.h b/src/common/launcher_model.h
+index c720523..f14e6cf 100644
+--- a/src/common/launcher_model.h
++++ b/src/common/launcher_model.h
+@@ -561,6 +561,7 @@ typedef struct {
+     bool disc_selection_locked;
+     const char* artwork_root;
+     bool dashboard_quick_controls;
++    bool dashboard_cards;   // GameInfo.dashboard_cards: cover + four cards
+ 
+     // ---- editable settings (working copy of the C ABI struct) ----
+     RecompLauncherCSettings s;
+diff --git a/src/recomp_launcher.h b/src/recomp_launcher.h
+index 8b7be49..1536145 100644
+--- a/src/recomp_launcher.h
++++ b/src/recomp_launcher.h
+@@ -2486,7 +2486,14 @@ typedef struct RecompLauncherCGameInfo {
+      * (callers that predate the field) keeps the profile's count. Appended for
+      * ABI stability. */
+     int                memcard_slots;
++
++    /* Nonzero: the dashboard uses the "cards" layout -- the cover on the left
++     * and four cards on the right (game disc, controllers and the title's
++     * settings cards) -- instead of the game / controller / memory-card
++     * columns. Zero keeps the existing dashboard. Appended for ABI stability. */
++    int                dashboard_cards;
+ } RecompLauncherCGameInfo;
++#define RECOMP_LAUNCHER_HAS_DASHBOARD_CARDS 1
+ #define RECOMP_LAUNCHER_HAS_VSYNC_VRR 1
+ #define RECOMP_LAUNCHER_HAS_FRAME_GENERATION_HIDDEN 1
+ #define RECOMP_LAUNCHER_HAS_CARD_MANAGER 1
+-- 
+2.52.0.windows.1
+

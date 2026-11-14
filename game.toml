@@ -42,6 +42,11 @@ overlay_cache = true
 # launcher, não um mod: features hidden não aparecem na página Mods.
 hide_hidden_mod_features = true
 
+# Tela inicial do launcher: capa à esquerda e quatro cartões (disco, controles,
+# idioma, personagens). Precisa dos patches 0002 do psxrecomp e 0003 do recomp-ui.
+[launcher]
+dashboard = "cards"
+
 [video]
 renderer = "opengl"
 aspect_ratio = "4:3"

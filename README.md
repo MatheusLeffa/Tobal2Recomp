@@ -67,6 +67,11 @@ contents, so the file names do not matter, as long as the `.cue` names the
    it on your computer.
 4. Choose the language on the home screen and press **PLAY**.
 
+The home screen shows your game's cover if you add one: put a front cover
+image (`.jpg` or `.png`, with "front" in the name) in
+`artwork/SLPM-86033/` next to `Tobal_2_Recompiled`. No artwork ships with this
+project.
+
 ## Building from source
 
 Requirements: Git, Python 3, and either the
@@ -125,4 +130,5 @@ trocar com o jogo aberto pelo menu da barra de título da janela.
 
 Faça o dump do disco em **BIN/CUE** (não `.iso`). O nome dos arquivos não
 importa: o disco é reconhecido pelo conteúdo. Para jogar, siga os passos de
-**Playing** acima.
+**Playing** acima. Para a capa aparecer na tela inicial, coloque uma imagem
+da capa (com "front" no nome) em `artwork/SLPM-86033/`, ao lado do programa.
