@@ -10,12 +10,26 @@
  *   final = base | (saved progress byte at 0x801012D0) << 10   (10-17)
  *               | 0x20000 when a Quest fighter is loaded         (17)
  *
- * "All unlocked" turns the base into 0x1DFFFF in every path (0-16 and 18-20;
- * 17 keeps its Quest rule). That is five instruction words. They are written
+ * "All unlocked" turns the base into 0x1DFFFF in every path (0-16 and 18-20).
+ *
+ * Fighter 17 is the Quest monster list. The save keeps 2 bits per monster in
+ * 12 words at 0x8010129C (monster n = character id n + 16; 184 monsters, DOG
+ * to LOADER; 3 = usable, which is what the Quest writes when one joins you).
+ * The function at 0x800195E8 turns those bits into the list the select screen
+ * scrolls through (a count byte, then (n << 8) | bits per entry), and 17 is
+ * offered when the list is not empty. "All unlocked" makes that function see
+ * every monster 0..183 as 3 without reading the save, so the RAM copy of the
+ * save and the memory card stay as they were. Choosing a monster normally
+ * also marks it (bit 0) in the save (call at 0x8001A2B8); with "All unlocked"
+ * that call ORs 0 instead, so picking a locked monster does not leak into the
+ * save either.
+ *
+ * Eleven instruction words in all, in the main executable. They are written
  * from the VBlank callback, so the choice can change while the game runs: the
- * mask is rebuilt each time the select screen opens. Every word is checked to
- * hold either its original or its unlocked value before anything is written,
- * so other code or data at those addresses is never touched.
+ * mask and the list are rebuilt each time the select screen opens. Every word
+ * is checked to hold either its original or its unlocked value before
+ * anything is written, so other code or data at those addresses is never
+ * touched.
  *
  * On Windows the game window's title-bar menu (the icon at the top left, or a
  * right click on the bar) gets an "Unlock all characters" item that switches
@@ -41,6 +55,15 @@ static const struct {
     {0x800196E4u, 0x3C14001Cu, 0x3C14001Du}, /* lui $s4, 0x001C -> 0x001D */
     {0x800196F4u, 0x369403FFu, 0x3694FFFFu}, /* ori $s4, $s4, 0x03FF -> 0xFFFF */
     {0x800196F8u, 0x369403FFu, 0x3694FFFFu}, /* ori $s4, $s4, 0x03FF -> 0xFFFF */
+    /* Quest monster list (0x800195E8); branches stay where they were. The
+     * entry index is $t0, the list count $a3, the bits $a1. */
+    {0x80019610u, 0x00CB1006u, 0x2D0200B8u}, /* srlv $v0,$t3,$a2 -> sltiu $v0,$t0,184 */
+    {0x80019614u, 0x30450003u, 0x00022823u}, /* andi $a1,$v0,3  -> subu $a1,$zero,$v0 */
+    {0x8001961Cu, 0x00E01821u, 0x30A50003u}, /* move $v1,$a3     -> andi $a1,$a1,3 */
+    {0x80019620u, 0x24E70001u, 0x30E300FFu}, /* addiu $a3,$a3,1  -> andi $v1,$a3,0xFF */
+    {0x80019624u, 0x306300FFu, 0x24E70001u}, /* andi $v1,$v1,0xFF -> addiu $a3,$a3,1 */
+    /* Chosen monster: mark-as-used call gets 0 instead of 1 (delay slot). */
+    {0x8001A2BCu, 0x34050001u, 0x34050000u}, /* ori $a1,$zero,1 -> ori $a1,$zero,0 */
 };
 #define SITE_COUNT (sizeof k_sites / sizeof k_sites[0])
 
@@ -58,7 +81,7 @@ static void read_option(void) {
         g_want_unlocked = 0;
 }
 
-/* Bring the five words to the wanted state. Does nothing until the executable
+/* Bring the words to the wanted state. Does nothing until the executable
  * is in RAM (and if anything else ever occupies those addresses). */
 static void apply_words(void) {
     const int unlocked = g_want_unlocked;

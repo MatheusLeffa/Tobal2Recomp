@@ -27,7 +27,7 @@ default_enabled = true
 feature = "all_characters"
 id = "unlock"
 label = "Characters"
-description = "All unlocked: every fighter, secret ones included, from the start. Your save is not changed."
+description = "All unlocked: every fighter, secret ones and the 184 Quest monsters included, from the start. Your save is not changed."
 group = "Characters"
 type = "choice"
 default = "off"
@@ -40,8 +40,9 @@ label = "Original"
 value = "on"
 label = "All unlocked"
 
-# O plugin (src/mods/unlock_characters.c) troca 5 instruções da tela de
-# seleção conforme a opção, também com o jogo rodando.
+# O plugin (src/mods/unlock_characters.c) troca 11 instruções da tela de
+# seleção (lista de personagens e de monstros do Quest) conforme a opção,
+# também com o jogo rodando.
 [[plugin]]
 feature = "all_characters"
 id = "tobal2.unlock-characters"
