@@ -190,7 +190,7 @@ jobs:
             --build-dir build-setuphost --artifact "${{ matrix.artifact }}" \
             --zip-prefix tobal2 --exe-name Tobal_2_Recompiled \
             --display-name "Tobal 2 Recompiled" --recompiler-build build-recompiler \
-            --disc-hint "your own Tobal 2 (Japan) disc, SLPM-86033 v1.1" \
+            --disc-hint "your own Tobal 2 (Japan) disc, SLPM-86033" \
             --project-file game.toml --project-file game_options.toml \
             --project-file CMakeLists.txt --project-file codegen_setup.c \
             --project-file codegen_setup.h --project-file symbols.toml \
@@ -251,8 +251,8 @@ jobs:
           ls -la kits
           cat > notes.md <<'EOF'
           Setup kits for **Tobal 2 Recompiled**: one per system. No game data is
-          included -- you need your own Tobal 2 (Japan) disc, SLPM-86033 v1.1
-          (BIN/CUE; hashes in the README).
+          included -- you need your own Tobal 2 (Japan) disc, SLPM-86033, as
+          BIN/CUE.
 
           1. Extract the kit for your system and run `Tobal_2_Recompiled`.
           2. Pick your `.cue` and click **Generate & rebuild**. The game is
