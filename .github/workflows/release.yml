@@ -196,7 +196,7 @@ jobs:
             --project-file codegen_setup.h --project-file symbols.toml \
             --project-file psx_symbols.h --project-file VERSION \
             --project-file catalog_identity.json --project-file LICENSE \
-            --project-dir seeds --project-dir assets --project-dir mods
+            --project-dir seeds --project-dir assets --project-dir mods --project-dir src
           ls -la dist
 
       # The kit must never carry game data: no disc images, BIOS dumps or
