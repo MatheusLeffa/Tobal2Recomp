@@ -43,6 +43,11 @@ images are rejected. The game ships in Japanese only, so do **not** use a
 pre-translated image: the English text is applied by this project on top of
 the original disc.
 
+Dump the disc as **BIN/CUE** (for example with ImgBurn, redumper or
+DiscImageCreator), not as a 2048-byte `.iso`. The disc is recognized by its
+contents, so the file names do not matter, as long as the `.cue` names the
+`.bin` next to it.
+
 ## Playing
 
 1. Get the setup package for your system from
@@ -83,7 +88,6 @@ ignored by `.gitignore` on purpose.
 | `mods/lang_extra/en.toml` | Layout fixes applied with English (wider title menu box) |
 | `patches/` | Our changes to the `psxrecomp` and `recomp-ui` submodules |
 | `tools/` | Test automation and analysis tools (`nav.py`, `vram_dump.py`, `disc_diff.py`, `make_lang_mod.py`, `apply_patches.sh`) |
-| `docs/` | Project notes (in Portuguese) |
 | `psxrecomp/`, `recomp-ui/` | Framework and launcher submodules |
 
 ## Legal
@@ -108,7 +112,6 @@ PSXRecomp. Você precisa do **seu disco original japonês** (SLPM-86033 v1.1);
 o jogo é gerado e compilado no seu computador. O idioma (**English** por
 padrão ou **japonês original**) é escolhido na tela inicial do launcher.
 
-Documentação detalhada em português: [docs/ROADMAP.md](docs/ROADMAP.md),
-[docs/IDIOMAS.md](docs/IDIOMAS.md), [docs/KIT.md](docs/KIT.md),
-[docs/DUMP_DO_DISCO.md](docs/DUMP_DO_DISCO.md),
-[docs/PESQUISA.md](docs/PESQUISA.md).
+Faça o dump do disco em **BIN/CUE** (não `.iso`). O nome dos arquivos não
+importa: o disco é reconhecido pelo conteúdo. Para jogar, siga os passos de
+**Playing** acima.

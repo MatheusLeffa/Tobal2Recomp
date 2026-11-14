@@ -29,7 +29,7 @@ settings.toml
 # Código C gerado a partir do executável do jogo.
 # É uma tradução direta do código original da Square, por isso fica fora do
 # repositório público: cada pessoa gera o seu a partir do próprio disco
-# (mesma escolha do BattleArenaToshindenRecomp). Ver docs/ROADMAP.md.
+# (mesma escolha do BattleArenaToshindenRecomp).
 /generated/
 
 # Saídas de build
@@ -79,3 +79,8 @@ compile_commands.json
 .DS_Store
 Thumbs.db
 __pycache__/
+
+# Anotações internas do desenvolvimento (ficam só no PC de quem desenvolve)
+/docs/
+/CLAUDE.md
+/.claude/
