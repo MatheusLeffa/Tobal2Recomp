@@ -84,3 +84,7 @@ __pycache__/
 /docs/
 /CLAUDE.md
 /.claude/
+
+# Arte oficial do jogo (capa etc.): tem dono, fica só no PC, nunca no Git nem
+# nos kits. Para o launcher, cada jogador usa a própria.
+/art/
