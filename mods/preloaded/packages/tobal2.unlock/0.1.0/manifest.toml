@@ -1,0 +1,66 @@
+format_version = 5
+id = "tobal2.unlock"
+version = "0.1.0"
+name = "Tobal 2 - Unlock all characters"
+author = "Tobal2Recomp"
+description = "Every fighter is selectable from the start, including the secret ones."
+resolver = "declarative"
+save_compatibility = "shared"
+
+[[target]]
+game_id = "SLPM-86033"
+disc_sha256 = "04e79535b4616963e045957b4f9b87126753e94b01d35d32c60214df04bf5a5a"
+
+[[feature]]
+id = "all_characters"
+name = "Unlock all characters"
+description = "Every fighter can be picked on the character select screen from the start, including the secret ones (Mark and the others), plus the \"monster from memory card\" slots. Your memory card save is not changed: turn this off and the game is back to normal."
+group = "Gameplay"
+default_enabled = false
+
+# Tela de seleção de personagens (função em 0x80019680). O jogo monta uma
+# máscara de bits com quem pode ser escolhido: um bit por personagem (0-20).
+#
+#   base  = 0x0403FF  (0-9: os 10 do começo; 18: lutador do modo Quest)
+#           0x1C03FF  (com uma condição escondida: + 19 e 20, monstros do cartão)
+#   final = base | (progresso salvo em 0x801012D0) << 10   (10-17: secretos)
+#               | 0x20000 se houver lutador do Quest carregado   (17)
+#
+# Aqui a base vira 0x1DFFFF: liga 0-16 e 18-20 em todos os caminhos. O 17
+# continua com a regra original (só existe com um lutador do Quest
+# carregado). Cada troca confere a instrução original antes de aplicar.
+
+[[patch]]
+feature = "all_characters"
+target = "main_exe"
+address = 0x800196CC
+expected = "04 00 14 3c"   # lui $s4, 0x0004
+replace  = "1d 00 14 3c"   # lui $s4, 0x001D
+
+[[patch]]
+feature = "all_characters"
+target = "main_exe"
+address = 0x800196DC
+expected = "04 00 14 3c"   # lui $s4, 0x0004
+replace  = "1d 00 14 3c"   # lui $s4, 0x001D
+
+[[patch]]
+feature = "all_characters"
+target = "main_exe"
+address = 0x800196E4
+expected = "1c 00 14 3c"   # lui $s4, 0x001C
+replace  = "1d 00 14 3c"   # lui $s4, 0x001D
+
+[[patch]]
+feature = "all_characters"
+target = "main_exe"
+address = 0x800196F4
+expected = "ff 03 94 36"   # ori $s4, $s4, 0x03FF
+replace  = "ff ff 94 36"   # ori $s4, $s4, 0xFFFF
+
+[[patch]]
+feature = "all_characters"
+target = "main_exe"
+address = 0x800196F8
+expected = "ff 03 94 36"   # ori $s4, $s4, 0x03FF
+replace  = "ff ff 94 36"   # ori $s4, $s4, 0xFFFF

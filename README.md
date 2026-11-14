@@ -18,6 +18,9 @@ and [recomp-ui](https://github.com/RetroPortingToolKit/recomp-ui).
 - **Language: English (default) or Japanese (original)**, picked on the
   launcher's home screen. Switching does not require rebuilding.
 - The English title menu box is widened so every option fits.
+- Optional **Unlock all characters** (launcher → Mods, off by default): every
+  fighter is selectable from the start, secret ones included. Saves are not
+  changed.
 - High internal resolution (4x by default, OpenGL renderer).
 
 Not yet verified end to end: the whole Quest mode, every ending, memory-card
@@ -85,6 +88,7 @@ ignored by `.gitignore` on purpose.
 | --- | --- |
 | `game.toml`, `CMakeLists.txt`, `codegen_setup.*`, `seeds/`, `symbols.toml` | Title configuration for PSXRecomp |
 | `mods/preloaded/packages/tobal2.language/` | Language package: only the bytes the English text changes, each guarded by the SHA-256 of the original disc data |
+| `mods/preloaded/packages/tobal2.unlock/` | Optional "Unlock all characters" switch (five guarded instruction changes in the character select code) |
 | `mods/lang_extra/en.toml` | Layout fixes applied with English (wider title menu box) |
 | `patches/` | Our changes to the `psxrecomp` and `recomp-ui` submodules |
 | `tools/` | Test automation and analysis tools (`nav.py`, `vram_dump.py`, `disc_diff.py`, `make_lang_mod.py`, `apply_patches.sh`) |
@@ -111,6 +115,9 @@ Port nativo do Tobal 2 para PC por recompilação estática, feito com o
 PSXRecomp. Você precisa do **seu disco original japonês** (SLPM-86033 v1.1);
 o jogo é gerado e compilado no seu computador. O idioma (**English** por
 padrão ou **japonês original**) é escolhido na tela inicial do launcher.
+
+Opcional: **Unlock all characters** (launcher → Mods) libera todos os
+personagens, inclusive os secretos, sem mexer no save.
 
 Faça o dump do disco em **BIN/CUE** (não `.iso`). O nome dos arquivos não
 importa: o disco é reconhecido pelo conteúdo. Para jogar, siga os passos de
