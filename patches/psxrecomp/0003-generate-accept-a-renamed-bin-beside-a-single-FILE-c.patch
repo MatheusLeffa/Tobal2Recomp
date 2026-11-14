@@ -1,0 +1,120 @@
+From d60b8e963594ef50a10370e767ce9555fc0388d1 Mon Sep 17 00:00:00 2001
+From: Matt <83082324+MatheusLeffa@users.noreply.github.com>
+Date: Sat, 14 Nov 2026 01:39:08 -0300
+Subject: [PATCH 3/3] generate: accept a renamed bin beside a single-FILE cue
+
+A cue whose only FILE names a bin that does not exist (the bin was renamed,
+the cue was not) now falls back to the image with the cue's own name, the
+same recovery the runtime's disc_path.cpp already does. Before, the launcher
+verified such a disc but Generate & rebuild failed with "cue references
+missing bin". Multi-FILE cues keep the error.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ psxrecomp_cli.py      | 33 ++++++++++++++++++++++++++++++++-
+ tools/prepare_disc.py | 31 ++++++++++++++++++++++++++++++-
+ 2 files changed, 62 insertions(+), 2 deletions(-)
+
+diff --git a/psxrecomp_cli.py b/psxrecomp_cli.py
+index 7c85bea3..94d6090a 100755
+--- a/psxrecomp_cli.py
++++ b/psxrecomp_cli.py
+@@ -312,6 +312,30 @@ def file_hashes(path: Path) -> tuple[str, str, int]:
+     return h_md5.hexdigest(), h_sha1.hexdigest(), size
+ 
+ 
++_CUE_SIBLING_EXTS = (".bin", ".img", ".iso", ".car")
++
++
++def cue_sibling_image(cue_path: Path) -> "Path | None":
++    """The image beside a cue with the cue's own name (Game.cue -> Game.bin).
++
++    Same recovery as the runtime's disc_path.cpp find_sibling_image: a renamed
++    bin whose cue still names the old file is the most common broken dump
++    folder, and the launcher already accepts it.
++    """
++    for ext in _CUE_SIBLING_EXTS:
++        cand = cue_path.with_suffix(ext)
++        if cand.is_file():
++            return cand
++    try:
++        for cand in cue_path.parent.iterdir():
++            if (cand.stem == cue_path.stem and cand.suffix.lower() in _CUE_SIBLING_EXTS
++                    and cand.is_file()):
++                return cand
++    except OSError:
++        pass
++    return None
++
++
+ def resolve_cue_bin(cue_path: Path) -> Path:
+     text = cue_path.read_text(encoding="utf-8", errors="replace")
+     m = re.search(r'FILE\s+"([^"]+)"\s+BINARY', text, re.I)
+@@ -323,7 +347,14 @@ def resolve_cue_bin(cue_path: Path) -> Path:
+     if not cand.is_absolute():
+         cand = cue_path.parent / cand
+     if not cand.is_file():
+-        raise ValueError(f"cue references missing bin: {cand}")
++        names = (re.findall(r'FILE\s+"([^"]+)"\s+BINARY', text, re.I)
++                 or re.findall(r"FILE\s+(\S+)\s+BINARY", text, re.I))
++        sibling = cue_sibling_image(cue_path) if len(names) == 1 else None
++        if sibling is None:
++            raise ValueError(f"cue references missing bin: {cand}")
++        print(f"note: cue names {cand.name}, which does not exist; "
++              f"using {sibling.name} beside the cue")
++        return sibling
+     return cand
+ 
+ 
+diff --git a/tools/prepare_disc.py b/tools/prepare_disc.py
+index 92a321ca..50ef9adb 100644
+--- a/tools/prepare_disc.py
++++ b/tools/prepare_disc.py
+@@ -256,6 +256,30 @@ def load_config(project_root: Path, config_path: Path | None, out_dir_cli: str |
+     )
+ 
+ 
++_CUE_SIBLING_EXTS = (".bin", ".img", ".iso", ".car")
++
++
++def cue_sibling_image(cue_path: Path) -> "Path | None":
++    """The image beside a cue with the cue's own name (Game.cue -> Game.bin).
++
++    Same recovery as the runtime's disc_path.cpp find_sibling_image: a renamed
++    bin whose cue still names the old file is the most common broken dump
++    folder, and the launcher already accepts it.
++    """
++    for ext in _CUE_SIBLING_EXTS:
++        cand = cue_path.with_suffix(ext)
++        if cand.is_file():
++            return cand
++    try:
++        for cand in cue_path.parent.iterdir():
++            if (cand.stem == cue_path.stem and cand.suffix.lower() in _CUE_SIBLING_EXTS
++                    and cand.is_file()):
++                return cand
++    except OSError:
++        pass
++    return None
++
++
+ def list_cue_bins(cue_path: Path) -> list[Path]:
+     """Return every BINARY FILE referenced by a cue, in order."""
+     text = cue_path.read_text(encoding="utf-8", errors="replace")
+@@ -270,7 +294,12 @@ def list_cue_bins(cue_path: Path) -> list[Path]:
+         if not cand.is_absolute():
+             cand = cue_path.parent / cand
+         if not cand.is_file():
+-            raise SystemExit(f"cue references missing bin: {cand}")
++            sibling = cue_sibling_image(cue_path) if len(names) == 1 else None
++            if sibling is None:
++                raise SystemExit(f"cue references missing bin: {cand}")
++            print(f"note: cue names {cand.name}, which does not exist; "
++                  f"using {sibling.name} beside the cue")
++            cand = sibling
+         out.append(cand.resolve())
+     return out
+ 
+-- 
+2.52.0.windows.1
+
