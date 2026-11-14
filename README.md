@@ -18,9 +18,12 @@ and [recomp-ui](https://github.com/RetroPortingToolKit/recomp-ui).
 - **Language: English (default) or Japanese (original)**, picked on the
   launcher's home screen. Switching does not require rebuilding.
 - The English title menu box is widened so every option fits.
-- Optional **Unlock all characters** (launcher → Mods, off by default): every
-  fighter is selectable from the start, secret ones included. Saves are not
-  changed.
+- **Characters: Original or All unlocked**, picked on the launcher's home
+  screen (default Original). All unlocked makes every fighter selectable from
+  the start, secret ones included; saves are not changed. On Windows it can
+  also be switched while playing, from the game window's title-bar menu (click
+  the icon at the top left): it applies the next time the character select
+  screen opens.
 - High internal resolution (4x by default, OpenGL renderer).
 
 Not yet verified end to end: the whole Quest mode, every ending, memory-card
@@ -88,7 +91,7 @@ ignored by `.gitignore` on purpose.
 | --- | --- |
 | `game.toml`, `CMakeLists.txt`, `codegen_setup.*`, `seeds/`, `symbols.toml` | Title configuration for PSXRecomp |
 | `mods/preloaded/packages/tobal2.language/` | Language package: only the bytes the English text changes, each guarded by the SHA-256 of the original disc data |
-| `mods/preloaded/packages/tobal2.unlock/` | Optional "Unlock all characters" switch (five guarded instruction changes in the character select code) |
+| `mods/preloaded/packages/tobal2.unlock/`, `src/mods/unlock_characters.c` | Characters setting: a plugin swaps five guarded instructions in the character select code, also while the game runs |
 | `mods/lang_extra/en.toml` | Layout fixes applied with English (wider title menu box) |
 | `patches/` | Our changes to the `psxrecomp` and `recomp-ui` submodules |
 | `tools/` | Test automation and analysis tools (`nav.py`, `vram_dump.py`, `disc_diff.py`, `make_lang_mod.py`, `apply_patches.sh`) |
@@ -116,8 +119,9 @@ PSXRecomp. Você precisa do **seu disco original japonês** (SLPM-86033 v1.1);
 o jogo é gerado e compilado no seu computador. O idioma (**English** por
 padrão ou **japonês original**) é escolhido na tela inicial do launcher.
 
-Opcional: **Unlock all characters** (launcher → Mods) libera todos os
-personagens, inclusive os secretos, sem mexer no save.
+Na tela inicial também dá para liberar todos os personagens (cartão
+**CHARACTERS**), inclusive os secretos, sem mexer no save. No Windows, dá para
+trocar com o jogo aberto pelo menu da barra de título da janela.
 
 Faça o dump do disco em **BIN/CUE** (não `.iso`). O nome dos arquivos não
 importa: o disco é reconhecido pelo conteúdo. Para jogar, siga os passos de

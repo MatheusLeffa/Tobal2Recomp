@@ -8,8 +8,9 @@ oficiais; estes patches são aplicados por cima antes de compilar.
 | --- | --- |
 | `psxrecomp/0001-host-Windows-first-run-setup-builds-in-process-no-co.patch` | No Windows, o primeiro setup compila dentro da janela do launcher, com barra de progresso, sem abrir CMD |
 | `recomp-ui/0001-dashboard-LANGUAGE-card-for-a-title-s-Language-mod-f.patch` | Cartão LANGUAGE na tela inicial do launcher para a feature de mod do grupo "Language" (o seletor English / Japanese) |
+| `recomp-ui/0002-dashboard-settings-cards-for-the-Language-and-Charac.patch` | Generaliza o cartão: features dos grupos "Language" e "Characters" viram cartões na tela inicial (LANGUAGE e CHARACTERS) |
 
-Nenhum dos dois foi enviado aos projetos oficiais ainda.
+Nenhum deles foi enviado aos projetos oficiais ainda.
 
 ## Aplicar
 

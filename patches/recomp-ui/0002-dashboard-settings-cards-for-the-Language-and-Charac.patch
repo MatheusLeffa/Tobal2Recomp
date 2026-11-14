@@ -1,0 +1,181 @@
+From 16c47619b5a947c80dea52afc7c4ff59fb205a17 Mon Sep 17 00:00:00 2001
+From: Matt <83082324+MatheusLeffa@users.noreply.github.com>
+Date: Sat, 14 Nov 2026 00:09:43 -0300
+Subject: [PATCH 2/2] dashboard: settings cards for the Language and Characters mod
+ groups
+
+The LANGUAGE card becomes a general settings card: a title feature in the
+"Language" or "Characters" group (usually hidden, with [runtime]
+hide_hidden_mod_features) gets a dashboard card titled with the group name,
+one radio button per choice of its first choice option. Selecting a choice is
+still an ordinary feature_set_option.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ src/common/backends/imgui/launcher_imgui.cpp | 103 ++++++++++++-------
+ 1 file changed, 66 insertions(+), 37 deletions(-)
+
+diff --git a/src/common/backends/imgui/launcher_imgui.cpp b/src/common/backends/imgui/launcher_imgui.cpp
+index f362d11..5281521 100644
+--- a/src/common/backends/imgui/launcher_imgui.cpp
++++ b/src/common/backends/imgui/launcher_imgui.cpp
+@@ -2913,21 +2913,24 @@ static int dash_card_columns(float availw, float gap, float cardw, int count) {
+ 
+ static void draw_quick_mods(LauncherModel* m,const LauncherTheme& th);
+ 
+-/* Title language as a dashboard setting. A title that ships its translations
+- * as a mod package can mark that feature `group = "Language"` (normally also
+- * `hidden = true` with [runtime] hide_hidden_mod_features, so it never shows on
+- * the Mods page). The dashboard then presents the feature's first choice
+- * option as a plain LANGUAGE card -- one radio button per choice -- next to
+- * the memory cards. Selecting a choice is an ordinary feature_set_option, so
+- * persistence and plan preparation are the provider's, exactly as on the Mods
+- * page. Titles without such a feature are unchanged. */
+-struct LanguageCard {
++/* Title settings as dashboard cards. A title that ships a setting as a mod
++ * package can put that feature in one of the dashboard groups below (normally
++ * also `hidden = true` with [runtime] hide_hidden_mod_features, so it never
++ * shows on the Mods page). The dashboard then presents the feature's first
++ * choice option as a plain card titled with the group name -- one radio
++ * button per choice -- next to the memory cards. "Language" is the title's
++ * text language; "Characters" is, for example, an unlock-all roster switch.
++ * Selecting a choice is an ordinary feature_set_option, so persistence and
++ * plan preparation are the provider's, exactly as on the Mods page. Titles
++ * without such a feature are unchanged. */
++struct SettingsCard {
+     RecompLauncherCModFeature feature;
+     RecompLauncherCModOption option;
+ };
+-static bool find_language_card(LauncherModel* m, LanguageCard* out);
+-static void draw_language_card(LauncherModel* m, const LauncherTheme& th,
+-                               const LanguageCard& card);
++enum { kMaxSettingsCards = 2 };
++static int find_settings_cards(LauncherModel* m, SettingsCard* out, int max);
++static void draw_settings_card(LauncherModel* m, const LauncherTheme& th,
++                               const SettingsCard& card);
+ 
+ #include "card_manager_imgui.hpp"
+ 
+@@ -2950,9 +2953,11 @@ void panel_save_draw(LauncherModel* m, const LauncherTheme* th) {
+             m, (prof->save.slots > 0 && prof->save.slots <= 2) ? prof->save.slots : 2);
+         const float gap = px(th->spacing_sm);
+         const float avail = ImGui::GetContentRegionAvail().x;
+-        LanguageCard lang_card{};
+-        const bool has_lang = find_language_card(m, &lang_card);
+-        const int lang_cards = has_lang ? 1 : 0;
++        SettingsCard setting_cards[kMaxSettingsCards]{};
++        const int setting_count = find_settings_cards(m, setting_cards, kMaxSettingsCards);
++        // All title settings share one column, stacked, so they never push
++        // the row past the memory cards.
++        const int lang_cards = setting_count > 0 ? 1 : 0;
+         const int cards=slots+lang_cards+(m->dashboard_quick_controls?1:0);
+         const float cw = dash_card_width(avail, gap, cards);
+         const int cols = dash_card_columns(avail, gap, cw, cards);
+@@ -2966,7 +2971,7 @@ void panel_save_draw(LauncherModel* m, const LauncherTheme* th) {
+             else if (slot) ImGui::Dummy(ImVec2(0, gap));
+             char cid[16]; snprintf(cid, sizeof(cid), "mcc%d", slot);
+             char pid[16]; snprintf(pid, sizeof(pid), "mcp%d", slot);
+-            const bool lang=has_lang && slot==slots;
++            const bool lang=slot>=slots && slot<slots+lang_cards;
+             const bool quick=slot>=slots+lang_cards;
+             const float height=quick?px(250):(do_fill && !lang)?fill_h:0.0f;
+             begin_container(cid, ImVec2(cw, height),
+@@ -2976,7 +2981,14 @@ void panel_save_draw(LauncherModel* m, const LauncherTheme* th) {
+                 if (begin_panel(pid, 0, quick || (do_fill && !lang),
+                                 quick||lang?false:do_fill)) {
+                     if(slot<slots)draw_memcard_slot(m,*th,slot);
+-                    else if(lang)draw_language_card(m,*th,lang_card);
++                    else if(lang){
++                        for (int s = 0; s < setting_count; ++s) {
++                            if (s) { ImGui::Spacing(); ImGui::Spacing(); }
++                            ImGui::PushID(s);
++                            draw_settings_card(m,*th,setting_cards[s]);
++                            ImGui::PopID();
++                        }
++                    }
+                     else draw_quick_mods(m,*th);
+                 }
+                 end_panel();
+@@ -12949,34 +12961,51 @@ static void draw_quick_mods(LauncherModel* m,const LauncherTheme& th) {
+     (void)th;
+ }
+ 
+-static bool find_language_card(LauncherModel* m, LanguageCard* out) {
++static const char* const kSettingsCardGroups[kMaxSettingsCards] = {
++    "Language", "Characters"};
++
++static int find_settings_cards(LauncherModel* m, SettingsCard* out, int max) {
+     const auto* mods = m ? m->mods : nullptr;
+-    if (!out || !mods || !mods->feature_count || !mods->feature_get ||
++    if (!out || max <= 0 || !mods || !mods->feature_count || !mods->feature_get ||
+         !mods->feature_option_get || !mods->feature_choice_get ||
+         !mods->feature_set_option)
+-        return false;
+-    for (int i = 0, n = mods->feature_count(mods->ctx); i < n; ++i) {
+-        RecompLauncherCModFeature feature{};
+-        if (!mods->feature_get(mods->ctx, i, &feature)) continue;
+-        if (std::strcmp(feature.group, "Language") != 0 || !feature.enabled) continue;
+-        for (int k = 0; k < feature.option_count; ++k) {
+-            RecompLauncherCModOption option{};
+-            if (mods->feature_option_get(mods->ctx, feature.package_id, feature.id,
+-                                         k, &option) &&
+-                option.type == RECOMP_MOD_OPTION_CHOICE && option.choice_count > 0) {
+-                out->feature = feature;
+-                out->option = option;
+-                return true;
++        return 0;
++    int found = 0;
++    for (int g = 0; g < kMaxSettingsCards && found < max; ++g) {
++        bool group_done = false;
++        for (int i = 0, n = mods->feature_count(mods->ctx); i < n && !group_done; ++i) {
++            RecompLauncherCModFeature feature{};
++            if (!mods->feature_get(mods->ctx, i, &feature)) continue;
++            if (std::strcmp(feature.group, kSettingsCardGroups[g]) != 0 ||
++                !feature.enabled)
++                continue;
++            for (int k = 0; k < feature.option_count; ++k) {
++                RecompLauncherCModOption option{};
++                if (mods->feature_option_get(mods->ctx, feature.package_id,
++                                             feature.id, k, &option) &&
++                    option.type == RECOMP_MOD_OPTION_CHOICE &&
++                    option.choice_count > 0) {
++                    out[found].feature = feature;
++                    out[found].option = option;
++                    ++found;
++                    group_done = true;
++                    break;
++                }
+             }
+         }
+     }
+-    return false;
++    return found;
+ }
+ 
+-static void draw_language_card(LauncherModel* m, const LauncherTheme& th,
+-                               const LanguageCard& card) {
++static void draw_settings_card(LauncherModel* m, const LauncherTheme& th,
++                               const SettingsCard& card) {
+     const auto* mods = m->mods;
+-    eyebrow("LANGUAGE");
++    char title[64];
++    size_t n = 0;
++    for (const char* c = card.feature.group; *c && n + 1 < sizeof title; ++c)
++        title[n++] = (char)std::toupper((unsigned char)*c);
++    title[n] = ' ';
++    eyebrow(title);
+     ImGui::BeginDisabled(!launcher_model_can_open_mods(m));
+     for (int c = 0; c < card.option.choice_count; ++c) {
+         RecompLauncherCModChoice choice{};
+@@ -12994,7 +13023,7 @@ static void draw_language_card(LauncherModel* m, const LauncherTheme& th,
+     }
+     ImGui::EndDisabled();
+     if (m->in_session && ImGui::IsItemHovered(ImGuiHoveredFlags_AllowWhenDisabled))
+-        ImGui::SetTooltip("Close the game before changing the language.");
++        ImGui::SetTooltip("Close the game before changing this setting.");
+     (void)th;
+ }
+ 
+-- 
+2.52.0.windows.1
+
