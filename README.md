@@ -2,6 +2,8 @@
 
 <a href="https://recomplauncher.com"><picture><source media="(prefers-color-scheme: dark)" srcset="https://recomplauncher.com/assets/press/launcher/badge-light.svg"><img alt="Get it on RecompLauncher" src="https://recomplauncher.com/assets/press/launcher/badge-dark.svg" height="48"></picture></a>
 
+[![Verified developer on RecompStore](https://recompstore.com/assets/press/verified-dark.svg)](https://recompstore.com/dev/matheusleffa)
+
 A native PC port of **Tobal 2** (PlayStation, Square / DreamFactory, 1997), made
 by **static recompilation**: the game's original MIPS code is translated to C
 and compiled into a real Windows / Linux / macOS program. It is not an
