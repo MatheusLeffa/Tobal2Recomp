@@ -254,6 +254,12 @@ jobs:
           included -- you need your own Tobal 2 (Japan) disc, SLPM-86033, as
           BIN/CUE.
 
+          **Easiest: RecompLauncher.** Install Tobal 2 Recompiled there and pick
+          your `.cue`. Its setup screen checks the disc and builds the game for
+          you (a few minutes the first time), then press Play.
+
+          **By hand:**
+
           1. Extract the kit for your system and run `Tobal_2_Recompiled`.
           2. Pick your `.cue` and click **Generate & rebuild**. The game is
              converted and compiled on your computer (a few minutes); the tools
