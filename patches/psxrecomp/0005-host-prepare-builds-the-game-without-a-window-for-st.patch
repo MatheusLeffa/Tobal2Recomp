@@ -1,0 +1,195 @@
+From 3073f7a6f8305a89c7a000383e71c1598c52dacb Mon Sep 17 00:00:00 2001
+From: Matt <83082324+MatheusLeffa@users.noreply.github.com>
+Date: Tue, 17 Nov 2026 20:09:48 -0300
+Subject: [PATCH] host: --prepare builds the game without a window, for store
+ setup screens
+
+A store or launcher with its own setup screen (RecompLauncher's "prepare"
+step) needs the first-run setup as a command: `<setup host> --prepare
+--disc <image>` runs the wizard's own callbacks in the wizard's order
+(disc sidecars, build tools, Generate, rebuild) and exits 0 when the
+product exe is built, 1 when a step failed.
+
+stdout carries "progress <0..1> <text>" lines: one fraction for the whole
+job, with each step's own 0..1 mapped into its slice, and a plain-words
+label per step. The steps' own messages (thousands of compiler and
+generator lines) go to stderr. Only the setup host answers; a product
+build refuses, since it cannot rebuild itself while running.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+---
+ host/psxrecomp_codegen_host.c | 154 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 154 insertions(+)
+
+diff --git a/host/psxrecomp_codegen_host.c b/host/psxrecomp_codegen_host.c
+index b9a18896..e7f08813 100644
+--- a/host/psxrecomp_codegen_host.c
++++ b/host/psxrecomp_codegen_host.c
+@@ -4618,10 +4618,164 @@ static void host_selfcheck_or_return(const PsxrecompCodegenHostConfig* cfg,
+     exit(missing ? 2 : 0);
+ }
+ 
++/* --prepare --disc <image>: the setup wizard's whole job (build tools,
++ * Generate, rebuild) without a window, for a store or launcher that runs its
++ * own setup screen (RecompLauncher's "prepare" step, say). It runs the same
++ * host callbacks the wizard runs, in the wizard's order, and exits: 0 when
++ * the product exe is built, 1 when a step failed.
++ *
++ * Progress goes to stdout as "progress <0..1> <text>" lines (RecompLauncher's
++ * format): one fraction for the whole job, each step's own 0..1 mapped into
++ * its slice, and the step's plain-words label as the text. The steps' own
++ * messages (compiler output, generated-code echoes: thousands of lines) go
++ * to stderr, so the setup screen shows a steady label and the detail stays
++ * available. Only the setup host (zip-root exe, no game linked in) answers;
++ * a product build refuses. */
++#if !defined(PSX_HAS_GAME_DISPATCH) && defined(PSX_HAS_SETUP_WIZARD)
++static float g_cli_base = 0.0f;  /* where the current step starts */
++static float g_cli_span = 1.0f;  /* how much of the whole it covers */
++static float g_cli_last = 0.0f;  /* fraction for the whole, never goes back */
++static float g_cli_shown = -1.0f; /* fraction on the last stdout line */
++static const char* g_cli_label = "";
++
++static void host_cli_line(const char* msg) {
++    char clean[512];
++    size_t i, n = 0;
++    /* One line per update: the launcher reads stdout line by line. */
++    for (i = 0; msg && msg[i] && n + 1 < sizeof(clean); ++i)
++        clean[n++] = (msg[i] == '\r' || msg[i] == '\n') ? ' ' : msg[i];
++    clean[n] = '\0';
++    printf("progress %.3f %s\n", g_cli_last, clean);
++    fflush(stdout);
++    g_cli_shown = g_cli_last;
++}
++
++static void host_cli_step(float base, float span, const char* label) {
++    g_cli_base = base;
++    g_cli_span = span;
++    if (base > g_cli_last)
++        g_cli_last = base;
++    g_cli_label = label ? label : "";
++    host_cli_line(g_cli_label);
++}
++
++static void host_cli_progress(void* ctx, float pct, const char* msg) {
++    (void)ctx;
++    if (pct >= 0.0f && pct <= 1.0f) {
++        const float whole = g_cli_base + pct * g_cli_span;
++        if (whole > g_cli_last)
++            g_cli_last = whole > 1.0f ? 1.0f : whole;
++    }
++    if (msg && msg[0]) {
++        fprintf(stderr, "%s\n", msg);
++        fflush(stderr);
++    }
++    /* A new line only when the bar moved a visible step. */
++    if (g_cli_last - g_cli_shown >= 0.005f)
++        host_cli_line(g_cli_label);
++}
++
++static void host_cli_fail(const char* step, const char* err) {
++    char line[1200];
++    snprintf(line, sizeof(line), "Failed (%s): %s", step,
++             (err && err[0]) ? err : "unknown error");
++    host_cli_line(line);
++    exit(1);
++}
++#endif
++
++static void host_prepare_cli_or_return(const PsxrecompCodegenHostConfig* cfg,
++                                       int argc, char** argv) {
++    int i, want = 0;
++    const char* disc = NULL;
++
++    for (i = 1; i < argc && argv[i]; ++i) {
++        if (strcmp(argv[i], "--prepare") == 0)
++            want = 1;
++        else if (strcmp(argv[i], "--disc") == 0 && i + 1 < argc)
++            disc = argv[++i];
++        else if (strncmp(argv[i], "--disc=", 7) == 0)
++            disc = argv[i] + 7;
++    }
++    if (!want)
++        return;
++
++#if defined(PSX_HAS_GAME_DISPATCH) || !defined(PSX_HAS_SETUP_WIZARD)
++    (void)cfg;
++    (void)disc;
++    printf("progress 0 Failed (prepare): this program is the game itself, "
++           "not the setup program.\n");
++    fflush(stdout);
++    exit(1);
++#else
++    {
++        RecompLauncherCGameInfo gi;
++        char abs_disc[1100];
++        char out[1200];
++        char err[1024];
++
++        if (!disc || !disc[0])
++            host_cli_fail("prepare", "no disc given: pass --disc <your .cue>");
++        if (!absolutize_existing_file(abs_disc, sizeof(abs_disc), disc))
++            host_cli_fail("prepare", "the disc image was not found");
++
++        host_cli_step(0.0f, 0.02f, "Checking the game's files");
++        memset(&gi, 0, sizeof(gi));
++        psxrecomp_codegen_host_apply(&gi, cfg);
++        if (!g_ready || !gi.prepare_with_progress)
++            host_cli_fail("prepare",
++                          "the project files next to the program are missing "
++                          "or incomplete; reinstall the game");
++
++        /* Same as the wizard: disc sidecars first (project root + exe dirs),
++         * so Generate gets --disc and the built game finds the disc. */
++        host_persist_setup(NULL, abs_disc, NULL);
++
++        /* Build tools: a download (a few hundred MB) the first time only. */
++        err[0] = '\0';
++        host_cli_step(0.02f, 0.13f,
++                      "Getting the build tools (downloaded the first time only)");
++        if (!host_toolchain_is_ready() &&
++            !host_ensure_toolchain_with_progress(1, NULL, err, sizeof(err),
++                                                 host_cli_progress, NULL))
++            host_cli_fail("build tools", err);
++
++        /* Generate: the game's C from the disc (about a minute). */
++        err[0] = '\0';
++        out[0] = '\0';
++        host_cli_step(0.15f, 0.30f, "Turning your disc's game code into C");
++        if (!host_prepare_generate(abs_disc, out, sizeof(out), err, sizeof(err),
++                                   host_cli_progress, NULL))
++            host_cli_fail("generate", err);
++
++        if (!gi.rebuild_with_progress)
++            host_cli_fail("build", "the build folder could not be set up");
++        /* Build: compile the game (two to three minutes). */
++        err[0] = '\0';
++        out[0] = '\0';
++        host_cli_step(0.45f, 0.55f, "Compiling the game");
++        if (!host_rebuild_game(abs_disc, out, sizeof(out), err, sizeof(err),
++                               host_cli_progress, NULL))
++            host_cli_fail("build", err);
++        if (g_relaunch_is_helper)
++            host_cli_fail("build", "this program is the game itself and "
++                                   "cannot rebuild while running; run "
++                                   "--prepare from the setup program");
++        if (!g_exe_path[0] || !path_is_file(g_exe_path))
++            host_cli_fail("build", "the build finished but the game program "
++                                   "is not there");
++
++        host_cli_step(1.0f, 0.0f, "The game is ready");
++        exit(0);
++    }
++#endif
++}
++
+ /* Setup-host zip-root exe → build-release product (bios/mods/assets/settings). */
+ void psxrecomp_codegen_host_forward_if_built(
+     const PsxrecompCodegenHostConfig* cfg, int argc, char** argv) {
+     host_selfcheck_or_return(cfg, argc, argv); /* exits when requested */
++    host_prepare_cli_or_return(cfg, argc, argv); /* exits when requested */
+ #if defined(PSX_HAS_GAME_DISPATCH)
+     /* Full game binary — already the product tree. */
+     (void)cfg;
+-- 
+2.52.0.windows.1
+

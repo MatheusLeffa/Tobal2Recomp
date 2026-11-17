@@ -5,12 +5,74 @@
   "repo": "MatheusLeffa/Tobal2Recomp",
   "game": {
     "kind": "iso",
-    "label": "Your disc image of Tobal 2 for PlayStation (Japan, SLPM-86033): the .cue file, kept next to its .bin file. The first start builds the game from it on this PC in a few minutes; the tools it needs are downloaded automatically."
+    "label": "Your disc image of Tobal 2 for PlayStation (Japan, SLPM-86033): the .cue file, kept next to its .bin file.",
+    "check": {
+      "ids": ["SLPM-86033"]
+    },
+    "dumps": [
+      { "name": "Japan (Rev 1)", "size": 669555600, "crc32": "479f1388" }
+    ]
+  },
+  "prepare": {
+    "program": ["Tobal_2_Recompiled.exe", "Tobal_2_Recompiled"],
+    "args": ["--prepare", "--disc", "{game}"],
+    "label": "Building the game from your disc (3 to 6 minutes; the first time also downloads the build tools)",
+    "timeout": 3600
   },
   "start": {
-    "program": ["Tobal_2_Recompiled.exe", "Tobal_2_Recompiled"],
+    "program": [
+      "build-release/Tobal_2_Recompiled.exe",
+      "build-release/Tobal_2_Recompiled",
+      "Tobal_2_Recompiled.exe",
+      "Tobal_2_Recompiled"
+    ],
     "args": ["--disc", "{game}"]
   },
+  "config": [
+    {
+      "id": "main",
+      "format": "toml",
+      "file": [
+        { "path": "{install}/build-release/settings.toml" }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "id": "home",
+      "label": "Start screen",
+      "help": "Tobal 2's own start screen, where you pick the language (English or Japanese), the characters and the controllers. Skip it to go straight into the game with the choices you made there last time.",
+      "in": "main",
+      "choices": [
+        { "label": "Show", "set": { "launcher/skip_launcher": "false" } },
+        { "label": "Skip", "set": { "launcher/skip_launcher": "true" } }
+      ],
+      "defaults": { "launcher/skip_launcher": "false" }
+    },
+    {
+      "id": "fullscreen",
+      "label": "Full screen",
+      "in": "main",
+      "choices": [
+        { "label": "Off", "set": { "video/fullscreen": "0" } },
+        { "label": "Borderless", "set": { "video/fullscreen": "1" } },
+        { "label": "Exclusive", "set": { "video/fullscreen": "2" } }
+      ],
+      "defaults": { "video/fullscreen": "0" }
+    },
+    {
+      "id": "vsync",
+      "label": "V-Sync",
+      "help": "On stops tearing. Off has the least input delay. Adaptive turns it off only when a frame is late.",
+      "in": "main",
+      "choices": [
+        { "label": "On", "set": { "video/vsync": "\"on\"" } },
+        { "label": "Off", "set": { "video/vsync": "\"off\"" } },
+        { "label": "Adaptive", "set": { "video/vsync": "\"adaptive\"" } }
+      ],
+      "defaults": { "video/vsync": "\"on\"" }
+    }
+  ],
   "saves": [
     "{install}/saves",
     "{install}/build-release/saves"
