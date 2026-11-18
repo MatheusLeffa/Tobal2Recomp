@@ -7,9 +7,10 @@
     "kind": "iso",
     "label": "Your disc image of Tobal 2 for PlayStation (Japan, SLPM-86033): the .cue file, kept next to its .bin file.",
     "check": {
-      "ids": ["SLPM-86033"]
+      "iso9660": "SLPM_860.33"
     },
     "dumps": [
+      { "name": "Japan (Rev 1)", "size": 89, "crc32": "9a5378f4" },
       { "name": "Japan (Rev 1)", "size": 669555600, "crc32": "479f1388" }
     ]
   },
@@ -34,7 +35,12 @@
       "format": "toml",
       "file": [
         { "path": "{install}/build-release/settings.toml" }
-      ]
+      ],
+      "new": {
+        "launcher/skip_launcher": "false",
+        "video/fullscreen": "0",
+        "video/vsync": "\"on\""
+      }
     }
   ],
   "settings": [
@@ -74,12 +80,10 @@
     }
   ],
   "saves": [
-    "{install}/saves",
-    "{install}/build-release/saves"
+    "{install}/saves"
   ],
   "folders": {
     "saves": [
-      { "path": "{install}/build-release/saves", "if": "{install}/build-release/saves" },
       { "path": "{install}/saves" }
     ],
     "logs": [
